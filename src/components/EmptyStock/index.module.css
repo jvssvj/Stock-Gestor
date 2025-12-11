@@ -1,0 +1,32 @@
+.empty__container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.empty__content {
+  display: grid;
+  place-items: center;
+}
+
+.empty__icon {
+  width: 150px;
+  margin-bottom: 1rem;
+}
+
+.empty__t {
+  font-size: var(--font40);
+  color: var(--very--dark-blue);
+}
+.empty__p {
+  font-size: var(--font16);
+  margin: 1rem 0rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.empty__button {
+  width: 100%;
+}

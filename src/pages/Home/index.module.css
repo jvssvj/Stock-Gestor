@@ -1,0 +1,24 @@
+.dashboard__container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1920px;
+}
+
+.dashboard__title__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard__title {
+  color: var(--very-dark-blue);
+  font-weight: var(--fontWeight900);
+  font-size: var(--font32);
+}
+
+.dashboard__add__item {
+  max-width: 200px;
+}

@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  max-width: 1920px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line {
+  margin: 1rem 0rem 2rem;
+  height: 1px;
+  background-color: var(--light-grey);
+}
+
+.title {
+  margin-bottom: 2rem;
+  color: var(--very-dark-blue);
+  font-size: var(--font40);
+}
+
+.header__add__item {
+  max-width: 200px;
+}

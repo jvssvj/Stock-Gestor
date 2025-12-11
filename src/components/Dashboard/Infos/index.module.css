@@ -1,0 +1,39 @@
+.container {
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  flex: 1;
+  border: 1px solid var(--light-grey);
+}
+
+.title__container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.component {
+  color: var(--green);
+}
+
+.clipboard--check {
+  color: var(--blue);
+}
+
+.triangle--alert {
+  color: var(--orange);
+}
+
+.title {
+  color: var(--grey);
+}
+
+.quantity {
+  font-size: var(--font32);
+  font-weight: var(--fontWeight700);
+  color: var(--very-dark-blue);
+}

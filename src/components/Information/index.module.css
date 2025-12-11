@@ -1,0 +1,26 @@
+.information__container {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.metadata {
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.title {
+  color: var(--grey);
+}
+
+.information {
+  color: var(--very-dark-blue);
+  font-weight: var(--fontWeight500);
+}
+
+.emphasis {
+  color: var(--green);
+}

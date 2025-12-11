@@ -1,0 +1,35 @@
+.nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: var(--font16);
+  background-color: transparent;
+  width: 100%;
+  color: var(--grey);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease;
+  font-weight: var(--fontWeight500);
+  position: relative;
+  z-index: 2;
+}
+
+.active {
+  color: var(--blue);
+}
+
+.indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--very-light-blue);
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

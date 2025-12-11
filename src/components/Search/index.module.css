@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.visually__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.input {
+  height: 50px;
+  width: 100%;
+  padding-left: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--light-grey);
+  font-size: var(--font16);
+}
+
+.input:focus {
+  border-color: var(--light-blue);
+  outline: none;
+}
+
+.search__icon {
+  position: absolute;
+  margin-left: 1rem;
+  color: var(--grey);
+  width: 20px;
+  pointer-events: none;
+}

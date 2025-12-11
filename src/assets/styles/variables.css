@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --fontFamily: "Inter", sans-serif;
+  --font12: 0.75rem;
+  --font16: 1rem;
+  --font20: 1.25rem;
+  --font24: 1.5rem;
+  --font32: 2rem;
+  --font40: 2.5rem;
+
+  --fontWeight400: 400;
+  --fontWeight500: 500;
+  --fontWeight600: 600;
+  --fontWeight700: 700;
+  --fontWeight900: 900;
+
+  --white: #ffffff;
+  --very-light-grey: #eeeeee;
+  --light-grey: #d6d6d6;
+  --grey: rgb(95, 95, 95);
+  --very-light-blue: #e4e5ff;
+  --light-blue: #989cff;
+  --blue: #696fc7;
+  --very-dark-blue: #000333;
+  --light-green: #dcffd8;
+  --green: #19d800;
+  --light-orange: #ffccb9;
+  --orange: #ff3c00;
+  --light-red: #ffb9b9;
+  --red: #ff1010;
+}

@@ -1,0 +1,86 @@
+.card__container {
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.icon__container {
+  text-align: center;
+  background-color: var(--light-green);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: grid;
+  place-content: center;
+  margin-bottom: 2rem;
+}
+
+.container h2 {
+  margin: 2rem 0rem 0.5rem;
+}
+
+.icon {
+  color: var(--green);
+}
+
+.item__infos {
+  width: 100%;
+  border: 1px solid var(--light-grey);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 2rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.buttons__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.button {
+  text-decoration: none;
+  padding: 1rem;
+  font-weight: var(--fontWeight600);
+  width: max-content;
+  text-align: center;
+  border-radius: 0.5rem;
+  transition: 0.2s ease;
+}
+
+.to__stock {
+  color: var(--very-dark-blue);
+  border: 1px solid var(--light-grey);
+}
+
+.to__stock:hover {
+  border-color: var(--very-dark-blue);
+}
+
+.to__detail {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.to__detail:hover {
+  background-color: var(--light-blue);
+}
+
+@media (max-width: 765px) {
+  .buttons__container {
+    flex-wrap: wrap;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

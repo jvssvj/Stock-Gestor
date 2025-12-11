@@ -1,0 +1,23 @@
+.add__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+  padding: 0.81rem 2rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none;
+  font-size: var(--font12);
+  width: 100%;
+}
+
+.add__item:hover {
+  background-color: var(--light-blue);
+}
+
+.add__item:active {
+  transform: scale(0.92);
+}

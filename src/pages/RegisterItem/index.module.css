@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width: 1920px;
+}
+
+.register__t {
+  font-size: var(--font40);
+  color: var(--very-dark-blue);
+}
+
+.register__p {
+  color: var(--grey);
+  margin: 0.5rem 0rem 2rem;
+}

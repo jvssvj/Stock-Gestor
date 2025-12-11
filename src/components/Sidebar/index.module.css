@@ -1,0 +1,48 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 72px;
+  background-color: var(--white);
+  min-height: 100dvh;
+  padding: 1rem;
+  border-right: 1px solid var(--light-grey);
+  overflow: hidden;
+  position: fixed;
+  z-index: 9999;
+  transition: max-width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.icon {
+  cursor: pointer;
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.activeIcon {
+  transform: rotate(180deg);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.title h1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--font24);
+  color: var(--very-dark-blue);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  max-width: 270px;
+}
