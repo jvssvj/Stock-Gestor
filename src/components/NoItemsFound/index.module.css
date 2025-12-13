@@ -1,0 +1,46 @@
+.container {
+  background-color: var(--white);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 1920px;
+  margin-top: 2rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.icon {
+  background-color: var(--very-light-grey);
+  padding: 1rem;
+  border-radius: 100%;
+  line-height: 0;
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: var(--very-dark-blue);
+}
+
+.description {
+  color: var(--grey);
+  margin: 1rem 0rem 2rem;
+  max-width: 500px;
+}
+
+.clean__input {
+  background-color: var(--blue);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.9rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.clean__input:hover {
+  background-color: var(--light-blue);
+}

@@ -17,6 +17,7 @@
   align-items: start;
   justify-content: space-between;
   gap: 1rem;
+  overflow: hidden;
 }
 
 .details__container {

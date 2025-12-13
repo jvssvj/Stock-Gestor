@@ -33,3 +33,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.icon {
+  line-height: 0;
+}

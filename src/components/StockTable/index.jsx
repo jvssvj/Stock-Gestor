@@ -21,74 +21,70 @@ export default function StockTable({ data }) {
 
   return (
     <>
-      {currentItems && currentItems.length > 0 ? (
-        <div className={styles.container}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Quantidade</th>
-                <th>Preço unitário</th>
-                <th>Categoria</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>{Number(item.quantity)}</td>
-                  <td>R${Number(item.price).toFixed(2)}</td>
-                  <td>{item.category}</td>
-                  <td>
-                    <div className={styles.icons__container}>
-                      <Link to={`/items/${item.id}`}>
-                        <Actions
-                          icon={<Eye />}
-                          text="Visualizar"
-                        />
-                      </Link>
-
-                      <Link to={`/update/${item.id}`}>
-                        <Actions
-                          icon={<Pencil />}
-                          text="Editar"
-                        />
-                      </Link>
-
+      <div className={styles.container}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade</th>
+              <th>Preço unitário</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{Number(item.quantity)}</td>
+                <td>R${Number(item.price).toFixed(2)}</td>
+                <td>{item.category}</td>
+                <td>
+                  <div className={styles.icons__container}>
+                    <Link to={`/items/${item.id}`}>
                       <Actions
-                        icon={<Trash2 />}
-                        text="Deletar"
-                        isTrash
+                        icon={<Eye />}
+                        text="Visualizar"
                       />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </Link>
 
-          {/* Paginação com Material UI */}
-          <Stack
-            spacing={2}
-            alignItems="center"
-            className={styles.pagination}
-          >
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              shape="rounded"
-              siblingCount={1}
-              boundaryCount={2}
-              showFirstButton
-              showLastButton
-            />
-          </Stack>
-        </div>
-      ) : (
-        <p>Nenhum item em estoque</p>
-      )}
+                    <Link to={`/update/${item.id}`}>
+                      <Actions
+                        icon={<Pencil />}
+                        text="Editar"
+                      />
+                    </Link>
+
+                    <Actions
+                      icon={<Trash2 />}
+                      text="Deletar"
+                      isTrash
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Paginação com Material UI */}
+        <Stack
+          spacing={2}
+          alignItems="center"
+          className={styles.pagination}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            shape="rounded"
+            siblingCount={1}
+            boundaryCount={2}
+            showFirstButton
+            showLastButton
+          />
+        </Stack>
+      </div>
     </>
   );
 }

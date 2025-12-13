@@ -16,7 +16,7 @@ export default function NavItem({ imageElement, name, isActive, onClick }) {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
       )}
-      <span className={styles.teste}>{imageElement}</span>
+      <span className={styles.icon}>{imageElement}</span>
       <span className={styles.label}>{name}</span>
     </button>
   );
