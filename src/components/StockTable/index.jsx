@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import styles from "./index.module.css";
 import Actions from "./Actions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ConfirmDeletion from "../ConfirmDeletion";
+import useGetItems from "../../hooks/useGetItems";
+import SucessStatusCard from "../SucessStatusCard";
 
 export default function StockTable({ data }) {
+  const navigate = useNavigate();
+
+  const { items } = useGetItems();
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const [deletedItem, setDeletedItem] = useState(false);
+
+  // Paginação
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -19,9 +28,47 @@ export default function StockTable({ data }) {
     setCurrentPage(value);
   };
 
+  function deleteItem() {
+    const newList = items.filter((item) => item.id !== itemToDelete.id);
+
+    localStorage.setItem("items", JSON.stringify(newList));
+
+    setDeletedItem(itemToDelete); // salva o item
+    setItemToDelete(null); // fecha modal
+  }
+
+  function renderContent() {
+    if (itemToDelete) {
+      return (
+        <ConfirmDeletion
+          productName={itemToDelete.name}
+          productSku={itemToDelete.sku}
+          cancelAction={() => setItemToDelete(null)}
+          confirmAction={deleteItem}
+        />
+      );
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    if (deletedItem) {
+      navigate("/success", {
+        state: {
+          mode: "delete",
+          itemName: deletedItem.name,
+        },
+      });
+    }
+
+    setDeletedItem(null);
+  }, [deletedItem, navigate]);
+
   return (
     <>
       <div className={styles.container}>
+        {renderContent()}
+
         <table className={styles.table}>
           <thead>
             <tr>
@@ -59,6 +106,7 @@ export default function StockTable({ data }) {
                       icon={<Trash2 />}
                       text="Deletar"
                       isTrash
+                      onClick={() => setItemToDelete(item)}
                     />
                   </div>
                 </td>

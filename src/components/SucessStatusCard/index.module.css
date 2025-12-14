@@ -1,6 +1,6 @@
 .card__container {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   background-color: var(--white);
   border-radius: 0.5rem;
   padding: 1.5rem;
@@ -20,12 +20,12 @@
   margin-bottom: 2rem;
 }
 
-.container h2 {
-  margin: 2rem 0rem 0.5rem;
-}
-
 .icon {
   color: var(--green);
+}
+
+.card__container h2 {
+  margin: 1rem 0rem 0.5rem;
 }
 
 .item__infos {
@@ -55,6 +55,7 @@
   text-align: center;
   border-radius: 0.5rem;
   transition: 0.2s ease;
+  width: 100%;
 }
 
 .to__stock {
@@ -72,6 +73,16 @@
 }
 
 .to__detail:hover {
+  background-color: var(--light-blue);
+}
+
+.delete__status {
+  background-color: var(--blue);
+  color: var(--white);
+  margin-top: 2rem;
+}
+
+.delete__status:hover {
   background-color: var(--light-blue);
 }
 
