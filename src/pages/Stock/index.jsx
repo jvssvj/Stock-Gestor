@@ -55,19 +55,24 @@ export default function Stock() {
   return (
     <>
       <section className={styles.container}>
-        <header className={styles.header}>
-          <SearchInput
-            value={searchedItem}
-            event={handleSearchItem}
-          />
-          <div className={styles.header__add__tem}>
-            <AddItem />
-          </div>
-        </header>
-        <hr className={styles.line} />
-        <h2 className={styles.title}>{`${
-          searchedItem == "" ? "Itens em estoque" : "Resultados da pesquisa"
-        }`}</h2>
+        {items.length > 0 && (
+          <>
+            <header className={styles.header}>
+              <SearchInput
+                value={searchedItem}
+                event={handleSearchItem}
+              />
+              <div className={styles.header__add__tem}>
+                <AddItem />
+              </div>
+            </header>
+            <hr className={styles.line} />
+            <h2 className={styles.title}>{`${
+              searchedItem == "" ? "Itens em estoque" : "Resultados da pesquisa"
+            }`}</h2>
+          </>
+        )}
+
         {searching && searchedItem.trim() && (
           <p>
             Exibindo {findItem()?.length || 0} resultados para{" "}
