@@ -1,5 +1,4 @@
 .dashboard__container {
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -20,5 +19,6 @@
 }
 
 .dashboard__add__item {
+  width: 100%;
   max-width: 200px;
 }

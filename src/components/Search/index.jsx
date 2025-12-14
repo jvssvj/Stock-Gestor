@@ -1,9 +1,12 @@
 import styles from "./index.module.css";
 import { Search } from "lucide-react";
 
-export default function SearchInput({ value, event }) {
+export default function SearchInput({ value, event, maxWidth }) {
   return (
-    <div className={styles.container}>
+    <div
+      style={{ maxWidth: `${maxWidth}px` }}
+      className={styles.container}
+    >
       <label
         className={styles.visually__hidden}
         htmlFor="search-product"

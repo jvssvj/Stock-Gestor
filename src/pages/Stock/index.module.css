@@ -18,7 +18,8 @@
 
 .title {
   color: var(--very-dark-blue);
-  font-size: var(--font40);
+  font-size: var(--font32);
+  font-weight: var(--fontWeight900);
 }
 
 .header__add__item {

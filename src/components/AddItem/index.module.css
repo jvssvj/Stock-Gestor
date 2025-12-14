@@ -12,6 +12,7 @@
   text-decoration: none;
   font-size: var(--font12);
   width: 100%;
+  white-space: nowrap;
 }
 
 .add__item:hover {

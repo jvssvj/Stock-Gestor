@@ -41,9 +41,7 @@ export default function Home() {
         <div className={styles.dashboard__container}>
           <section className={styles.dashboard__title__container}>
             <h2 className={styles.dashboard__title}>Dashboard</h2>
-            <div className={styles.dashboard__add__item}>
-              <AddItem />
-            </div>
+            <AddItem maxWidth={200} />
           </section>
 
           <Dashboard

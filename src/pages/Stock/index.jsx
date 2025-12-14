@@ -79,19 +79,20 @@ export default function Stock() {
       <section className={styles.container}>
         {items.length > 0 && (
           <>
+            <h2 className={styles.title}>
+              {searching ? "Resultados da pesquisa" : "Estoque"}
+            </h2>
+
+            <hr className={styles.line} />
+
             <header className={styles.header}>
               <SearchInput
                 value={searchedItem}
                 event={handleSearchItem}
+                maxWidth={400}
               />
-              <AddItem />
+              <AddItem maxWidth={200} />
             </header>
-
-            <hr className={styles.line} />
-
-            <h2 className={styles.title}>
-              {searching ? "Resultados da pesquisa" : "Itens em estoque"}
-            </h2>
 
             {searching && (
               <p>
