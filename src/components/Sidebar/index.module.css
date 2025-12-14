@@ -9,8 +9,6 @@
   padding: 1rem;
   border-right: 1px solid var(--light-grey);
   overflow: hidden;
-  position: fixed;
-  z-index: 9999;
   transition: max-width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 

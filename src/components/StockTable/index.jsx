@@ -1,41 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import styles from "./index.module.css";
 import Actions from "./Actions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useDeleteItem from "../../hooks/useDeleteItem";
 import ConfirmDeletion from "../ConfirmDeletion";
-import useGetItems from "../../hooks/useGetItems";
-import SucessStatusCard from "../SucessStatusCard";
 
-export default function StockTable({ data }) {
-  const navigate = useNavigate();
-
-  const { items } = useGetItems();
-  const [itemToDelete, setItemToDelete] = useState(null);
-  const [deletedItem, setDeletedItem] = useState(false);
+export default function StockTable({ items, setItems }) {
+  const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({
+    items,
+    setItems,
+  });
 
   // Paginação
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(items.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = data.slice(startIndex, endIndex);
+  const currentItems = items.slice(startIndex, endIndex);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
-  function deleteItem() {
-    const newList = items.filter((item) => item.id !== itemToDelete.id);
-
-    localStorage.setItem("items", JSON.stringify(newList));
-
-    setDeletedItem(itemToDelete); // salva o item
-    setItemToDelete(null); // fecha modal
-  }
 
   function renderContent() {
     if (itemToDelete) {
@@ -44,25 +33,12 @@ export default function StockTable({ data }) {
           productName={itemToDelete.name}
           productSku={itemToDelete.sku}
           cancelAction={() => setItemToDelete(null)}
-          confirmAction={deleteItem}
+          confirmAction={confirmDelete}
         />
       );
     }
     return null;
   }
-
-  useEffect(() => {
-    if (deletedItem) {
-      navigate("/success", {
-        state: {
-          mode: "delete",
-          itemName: deletedItem.name,
-        },
-      });
-    }
-
-    setDeletedItem(null);
-  }, [deletedItem, navigate]);
 
   return (
     <>

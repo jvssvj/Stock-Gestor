@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function AddItem() {
   return (
-    <Link to={"/register"} className={styles.add__item}>
+    <Link
+      to={"/register"}
+      className={styles.add__item}
+    >
       <Plus /> Adicionar produto
     </Link>
   );
