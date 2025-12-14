@@ -3,7 +3,7 @@ import Form from "../../components/Form";
 import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 
-export default function RegisterItem() {
+export default function CreateItem() {
   const navigate = useNavigate();
   const { items, loading, error } = useGetItems(); // adicione o setItems no hook se ainda não tiver
 

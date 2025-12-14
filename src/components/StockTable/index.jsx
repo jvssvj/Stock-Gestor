@@ -26,24 +26,17 @@ export default function StockTable({ items, setItems }) {
     setCurrentPage(value);
   };
 
-  function renderContent() {
-    if (itemToDelete) {
-      return (
-        <ConfirmDeletion
-          productName={itemToDelete.name}
-          productSku={itemToDelete.sku}
-          cancelAction={() => setItemToDelete(null)}
-          confirmAction={confirmDelete}
-        />
-      );
-    }
-    return null;
-  }
-
   return (
     <>
       <div className={styles.container}>
-        {renderContent()}
+        {itemToDelete && (
+          <ConfirmDeletion
+            productName={itemToDelete.name}
+            productSku={itemToDelete.sku}
+            cancelAction={() => setItemToDelete(null)}
+            confirmAction={confirmDelete}
+          />
+        )}
 
         <table className={styles.table}>
           <thead>

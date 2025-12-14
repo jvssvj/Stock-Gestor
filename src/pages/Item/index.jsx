@@ -1,11 +1,15 @@
 import styles from "./index.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
 import useGetItems from "../../hooks/useGetItems";
 import Information from "../../components/Information";
+import ConfirmDeletion from "../../components/ConfirmDeletion";
+import useDeleteItem from "../../hooks/useDeleteItem";
 
 export default function Item() {
+  const navigate = useNavigate();
   const { items, loading, error } = useGetItems();
+  const { itemToDelete, setItemToDelete } = useDeleteItem({ items });
   const { itemId } = useParams();
   const item = items.find((i) => i.id === +itemId);
 
@@ -34,90 +38,117 @@ export default function Item() {
   const itemDate = formatDateISO(item.date);
   const updatedDate = formatDateISO(item.updatedDate);
 
+  function handleDelete() {
+    const items = JSON.parse(localStorage.getItem("items")) || [];
+    const newList = items.filter((i) => i.id !== item.id);
+
+    localStorage.setItem("items", JSON.stringify(newList));
+
+    navigate("/success", {
+      state: {
+        mode: "delete",
+        itemName: itemToDelete.name,
+      },
+    });
+  }
+
   return (
-    <section className={styles.section}>
-      <h2 className={styles.main__t}>Detalhes do item</h2>
+    <>
+      {itemToDelete && (
+        <ConfirmDeletion
+          cancelAction={() => setItemToDelete(null)}
+          confirmAction={handleDelete}
+          productName={itemToDelete.name}
+          productSku={itemToDelete.sku}
+        />
+      )}
+      <section className={styles.section}>
+        <h2 className={styles.main__t}>Detalhes do item</h2>
 
-      <div className={styles.container}>
-        <section className={styles.details__container}>
-          <img
-            className={styles.item__img}
-            src={item.image}
-            alt="Imagem do produto"
-          />
-          <h3 className={styles.details__container__t}>Informações gerais</h3>
+        <div className={styles.container}>
+          <section className={styles.details__container}>
+            <img
+              className={styles.item__img}
+              src={item.image}
+              alt="Imagem do produto"
+            />
+            <h3 className={styles.details__container__t}>Informações gerais</h3>
 
-          <hr className={styles.line} />
+            <hr className={styles.line} />
 
-          <div className={styles.infomation__container}>
-            <div className={styles.column}>
-              <Information
-                title={"Nome do item"}
-                information={item.name}
-              />
-              <Information
-                title={"Categoria"}
-                information={item.category}
-              />
-              <Information
-                title={"Preço unitário"}
-                information={`R$ ${priceFormated}`}
-              />
+            <div className={styles.infomation__container}>
+              <div className={styles.column}>
+                <Information
+                  title={"Nome do item"}
+                  information={item.name}
+                />
+                <Information
+                  title={"Categoria"}
+                  information={item.category}
+                />
+                <Information
+                  title={"Preço unitário"}
+                  information={`R$ ${priceFormated}`}
+                />
+              </div>
+              <div className={styles.column}>
+                <Information
+                  title={"Código/SKU"}
+                  information={item.sku}
+                />
+                <Information
+                  title={"Em estoque"}
+                  information={`${item.quantity} unidades`}
+                />
+                <Information
+                  title={"Valor total em estoque"}
+                  information={`R$ ${totalPriceFormated}`}
+                  emphasis
+                />
+              </div>
             </div>
-            <div className={styles.column}>
-              <Information
-                title={"Código/SKU"}
-                information={item.sku}
-              />
-              <Information
-                title={"Em estoque"}
-                information={`${item.quantity} unidades`}
-              />
-              <Information
-                title={"Valor total em estoque"}
-                information={`R$ ${totalPriceFormated}`}
-                emphasis
-              />
-            </div>
-          </div>
 
-          <section>
-            <h3 className={styles.description__t}>Descrição do item</h3>
-            <p className={styles.description__p}>{item.description}</p>
+            <section>
+              <h3 className={styles.description__t}>Descrição do item</h3>
+              <p className={styles.description__p}>{item.description}</p>
+            </section>
           </section>
-        </section>
-        <section className={styles.actions__panel}>
-          <h3 className={styles.actions__panel__t}>Ações</h3>
-          <div className={styles.action__container}>
-            <Link
-              to={`/update/${item.id}`}
-              className={`${styles.action} ${styles.update}`}
-            >
-              <Pencil /> Atualizar item
-            </Link>
+          <section className={styles.actions__panel}>
+            <h3 className={styles.actions__panel__t}>Ações</h3>
+            <div className={styles.action__container}>
+              <Link
+                to={`/update/${item.id}`}
+                className={`${styles.action} ${styles.update}`}
+              >
+                <Pencil /> Atualizar item
+              </Link>
 
-            <button className={`${styles.action} ${styles.delete}`}>
-              <Trash2 /> Excluir item
-            </button>
-          </div>
+              <button
+                onClick={() => setItemToDelete(item)}
+                className={`${styles.action} ${styles.delete}`}
+              >
+                <Trash2 /> Excluir item
+              </button>
+            </div>
 
-          <hr className={styles.line} />
+            <hr className={styles.line} />
 
-          <h3 className={styles.actions__panel__t}>Metadados</h3>
-          <div className={styles.metadata__container}>
-            <Information
-              title={"Data de adição:"}
-              information={itemDate}
-              metadata
-            />
-            <Information
-              title={"Última modificação:"}
-              information={updatedDate}
-              metadata
-            />
-          </div>
-        </section>
-      </div>
-    </section>
+            <h3 className={styles.actions__panel__t}>Metadados</h3>
+            <div className={styles.metadata__container}>
+              <Information
+                title={"Data de adição:"}
+                information={itemDate}
+                metadata
+              />
+              <Information
+                title={"Última modificação:"}
+                information={updatedDate}
+                metadata
+              />
+            </div>
+          </section>
+        </div>
+      </section>
+    </>
   );
 }

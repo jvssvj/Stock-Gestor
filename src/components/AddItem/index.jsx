@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function AddItem({ maxWidth }) {
   return (
     <Link
-      to={"/register"}
+      to={"/create"}
       className={styles.add__item}
       style={{ maxWidth: `${maxWidth}px` }}
     >

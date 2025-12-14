@@ -1,10 +1,10 @@
-import Dashboard from "../../components/Dashboard";
 import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 import AddItem from "../../components/AddItem";
 import EmptyStock from "../../components/EmptyStock";
+import DashboardInfos from "../../components/Dashboard";
 
-export default function Home() {
+export default function Dashboard() {
   const { items, loading, error } = useGetItems();
 
   if (loading) return <p>Carregando itens..</p>;
@@ -44,7 +44,7 @@ export default function Home() {
             <AddItem maxWidth={200} />
           </section>
 
-          <Dashboard
+          <DashboardInfos
             items={items}
             runningOut={runningOut}
             recentItems={recentItems}
