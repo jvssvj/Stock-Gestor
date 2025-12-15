@@ -20,5 +20,5 @@ export default function useGetItems() {
     }
   }, []);
 
-  return { items, loading, error };
+  return { items, setItems, loading, error };
 }
