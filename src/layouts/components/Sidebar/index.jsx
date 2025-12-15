@@ -1,6 +1,6 @@
 import NavItem from "./NavItem";
 import styles from "./index.module.css";
-import stockflowicon from "../../assets/images/stockflow-icon.png";
+import stockflowicon from "../../../assets/images/stockflow-icon.png";
 import { LayoutDashboard, Box } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";

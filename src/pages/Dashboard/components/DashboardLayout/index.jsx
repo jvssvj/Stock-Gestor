@@ -4,8 +4,7 @@ import { Shapes, ClipboardCheck, TriangleAlert } from "lucide-react";
 import LowStock from "./LowStock";
 import RecentItems from "./RecentItems";
 
-export default function DashboardInfos({ items, runningOut, recentItems }) {
-  console.log(runningOut);
+export default function DashboardLayout({ items, runningOut, recentItems }) {
   return (
     <>
       <div className={styles.dashboard__infos}>

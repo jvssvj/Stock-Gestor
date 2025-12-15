@@ -2,9 +2,10 @@ import styles from "./index.module.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
 import useGetItems from "../../hooks/useGetItems";
-import Information from "../../components/Information";
+
 import ConfirmDeletion from "../../components/ConfirmDeletion";
 import useDeleteItem from "../../hooks/useDeleteItem";
+import Information from "../../components/Information";
 
 export default function Item() {
   const navigate = useNavigate();

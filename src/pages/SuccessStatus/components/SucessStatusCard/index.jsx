@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import Information from "../Information";
+
 import { CircleCheck } from "lucide-react";
 import styles from "./index.module.css";
+import Information from "../../../../components/Information";
 
 export default function SucessStatusCard({
   itemId,

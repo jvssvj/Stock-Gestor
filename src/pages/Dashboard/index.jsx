@@ -2,7 +2,7 @@ import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 import AddItem from "../../components/AddItem";
 import EmptyStock from "../../components/EmptyStock";
-import DashboardInfos from "../../components/Dashboard";
+import DashboardLayout from "./components/DashboardLayout";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems();
@@ -44,7 +44,7 @@ export default function Dashboard() {
             <AddItem maxWidth={200} />
           </section>
 
-          <DashboardInfos
+          <DashboardLayout
             items={items}
             runningOut={runningOut}
             recentItems={recentItems}

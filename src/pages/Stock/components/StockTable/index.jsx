@@ -5,8 +5,9 @@ import Stack from "@mui/material/Stack";
 import styles from "./index.module.css";
 import Actions from "./Actions";
 import { Link } from "react-router-dom";
-import useDeleteItem from "../../hooks/useDeleteItem";
-import ConfirmDeletion from "../ConfirmDeletion";
+
+import ConfirmDeletion from "../../../../components/ConfirmDeletion";
+import useDeleteItem from "../../../../hooks/useDeleteItem";
 
 export default function StockTable({ items, setItems }) {
   const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({

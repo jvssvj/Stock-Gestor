@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AddItem from "../../components/AddItem";
 import SearchInput from "../../components/Search";
-import StockTable from "../../components/StockTable";
+import StockTable from "./components/StockTable";
 import EmptyStock from "../../components/EmptyStock";
 import NoItemsFound from "../../components/NoItemsFound";
 import styles from "./index.module.css";
