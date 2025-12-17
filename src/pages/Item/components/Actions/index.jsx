@@ -12,14 +12,14 @@ export default function Actions({ item, setItemToDelete }) {
           to={`/update/${item.id}`}
           className={`${styles.action} ${styles.update}`}
         >
-          <Pencil /> Atualizar item
+          <Pencil className={styles.icon} /> Atualizar item
         </Link>
 
         <button
           onClick={setItemToDelete}
           className={`${styles.action} ${styles.delete}`}
         >
-          <Trash2 /> Excluir item
+          <Trash2 className={styles.icon} /> Excluir item
         </button>
       </div>
     </section>

@@ -50,3 +50,16 @@
 .delete:hover {
   background-color: var(--light-red);
 }
+
+@media (max-width: 370px) {
+  .action {
+    padding: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .icon {
+    display: none;
+  }
+}

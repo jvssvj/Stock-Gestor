@@ -70,3 +70,16 @@
     max-width: unset;
   }
 }
+
+@media (max-width: 455px) {
+  .details__container {
+    padding: 1rem;
+  }
+
+  .main__t {
+    font-size: var(--font32);
+  }
+  .general__information__container__t {
+    font-size: var(--font24);
+  }
+}
