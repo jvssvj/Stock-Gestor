@@ -1,0 +1,11 @@
+.metadata__t {
+  font-size: var(--font24);
+  color: var(--very-dark-blue);
+  margin-bottom: 1rem;
+}
+
+.metadata__infos__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

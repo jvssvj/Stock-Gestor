@@ -1,0 +1,13 @@
+.description__t {
+  font-size: var(--font24);
+  color: var(--very-dark-blue);
+  margin-bottom: 1rem;
+}
+
+.description__p {
+  color: var(--grey);
+  line-height: 1.5rem;
+  word-wrap: break-word; /* compatibilidade antiga */
+  overflow-wrap: break-word; /* padrão moderno */
+  white-space: normal; /* garante quebra de linha normal */
+}

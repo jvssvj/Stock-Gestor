@@ -1,19 +1,16 @@
 import styles from "./index.module.css";
-import { Link, useParams } from "react-router-dom";
-import { Pencil, Trash2 } from "lucide-react";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import useGetItems from "../../hooks/useGetItems";
 import useDeleteItem from "../../hooks/useDeleteItem";
-
 import ConfirmDeletion from "../../components/ConfirmDeletion";
-import Information from "../../components/Information";
+import Actions from "./components/Actions";
+import Metadata from "./components/Metadata";
+import Description from "./components/ItemDetails/Description";
+import Informations from "./components/ItemDetails/Informations";
 
 export default function Item() {
-  // carrega do localStorage
   const { items: initialItems, loading, error } = useGetItems();
-
-  // estado local (OBRIGATÓRIO)
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -55,7 +52,7 @@ export default function Item() {
       <h2 className={styles.main__t}>Detalhes do item</h2>
 
       <div className={styles.container}>
-        <section className={styles.details__container}>
+        <div className={styles.details__container}>
           <img
             className={styles.item__img}
             src={item.image}
@@ -69,82 +66,30 @@ export default function Item() {
 
             <hr className={styles.line} />
 
-            <div className={styles.infomation__container}>
-              <div className={styles.column}>
-                <Information
-                  title={"Nome do item"}
-                  information={item.name}
-                />
-                <Information
-                  title={"Categoria"}
-                  information={item.category}
-                />
-                <Information
-                  title={"Preço unitário"}
-                  information={`R$ ${price.toLocaleString("pt-BR")}`}
-                />
-              </div>
-              <div className={styles.column}>
-                <Information
-                  title={"Código/SKU"}
-                  information={item.sku}
-                />
-                <Information
-                  title={"Em estoque"}
-                  information={`${item.quantity} unidades`}
-                />
-                <Information
-                  title={"Valor total em estoque"}
-                  information={`R$ ${totalPrice.toLocaleString("pt-BR")}`}
-                  emphasis
-                />
-              </div>
-            </div>
+            <Informations
+              item={item}
+              price={price}
+              totalPrice={totalPrice}
+            />
           </section>
-
-          <section>
-            <h3 className={styles.description__t}>Descrição</h3>
-            <p className={styles.description__p}>{item.description}</p>
-          </section>
-        </section>
-
-        <section className={styles.actions__panel}>
-          <h3 className={styles.actions__panel__t}>Ações</h3>
-
-          <div className={styles.action__container}>
-            <Link
-              to={`/update/${item.id}`}
-              className={`${styles.action} ${styles.update}`}
-            >
-              <Pencil /> Atualizar item
-            </Link>
-
-            <button
-              onClick={() => setItemToDelete(item)}
-              className={`${styles.action} ${styles.delete}`}
-            >
-              <Trash2 /> Excluir item
-            </button>
+          <div style={{ marginTop: "1rem" }}>
+            <Description item={item} />
           </div>
+        </div>
+
+        <div className={styles.actions__panel}>
+          <Actions
+            item={item}
+            setItemToDelete={() => setItemToDelete(item)}
+          />
 
           <hr className={styles.line} />
 
-          <section className={styles.metadata__container}>
-            <h3 className={styles.metadata__t}>Metadados</h3>
-            <div className={styles.metadata__infos__container}>
-              <Information
-                title="Data de adição:"
-                information={formatDateISO(item.date)}
-                metadata
-              />
-              <Information
-                title="Última modificação:"
-                information={formatDateISO(item.updatedDate)}
-                metadata
-              />
-            </div>
-          </section>
-        </section>
+          <Metadata
+            formattedDate={formatDateISO(item.date)}
+            formattedUpdateDate={formatDateISO(item.updatedDate)}
+          />
+        </div>
       </div>
     </>
   );
