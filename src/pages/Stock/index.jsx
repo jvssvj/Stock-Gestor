@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import AddItem from "../../components/AddItem";
-import SearchInput from "../../components/Search";
 import StockTable from "./components/StockTable";
 import EmptyStock from "../../components/EmptyStock";
-import NoItemsFound from "../../components/NoItemsFound";
+
 import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
+import SearchInput from "./components/Search";
+import NoItemsFound from "./components/NoItemsFound";
 
 export default function Stock() {
   // carrega do localStorage
@@ -45,7 +46,19 @@ export default function Stock() {
       return (
         <NoItemsFound
           value={searchedItem}
-          onClear={() => setSearchedItem("")}
+          onCLick={() => {
+            setSearching(false);
+            setSearchedItem("");
+          }}
+        />
+      );
+    }
+
+    if (!searching) {
+      return (
+        <StockTable
+          items={items}
+          setItems={setItems}
         />
       );
     }
@@ -65,7 +78,7 @@ export default function Stock() {
       return <EmptyStock />;
     }
 
-    // padrão
+    // padrão;
     return (
       <StockTable
         items={items}
@@ -95,7 +108,7 @@ export default function Stock() {
             </header>
 
             {searching && (
-              <p>
+              <p style={{ marginTop: "1rem" }}>
                 Exibindo {findItem().length} resultados para{" "}
                 <strong>"{searchedItem}"</strong>
               </p>

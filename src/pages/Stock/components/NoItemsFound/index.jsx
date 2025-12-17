@@ -1,7 +1,7 @@
 import { Delete, SearchX } from "lucide-react";
 import styles from "./index.module.css";
 
-export default function NoItemsFound({ onClear, value = "valor" }) {
+export default function NoItemsFound({ onCLick, value = "valor" }) {
   return (
     <div className={styles.container}>
       <span className={styles.icon}>
@@ -21,7 +21,7 @@ export default function NoItemsFound({ onClear, value = "valor" }) {
         </p>
       </section>
       <button
-        onClick={onClear}
+        onClick={onCLick}
         className={styles.clean__input}
       >
         {<Delete color="#ffff" />} Limpar pesquisa
