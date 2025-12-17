@@ -15,4 +15,5 @@ main {
   overflow-y: auto;
   min-height: 100dvh;
   padding: 1rem;
+  margin-left: 70px;
 }

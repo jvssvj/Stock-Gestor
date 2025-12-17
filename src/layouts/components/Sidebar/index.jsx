@@ -23,45 +23,48 @@ export default function Sidebar() {
   }
 
   return (
-    <div className={`${styles.sidebar} ${isMenuOpen ? styles.active : ""}`}>
-      <section className={styles.title}>
-        <img
-          src={stockflowicon}
-          style={{ width: "25px" }}
-          alt="Abrir e fechar menu"
-          onClick={handleMenuClick}
-          className={`${styles.icon} ${isMenuOpen ? styles.activeIcon : ""}`}
-        />
-        <h1>Stock Flow</h1>
-      </section>
+    <>
+      <div className={`${styles.sidebar} ${isMenuOpen ? styles.active : ""}`}>
+        <section className={styles.title}>
+          <img
+            src={stockflowicon}
+            style={{ width: "25px" }}
+            alt="Abrir e fechar menu"
+            onClick={handleMenuClick}
+            className={`${styles.icon} ${isMenuOpen ? styles.activeIcon : ""}`}
+          />
+          <h1>Stock Flow</h1>
+        </section>
 
-      <LayoutGroup>
-        <nav className={styles.nav}>
-          <Link
-            to="/"
-            style={{ textDecoration: "none" }}
-          >
-            <NavItem
-              isActive={active === "home"}
-              onClick={() => setActive("home")}
-              imageElement={<LayoutDashboard />}
-              name="Início"
-            />
-          </Link>
+        <LayoutGroup>
+          <nav className={styles.nav}>
+            <Link
+              to="/"
+              style={{ textDecoration: "none" }}
+            >
+              <NavItem
+                isActive={active === "home"}
+                onClick={() => setActive("home")}
+                imageElement={<LayoutDashboard />}
+                name="Início"
+              />
+            </Link>
 
-          <Link
-            to="/items"
-            style={{ textDecoration: "none" }}
-          >
-            <NavItem
-              isActive={active === "stock"}
-              onClick={() => setActive("stock")}
-              imageElement={<Box />}
-              name="Estoque"
-            />
-          </Link>
-        </nav>
-      </LayoutGroup>
-    </div>
+            <Link
+              to="/items"
+              style={{ textDecoration: "none" }}
+            >
+              <NavItem
+                isActive={active === "stock"}
+                onClick={() => setActive("stock")}
+                imageElement={<Box />}
+                name="Estoque"
+              />
+            </Link>
+          </nav>
+        </LayoutGroup>
+      </div>
+      <div className={`${isMenuOpen ? styles.overlay : ""}`}></div>
+    </>
   );
 }

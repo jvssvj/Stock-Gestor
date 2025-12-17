@@ -72,7 +72,7 @@ export default function Item() {
               totalPrice={totalPrice}
             />
           </section>
-          <div style={{ marginTop: "1rem" }}>
+          <div style={{ marginTop: "2rem" }}>
             <Description item={item} />
           </div>
         </div>
