@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import AddItem from "../../components/AddItem";
 import StockTable from "./components/StockTable";
 import EmptyStock from "../../components/EmptyStock";
-
 import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 import SearchInput from "./components/Search";
@@ -50,15 +49,6 @@ export default function Stock() {
             setSearching(false);
             setSearchedItem("");
           }}
-        />
-      );
-    }
-
-    if (!searching) {
-      return (
-        <StockTable
-          items={items}
-          setItems={setItems}
         />
       );
     }
