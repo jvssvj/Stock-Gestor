@@ -2,7 +2,10 @@ import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 import AddItem from "../../components/AddItem";
 import EmptyStock from "../../components/EmptyStock";
-import DashboardLayout from "./components/DashboardLayout";
+import Infos from "./components/Infos";
+import RecentItems from "./components/RecentItems";
+import { ClipboardCheck, Shapes, TriangleAlert } from "lucide-react";
+import LowStock from "./components/LowStock";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems();
@@ -19,21 +22,20 @@ export default function Dashboard() {
   const dbFormatted = items
     .map((item) => ({
       ...item,
-      dateISO: item.date, // mantém original
+      dateISO: item.date,
     }))
     .sort((a, b) => new Date(b.dateISO) - new Date(a.dateISO))
     .map((item) => ({
       ...item,
-      date: formatDate(item.dateISO), // agora formata com segurança
+      date: formatDate(item.dateISO),
     }))
     .slice(0, 10);
 
-  // Ordena por data mais recente
   const recentItems = dbFormatted;
   const runningOut = items
     .filter((item) => item.quantity <= 10)
     .sort((a, b) => a.quantity - b.quantity);
-  const differentItems = [...new Set(items.map((item) => item.category))];
+  // const differentItems = [...new Set(items.map((item) => item.category))];
 
   return (
     <>
@@ -44,12 +46,31 @@ export default function Dashboard() {
             <AddItem maxWidth={200} />
           </section>
 
-          <DashboardLayout
-            items={items}
-            runningOut={runningOut}
-            recentItems={recentItems}
-            differentItems={differentItems}
-          />
+          <div className={styles.dashboard__infos}>
+            <Infos
+              iconElement={<Shapes />}
+              title={"Total de itens diferentes"}
+              quantity={items.length}
+              iconClass={"component"}
+            />
+            <Infos
+              iconElement={<ClipboardCheck />}
+              title={"Total de itens"}
+              quantity={items.length.toLocaleString("pt-BR")}
+              iconClass={"clipboard--check"}
+            />
+            <Infos
+              iconElement={<TriangleAlert />}
+              title={"Itens com baixo estoque"}
+              quantity={runningOut.length}
+              iconClass={"triangle--alert"}
+            />
+          </div>
+
+          <div className={styles.dashboard__tables__container}>
+            <RecentItems data={recentItems} />
+            {runningOut.length >= 1 && <LowStock data={runningOut} />}
+          </div>
         </div>
       ) : (
         <EmptyStock />

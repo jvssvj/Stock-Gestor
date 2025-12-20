@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { CircleCheck } from "lucide-react";
 import styles from "./index.module.css";
 import Information from "../../../../components/Information";
