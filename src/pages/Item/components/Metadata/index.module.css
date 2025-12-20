@@ -9,3 +9,25 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.metadata__info__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.title {
+  color: var(--grey);
+  white-space: nowrap;
+  min-width: 150px;
+}
+
+.information {
+  color: var(--very-dark-blue);
+  font-weight: var(--fontWeight500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

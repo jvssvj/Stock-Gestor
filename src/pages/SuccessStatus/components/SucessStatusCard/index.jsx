@@ -39,17 +39,17 @@ export default function SucessStatusCard({
             <Information
               title={"Nome do item:"}
               information={itemName}
-              metadata
+              inStatusCard
             />
             <Information
               title={"Código/SKU:"}
               information={itemSku}
-              metadata
+              inStatusCard
             />
             <Information
               title={"Estoque atual:"}
               information={itemQuantity}
-              metadata
+              inStatusCard
             />
           </div>
         )}

@@ -9,7 +9,7 @@
     ". .";
 }
 
-@media (max-width: 530px) {
+@media (max-width: 830px) {
   .infomation__container {
     display: flex;
     flex-direction: column;

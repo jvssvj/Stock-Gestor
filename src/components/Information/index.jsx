@@ -4,17 +4,19 @@ export default function Information({
   title,
   information,
   emphasis,
-  metadata,
+  inStatusCard,
 }) {
   return (
     <div
       className={`${styles.information__container} ${
-        metadata ? styles.metadata : ""
+        inStatusCard ? styles.in__status__card : ""
       }`}
     >
       <span className={styles.title}>{title}</span>
       <span
-        className={`${styles.information} ${emphasis ? styles.emphasis : ""}`}
+        className={`${styles.information} ${emphasis ? styles.emphasis : ""} ${
+          inStatusCard ? styles.in__status__card__information : ""
+        }`}
       >
         {information}
       </span>

@@ -48,49 +48,50 @@ export default function Item() {
           confirmAction={confirmDelete}
         />
       )}
+      <section className={styles.container}>
+        <h2 className={styles.main__t}>Detalhes do item</h2>
 
-      <h2 className={styles.main__t}>Detalhes do item</h2>
+        <div className={styles.item__container}>
+          <div className={styles.details__container}>
+            <img
+              className={styles.item__img}
+              src={item.image}
+              alt={item.name}
+            />
 
-      <div className={styles.container}>
-        <div className={styles.details__container}>
-          <img
-            className={styles.item__img}
-            src={item.image}
-            alt={item.name}
-          />
+            <section>
+              <h3 className={styles.general__information__container__t}>
+                Informações gerais
+              </h3>
 
-          <section>
-            <h3 className={styles.general__information__container__t}>
-              Informações gerais
-            </h3>
+              <hr className={styles.line} />
+
+              <Informations
+                item={item}
+                price={price}
+                totalPrice={totalPrice}
+              />
+            </section>
+            <div style={{ marginTop: "2rem" }}>
+              <Description item={item} />
+            </div>
+          </div>
+
+          <div className={styles.actions__panel}>
+            <Actions
+              item={item}
+              setItemToDelete={() => setItemToDelete(item)}
+            />
 
             <hr className={styles.line} />
 
-            <Informations
-              item={item}
-              price={price}
-              totalPrice={totalPrice}
+            <Metadata
+              formattedDate={formatDateISO(item.date)}
+              formattedUpdateDate={formatDateISO(item.updatedDate)}
             />
-          </section>
-          <div style={{ marginTop: "2rem" }}>
-            <Description item={item} />
           </div>
         </div>
-
-        <div className={styles.actions__panel}>
-          <Actions
-            item={item}
-            setItemToDelete={() => setItemToDelete(item)}
-          />
-
-          <hr className={styles.line} />
-
-          <Metadata
-            formattedDate={formatDateISO(item.date)}
-            formattedUpdateDate={formatDateISO(item.updatedDate)}
-          />
-        </div>
-      </div>
+      </section>
     </>
   );
 }
