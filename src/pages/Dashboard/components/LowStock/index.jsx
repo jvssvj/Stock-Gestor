@@ -3,11 +3,6 @@ import styles from "./index.module.css";
 export default function LowStock({ data }) {
   return (
     <div className={styles.table__container}>
-      <section className={styles.title__container}>
-        <h3>{`Itens com baixo estoque (<= 10)`}</h3>
-        <button className={styles.report}>Gerar relatório</button>
-      </section>
-
       <table className={styles.table}>
         <thead className={styles.table__header}>
           <tr>

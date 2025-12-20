@@ -2,20 +2,6 @@
   width: 100%;
 }
 
-.title__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
-.report {
-  color: var(--blue);
-  font-weight: var(--fontWeight600);
-  cursor: pointer;
-}
-
 .table {
   background-color: var(--white);
   border: 1px solid var(--light-grey);

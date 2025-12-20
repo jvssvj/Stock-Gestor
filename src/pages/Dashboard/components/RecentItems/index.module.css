@@ -2,19 +2,6 @@
   width: 100%;
 }
 
-.title__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.all__items {
-  color: var(--blue);
-  font-weight: var(--fontWeight600);
-  cursor: pointer;
-}
-
 .table {
   background-color: var(--white);
   border: 1px solid var(--light-grey);
@@ -30,7 +17,8 @@
 }
 
 .table__header th {
-  height: 40px;
+  text-align: start;
+  padding: 1rem;
 }
 
 .table__header__name {
@@ -40,7 +28,7 @@
 }
 
 .table__row__container {
-  text-align: center;
+  text-align: start;
   border-bottom: 1px solid var(--light-grey);
 }
 
@@ -50,6 +38,10 @@
 
 .table__row__container td {
   padding: 1rem;
+  max-width: 245px;
+  white-space: nowrap; /* 2. Impede o texto de pular para a linha de baixo */
+  overflow: hidden; /* 3. Esconde o que sobrar para fora da caixa */
+  text-overflow: ellipsis; /* A MÁGICA: Adiciona os "..." no final */
 }
 
 .table__row__item {

@@ -15,13 +15,13 @@
 .title {
   color: var(--grey);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .information {
   color: var(--very-dark-blue);
   font-weight: var(--fontWeight500);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .emphasis {

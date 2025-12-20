@@ -4,12 +4,6 @@ import styles from "./index.module.css";
 export default function RecentItems({ data }) {
   return (
     <div className={styles.table__container}>
-      <section className={styles.title__container}>
-        <h3>Itens adicionandos recentemente</h3>
-        <Link to="/items">
-          <button className={styles.all__items}>Ver todos os itens</button>
-        </Link>
-      </section>
       <table className={styles.table}>
         <thead className={styles.table__header}>
           <tr>

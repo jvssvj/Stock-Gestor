@@ -6,6 +6,7 @@ import Infos from "./components/Infos";
 import RecentItems from "./components/RecentItems";
 import { ClipboardCheck, Shapes, TriangleAlert } from "lucide-react";
 import LowStock from "./components/LowStock";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems();
@@ -43,7 +44,9 @@ export default function Dashboard() {
         <div className={styles.dashboard__container}>
           <section className={styles.dashboard__title__container}>
             <h2 className={styles.dashboard__title}>Dashboard</h2>
-            <AddItem maxWidth={200} />
+            <div className={styles.add__item}>
+              <AddItem maxWidth={200} />
+            </div>
           </section>
 
           <div className={styles.dashboard__infos}>
@@ -68,8 +71,28 @@ export default function Dashboard() {
           </div>
 
           <div className={styles.dashboard__tables__container}>
-            <RecentItems data={recentItems} />
-            {runningOut.length >= 1 && <LowStock data={runningOut} />}
+            <div className={styles.recent__items__container}>
+              <section className={styles.title__table__container}>
+                <h3>Itens adicionandos recentemente</h3>
+                <Link to="/items">
+                  <button className={styles.all__items}>
+                    Ver todos os itens
+                  </button>
+                </Link>
+              </section>
+              <RecentItems data={recentItems} />
+            </div>
+
+            {runningOut.length >= 1 && (
+              <div className={styles.running__out__items__container}>
+                <section className={styles.title__table__container}>
+                  <h3>{`Itens com baixo estoque (<= 10)`}</h3>
+                  <button className={styles.report}>Gerar relatório</button>
+                </section>
+
+                <LowStock data={runningOut} />
+              </div>
+            )}
           </div>
         </div>
       ) : (
