@@ -13,8 +13,10 @@
 
 .table {
   width: 100%;
+  min-width: 818px;
   background-color: var(--white);
   border-collapse: collapse;
+  table-layout: fixed;
   overflow: auto;
 }
 
@@ -33,6 +35,7 @@
 }
 
 .table td {
+  max-width: 384px;
   padding: 1rem;
   border-bottom: 1px solid var(--very-light-grey);
   white-space: nowrap;
