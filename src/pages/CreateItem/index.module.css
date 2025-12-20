@@ -4,17 +4,12 @@
 }
 
 .register__t {
-  font-size: var(--font40);
+  font-size: var(--font32);
   color: var(--very-dark-blue);
+  font-weight: var(--fontWeight900);
 }
 
 .register__p {
   color: var(--grey);
   margin: 0.5rem 0rem 2rem;
-}
-
-@media (max-width: 640px) {
-  .register__t {
-    font-size: var(--font32);
-  }
 }

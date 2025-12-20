@@ -11,7 +11,6 @@ export default function CreateItem() {
   if (error) return <p>Erro ao carregar itens: {error}</p>;
 
   const categories = [...new Set(items.map((item) => item.category))].sort();
-  const mode = "create";
 
   const handleCreateItem = (formData) => {
     // 🧩 Gera novo ID incremental
@@ -50,13 +49,9 @@ export default function CreateItem() {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.register__t}>
-        {mode === "update" ? "Atualização" : "Cadastro"} de item
-      </h2>
+      <h2 className={styles.register__t}>Cadastro de item</h2>
       <p className={styles.register__p}>
-        Preencha os detalhes abaixo para{" "}
-        {mode === "update" ? "atualizar" : "cadastrar"} o item no seu
-        inventário.
+        Preencha os detalhes abaixo para cadastrar o item no seu inventário.
       </p>
       <Form
         mode="create"

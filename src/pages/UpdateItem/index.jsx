@@ -40,6 +40,10 @@ export default function UpdateItem() {
 
   return (
     <section className={styles.container}>
+      <h2 className={styles.register__t}>Atualização do item</h2>
+      <p className={styles.register__p}>
+        Atualize os detalhes abaixo para atualizar o item no seu inventário.
+      </p>
       <Form
         mode="update"
         itemId={item.id}
