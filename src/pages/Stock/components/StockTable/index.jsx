@@ -53,7 +53,7 @@ export default function StockTable({ items, setItems }) {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{Number(item.quantity)}</td>
-                <td>R${Number(item.price).toFixed(2)}</td>
+                <td>R${Number(item.price).toLocaleString("pt-BR")}</td>
                 <td>{item.category}</td>
                 <td>
                   <div className={styles.icons__container}>

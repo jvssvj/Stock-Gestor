@@ -1,17 +1,3 @@
-.register__t {
-  width: 100%;
-  text-align: start;
-  font-size: var(--font40);
-  color: var(--very-dark-blue);
-}
-
-.register__p {
-  width: 100%;
-  text-align: start;
-  color: var(--grey);
-  margin: 0.5rem 0rem 2rem;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -26,6 +12,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
 }
 
 .form input,
@@ -76,4 +67,10 @@
 .error {
   width: max-content;
   color: var(--red);
+}
+
+@media (max-width: 640px) {
+  .row {
+    flex-direction: column;
+  }
 }

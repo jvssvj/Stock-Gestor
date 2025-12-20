@@ -101,7 +101,6 @@ export default function Form({
         className={styles.form}
         onSubmit={handleSubmit}
       >
-        {/* nome */}
         <div className={styles.input__container}>
           <label htmlFor="name">Nome do item</label>
           <input
@@ -115,7 +114,7 @@ export default function Form({
           />
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div className={styles.row}>
           <div className={styles.input__container}>
             <label htmlFor="quantity">Quantidade</label>
             <input

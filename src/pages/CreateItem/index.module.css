@@ -12,3 +12,9 @@
   color: var(--grey);
   margin: 0.5rem 0rem 2rem;
 }
+
+@media (max-width: 640px) {
+  .register__t {
+    font-size: var(--font32);
+  }
+}
