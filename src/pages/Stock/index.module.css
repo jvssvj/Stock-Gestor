@@ -25,3 +25,10 @@
 .header__add__item {
   max-width: 200px;
 }
+
+@media (max-width: 500px) {
+  .header {
+    flex-direction: column;
+    align-items: start;
+  }
+}

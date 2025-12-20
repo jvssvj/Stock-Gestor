@@ -99,6 +99,7 @@ export default function StockTable({ items, setItems }) {
             boundaryCount={2}
             showFirstButton
             showLastButton
+            size="small"
           />
         </Stack>
       </div>
