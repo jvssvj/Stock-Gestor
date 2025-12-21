@@ -38,3 +38,9 @@
   font-weight: var(--fontWeight700);
   color: var(--very-dark-blue);
 }
+
+@media (max-width: 380px) {
+  .container {
+    min-width: unset;
+  }
+}

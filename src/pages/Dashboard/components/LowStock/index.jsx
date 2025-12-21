@@ -2,7 +2,7 @@ import styles from "./index.module.css";
 
 export default function LowStock({ data }) {
   return (
-    <>
+    <div className={styles.container}>
       <table className={styles.table}>
         <thead className={styles.table__header}>
           <tr>
@@ -30,6 +30,6 @@ export default function LowStock({ data }) {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

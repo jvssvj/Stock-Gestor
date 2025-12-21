@@ -1,5 +1,6 @@
 .table__container {
   width: 100%;
+  overflow: scroll;
 }
 
 .table {
@@ -8,7 +9,6 @@
   width: 100%;
   border-collapse: collapse;
   border-radius: 0.5rem;
-  overflow: hidden;
 }
 
 .table__header {
@@ -19,6 +19,7 @@
 .table__header th {
   text-align: start;
   padding: 1rem;
+  white-space: nowrap;
 }
 
 .table__header__name {
@@ -39,9 +40,9 @@
 .table__row__container td {
   padding: 1rem;
   max-width: 245px;
-  white-space: nowrap; /* 2. Impede o texto de pular para a linha de baixo */
-  overflow: hidden; /* 3. Esconde o que sobrar para fora da caixa */
-  text-overflow: ellipsis; /* A MÁGICA: Adiciona os "..." no final */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table__row__item {

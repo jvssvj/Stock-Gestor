@@ -1,5 +1,6 @@
-.table__container {
+.container {
   width: 100%;
+  overflow: scroll;
 }
 
 .table {
@@ -8,7 +9,6 @@
   width: 100%;
   border-collapse: collapse;
   border-radius: 0.5rem;
-  overflow: hidden;
 }
 
 .table__header {
@@ -17,7 +17,8 @@
 }
 
 .table__header th {
-  height: 40px;
+  padding: 1rem;
+  white-space: nowrap;
 }
 
 .table__header__name {
@@ -35,8 +36,13 @@
   border-bottom: none;
 }
 
-.table__row__container td {
+.table td {
+  text-align: start;
+  max-width: 245px;
   padding: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .badge__container {
@@ -44,6 +50,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-top: 0.6rem;
 }
 
 .badge {
@@ -55,7 +62,6 @@
   width: 30px;
   height: 30px;
   position: absolute;
-  top: 0.7rem;
 }
 
 .bad {

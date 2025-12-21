@@ -49,6 +49,8 @@ export default function Dashboard() {
             </div>
           </section>
 
+          <hr className={styles.line} />
+
           <div className={styles.dashboard__infos}>
             <Infos
               iconElement={<Shapes />}
@@ -73,11 +75,9 @@ export default function Dashboard() {
           <div className={styles.dashboard__tables__container}>
             <div className={styles.recent__items__container}>
               <section className={styles.title__table__container}>
-                <h3>Itens adicionandos recentemente</h3>
+                <h3>Itens recentes</h3>
                 <Link to="/items">
-                  <button className={styles.all__items}>
-                    Ver todos os itens
-                  </button>
+                  <button className={styles.all__items}>Ver todos</button>
                 </Link>
               </section>
               <RecentItems data={recentItems} />
@@ -86,7 +86,7 @@ export default function Dashboard() {
             {runningOut.length >= 1 && (
               <div className={styles.running__out__items__container}>
                 <section className={styles.title__table__container}>
-                  <h3>{`Itens com baixo estoque (<= 10)`}</h3>
+                  <h3>{`Itens com baixo estoque`}</h3>
                   <button className={styles.report}>Gerar relatório</button>
                 </section>
 
