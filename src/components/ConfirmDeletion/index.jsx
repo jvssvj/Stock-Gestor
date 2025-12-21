@@ -20,8 +20,8 @@ export default function ConfirmDeletion({
             Esta ação não pode ser desfeita. Você está prestes a excluir
             permanentemente o item:
           </p>
-          <h3>"{productName}"</h3>
-          <span>SKU:[{productSku}]</span>
+          <h3 className={styles.product__name}>"{productName}"</h3>
+          <span className={styles.product__sku}>SKU: [{productSku}]</span>
 
           <div className={styles.buttons__container}>
             <button

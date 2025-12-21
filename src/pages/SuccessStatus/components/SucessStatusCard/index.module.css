@@ -41,6 +41,15 @@
   overflow: hidden;
 }
 
+.product__name {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
 .buttons__container {
   width: 100%;
   display: flex;

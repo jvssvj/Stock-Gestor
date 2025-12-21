@@ -50,6 +50,15 @@
   color: var(--grey);
 }
 
+.product__name,
+.product__sku {
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
 .buttons__container {
   width: 100%;
   display: flex;
@@ -76,4 +85,14 @@
 .confirm__btn {
   background-color: var(--red);
   color: var(--white);
+}
+
+@media (max-width: 395px) {
+  .buttons__container {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
 }

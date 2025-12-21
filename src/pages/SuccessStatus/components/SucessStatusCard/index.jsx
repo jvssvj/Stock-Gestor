@@ -31,7 +31,10 @@ export default function SucessStatusCard({
         {status === "create" && <p>O item foi cadastrado no seu inventário.</p>}
         {status === "update" && <p>O item foi atualizado.</p>}
         {status === "delete" && (
-          <p>O item "{itemName}" foi deletado do seu inventário.</p>
+          <p>
+            <span className={styles.product__name}>"{itemName}</span> foi
+            deletado do seu inventário.
+          </p>
         )}
 
         {(status === "create" || status === "update") && (
