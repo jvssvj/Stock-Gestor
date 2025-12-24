@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddItem from "../../components/AddItem";
 import StockTable from "./components/StockTable";
 import EmptyStock from "../../components/EmptyStock";
@@ -9,15 +9,7 @@ import NoItemsFound from "./components/NoItemsFound";
 
 export default function Stock() {
   // carrega do localStorage
-  const { items: initialItems, loading, error } = useGetItems();
-
-  // Stock é dono do estado
-  const [items, setItems] = useState([]);
-
-  // sincroniza uma vez quando carregar
-  useEffect(() => {
-    setItems(initialItems);
-  }, [initialItems]);
+  const { items, setItems, loading, error } = useGetItems();
 
   // busca
   const [searchedItem, setSearchedItem] = useState("");
@@ -58,6 +50,7 @@ export default function Stock() {
       return (
         <StockTable
           items={findItem()}
+          allItems={items}
           setItems={setItems}
         />
       );
@@ -72,6 +65,7 @@ export default function Stock() {
     return (
       <StockTable
         items={items}
+        allItems={items}
         setItems={setItems}
       />
     );

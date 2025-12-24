@@ -12,12 +12,11 @@ export default function useDeleteItem({ items, setItems }) {
     if (!itemToDelete) return;
 
     const newList = items.filter((item) => item.id !== itemToDelete.id);
-
-    setItems(newList);
     localStorage.setItem("items", JSON.stringify(newList));
 
     setDeletedItem(itemToDelete);
     setItemToDelete(null);
+    setItems(newList);
   }
 
   useEffect(() => {

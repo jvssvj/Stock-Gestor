@@ -10,8 +10,6 @@ import ConfirmDeletion from "../../../../components/ConfirmDeletion";
 
 const formatCentsToBRL = (valueInCents) => {
   if (!valueInCents && valueInCents !== 0) return "R$ 0,00";
-
-  // O Pulo do Gato: divide por 100 para voltar a ser decimal
   const decimalValue = valueInCents / 100;
 
   return decimalValue.toLocaleString("pt-BR", {
@@ -20,9 +18,9 @@ const formatCentsToBRL = (valueInCents) => {
   });
 };
 
-export default function StockTable({ items, setItems }) {
+export default function StockTable({ items, allItems, setItems }) {
   const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({
-    items,
+    items: allItems,
     setItems,
   });
 
