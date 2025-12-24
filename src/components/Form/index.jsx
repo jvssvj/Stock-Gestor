@@ -6,41 +6,43 @@ import {
 } from "../../utils/currencyUtils";
 
 export default function Form({
-  mode = "create", // "create" | "update"
+  mode = "create",
   itemId = null,
   itemName = "",
-  itemQuantity = "",
-  itemPrice = "0",
+  itemQuantity = 0,
+  itemPrice = "0.00", // Padronizei o nome para itemPrice
   itemCategory = "",
   itemDescription = "",
   itemSku = "",
   categories = [],
   onSubmit,
 }) {
+  // 1. Estado com nomes consistentes
   const [formData, setFormData] = useState({
-    name: "",
-    quantity: "",
-    price: "",
-    category: "",
-    description: "",
-    sku: "",
+    name: itemName,
+    quantity: itemQuantity,
+    price: mode === "update" ? Number(itemPrice) / 100 : "0.00",
+    category: itemCategory,
+    description: itemDescription,
+    sku: itemSku,
   });
 
-  // preenche os dados iniciais (modo update)
+  // 2. Sincronização corrigida
   useEffect(() => {
     if (mode === "update") {
       setFormData({
         name: itemName,
         quantity: itemQuantity,
-        price: String(itemPrice),
+        price: Number(itemPrice) / 100,
         category: itemCategory,
         description: itemDescription,
         sku: itemSku,
       });
     } else {
+      // Reset para modo criação
       setFormData({
         name: "",
-        quantity: "",
+        quantity: 0,
         price: "0.00",
         category: "",
         description: "",
@@ -57,44 +59,39 @@ export default function Form({
     itemSku,
   ]);
 
+  // 3. Verificação de modificação (usando o nome 'price')
+  const currentPriceInCents = Math.round(parseFloat(formData.price) * 100);
   const isModified =
     formData.name !== itemName ||
     formData.quantity !== itemQuantity ||
-    formData.price !== String(itemPrice) ||
+    currentPriceInCents !== itemPrice ||
     formData.category !== itemCategory ||
     formData.description !== itemDescription ||
     formData.sku !== itemSku;
 
-  // 👈 Função de mudança de input adaptada para o preço
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
 
-    if (name === "price") {
-      const cleanedValue = cleanCurrencyString(value);
-      setFormData((prev) => ({ ...prev, [name]: cleanedValue }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    // Se for preço, limpa a string, se não, salva normal
+    const finalValue = name === "price" ? cleanCurrencyString(value) : value;
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const convertedData = {
+    const payload = {
       ...formData,
+      id: itemId,
       quantity: Number(formData.quantity),
-      price: Number(formData.price),
+      price: Math.round(parseFloat(formData.price) * 100),
       updatedDate: new Date().toISOString().split("T")[0],
     };
 
-    // 👇 o form apenas devolve os dados
-    onSubmit({
-      ...convertedData,
-      id: itemId, // pode vir null no modo "create"
-      mode,
-    });
+    onSubmit(payload);
   };
 
+  console.log();
   return (
     <>
       <form

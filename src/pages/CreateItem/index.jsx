@@ -23,10 +23,10 @@ export default function CreateItem() {
       image: `http://dummyimage.com/800x500/c30ddb/ffffff`,
       name: formData.name,
       description: formData.description,
-      quantity: Number(formData.quantity),
+      quantity: formData.quantity,
       date: new Date().toISOString().split("T")[0],
       updatedDate: new Date().toISOString().split("T")[0],
-      price: Number(formData.price),
+      price: formData.price,
       category: formData.category,
       sku: formData.sku || `SKU-I${generatedId}`,
     };

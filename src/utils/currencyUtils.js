@@ -1,31 +1,37 @@
-// Limpa a string digitada: remove R$ e converte para um formato numérico com ponto (ex: "1234.56")
+// 1. Limpa a string e mantém o formato decimal (ex: "10.50")
+// Essa função está ótima para o "onChange" do input!
 export function cleanCurrencyString(value) {
   if (typeof value === "number") {
-    value = String(value); // Garante que é string
+    // Se vier um número (ex: 10.5), transformamos em string fixando 2 casas
+    value = value.toFixed(2).replace(".", "");
   }
-  if (!value) return "";
 
-  // Remove tudo que não for dígito.
-  let cleaned = value.replace(/[^\d]/g, "");
+  if (!value) return "0.00";
 
-  if (cleaned.length === 0) return "";
+  // Remove tudo que não é número
+  let cleaned = value.toString().replace(/[^\d]/g, "");
 
-  // Trata a entrada como centavos para simular a digitação (ex: 1234 vira 12.34)
-  // O número 2 representa as casas decimais.
-  cleaned = cleaned.padStart(3, "0"); // Garante que há zeros suficientes, ex: '5' vira '005'
+  if (cleaned.length === 0) return "0.00";
 
+  // Transforma em decimal (ex: "1250" vira "12.50")
+  cleaned = cleaned.padStart(3, "0");
   const integerPart = cleaned.substring(0, cleaned.length - 2);
   const decimalPart = cleaned.substring(cleaned.length - 2);
 
-  // Retorna o formato numérico puro com ponto (ex: "1234.56")
   return `${integerPart}.${decimalPart}`;
 }
 
-// Formata o valor numérico puro para o formato de moeda brasileiro (R$ 1.234,56)
-export function formatToCurrency(value) {
-  const numberValue = parseFloat(value);
+// 2. Formata para a moeda brasileira (R$)
+// AJUSTE: Agora ela aceita um parâmetro para saber se o valor está em centavos
+export function formatToCurrency(value, isCents = false) {
+  let numberValue = parseFloat(value);
 
-  if (isNaN(numberValue)) return "";
+  if (isNaN(numberValue)) return "R$ 0,00";
+
+  // Se o valor estiver em centavos (vinda do localStorage), divide por 100
+  if (isCents) {
+    numberValue = numberValue / 100;
+  }
 
   return numberValue.toLocaleString("pt-BR", {
     style: "currency",
@@ -33,4 +39,9 @@ export function formatToCurrency(value) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+}
+
+// 3. FUNÇÃO NOVA: Converte o valor do estado (10.50) para centavos (1050)
+export function toCents(value) {
+  return Math.round(parseFloat(value) * 100);
 }

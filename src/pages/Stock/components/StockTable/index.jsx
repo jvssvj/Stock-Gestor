@@ -8,6 +8,18 @@ import { Link } from "react-router-dom";
 import useDeleteItem from "../../../../hooks/useDeleteItem";
 import ConfirmDeletion from "../../../../components/ConfirmDeletion";
 
+const formatCentsToBRL = (valueInCents) => {
+  if (!valueInCents && valueInCents !== 0) return "R$ 0,00";
+
+  // O Pulo do Gato: divide por 100 para voltar a ser decimal
+  const decimalValue = valueInCents / 100;
+
+  return decimalValue.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};
+
 export default function StockTable({ items, setItems }) {
   const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({
     items,
@@ -53,7 +65,7 @@ export default function StockTable({ items, setItems }) {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{Number(item.quantity)}</td>
-                <td>R${Number(item.price).toLocaleString("pt-BR")}</td>
+                <td>{formatCentsToBRL(item.price)}</td>
                 <td>{item.category}</td>
                 <td>
                   <div className={styles.icons__container}>

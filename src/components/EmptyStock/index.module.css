@@ -8,6 +8,7 @@
 .empty__content {
   display: grid;
   place-items: center;
+  text-align: center;
 }
 
 .empty__icon {
@@ -19,12 +20,12 @@
   font-size: var(--font40);
   color: var(--very--dark-blue);
 }
+
 .empty__p {
   font-size: var(--font16);
   margin: 1rem 0rem 2rem;
   width: 100%;
   max-width: 400px;
-  text-align: center;
 }
 
 .empty__button {
