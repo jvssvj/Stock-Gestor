@@ -29,8 +29,8 @@ export default function Item() {
   if (error) return <p>Erro ao carregar item.</p>;
   if (!item) return <p>Item não encontrado.</p>;
 
-  const price = item.price;
-  const totalPrice = item.price * item.quantity;
+  const price = (item.price / 100).toFixed(2);
+  const totalPrice = (price * item.quantity).toFixed(2);
 
   function formatDateISO(dateStr) {
     if (!dateStr) return "";
@@ -68,8 +68,8 @@ export default function Item() {
 
               <Informations
                 item={item}
-                price={price}
-                totalPrice={totalPrice}
+                price={price.toLocaleString("pt-BR")}
+                totalPrice={totalPrice.toLocaleString("pt-BR")}
               />
             </section>
             <div style={{ marginTop: "2rem" }}>
