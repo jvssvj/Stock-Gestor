@@ -26,9 +26,9 @@ export default function CreateItem() {
       quantity: formData.quantity,
       date: new Date().toISOString().split("T")[0],
       updatedDate: new Date().toISOString().split("T")[0],
-      price: formData.price,
+      priceInCents: formData.priceInCents,
       category: formData.category,
-      sku: formData.sku || `SKU-I${generatedId}`,
+      sku: formData.sku,
     };
 
     // 💾 Atualiza lista e salva no localStorage
@@ -40,7 +40,7 @@ export default function CreateItem() {
       state: {
         mode: "create",
         itemId: newItem.id,
-        itemName: newItem.name,
+        name: newItem.name,
         itemQuantity: newItem.quantity,
         itemSku: newItem.sku,
       },

@@ -1,5 +1,4 @@
 import Information from "../../../../../components/Information";
-import { formatToCurrency } from "../../../../../utils/currencyUtils";
 import styles from "./index.module.css";
 
 export default function Informations({ item, price, totalPrice }) {
@@ -23,11 +22,11 @@ export default function Informations({ item, price, totalPrice }) {
       />
       <Information
         title={"Preço unitário"}
-        information={`${formatToCurrency(price)}`}
+        information={price}
       />
       <Information
         title={"Valor total em estoque"}
-        information={`${formatToCurrency(totalPrice)}`}
+        information={totalPrice}
         emphasis
       />
     </div>

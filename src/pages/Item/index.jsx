@@ -8,6 +8,7 @@ import Actions from "./components/Actions";
 import Metadata from "./components/Metadata";
 import Description from "./components/ItemDetails/Description";
 import Informations from "./components/ItemDetails/Informations";
+import { formatToCurrency } from "../../utils/currencyUtils";
 
 export default function Item() {
   const { items: initialItems, loading, error } = useGetItems();
@@ -29,7 +30,7 @@ export default function Item() {
   if (error) return <p>Erro ao carregar item.</p>;
   if (!item) return <p>Item não encontrado.</p>;
 
-  const price = (item.price / 100).toFixed(2);
+  const price = (item.priceInCents / 100).toFixed(2);
   const totalPrice = (price * item.quantity).toFixed(2);
 
   function formatDateISO(dateStr) {
@@ -68,8 +69,8 @@ export default function Item() {
 
               <Informations
                 item={item}
-                price={price.toLocaleString("pt-BR")}
-                totalPrice={totalPrice.toLocaleString("pt-BR")}
+                price={formatToCurrency(price)}
+                totalPrice={formatToCurrency(totalPrice)}
               />
             </section>
             <div style={{ marginTop: "2rem" }}>

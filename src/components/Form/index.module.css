@@ -64,9 +64,21 @@
   cursor: not-allowed;
 }
 
-.error {
-  width: max-content;
+.error__input {
+  outline: 1px solid var(--red);
+}
+
+.error__text {
   color: var(--red);
+  font-size: var(--font14);
+  margin-top: 0.5rem;
+}
+
+.update__error {
+  display: block;
+  color: var(--red);
+  font-size: var(--font14);
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 640px) {

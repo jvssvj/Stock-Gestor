@@ -4,46 +4,58 @@ import {
   cleanCurrencyString,
   formatToCurrency,
 } from "../../utils/currencyUtils";
+import * as z from "zod";
+
+// 1. Schema de Validação (O contrato dos dados)
+const ItemSchema = z.object({
+  name: z.string().min(3, "Nome deve ter ao menos 3 caracteres"),
+  quantity: z.coerce.number().min(1, "Mínimo de 1 unidade"),
+  priceInCents: z.coerce.number().min(0.01, "Mínimo de R$0,01"),
+  // category: z.string().nonempty("Selecione uma categoria"),
+  description: z.string().min(5, "Descrição muito curta."),
+  sku: z.string().nonempty("SKU é obrigatório."),
+});
 
 export default function Form({
   mode = "create",
   itemId = null,
   itemName = "",
   itemQuantity = 0,
-  itemPrice = "0.00", // Padronizei o nome para itemPrice
+  itemPriceInCents = 0, // Vem em centavos (ex: 200)
   itemCategory = "",
   itemDescription = "",
   itemSku = "",
   categories = [],
   onSubmit,
 }) {
-  // 1. Estado com nomes consistentes
+  // 2. Estado Inicial
   const [formData, setFormData] = useState({
     name: itemName,
     quantity: itemQuantity,
-    price: mode === "update" ? Number(itemPrice) / 100 : "0.00",
+    priceInCents: mode === "update" ? Number(itemPriceInCents) / 100 : 0,
     category: itemCategory,
     description: itemDescription,
     sku: itemSku,
   });
 
-  // 2. Sincronização corrigida
+  const [errors, setErrors] = useState({});
+
+  // 3. Sincronização (Edição vs Criação)
   useEffect(() => {
     if (mode === "update") {
       setFormData({
         name: itemName,
         quantity: itemQuantity,
-        price: Number(itemPrice) / 100,
+        priceInCents: Number(itemPriceInCents) / 100,
         category: itemCategory,
         description: itemDescription,
         sku: itemSku,
       });
     } else {
-      // Reset para modo criação
       setFormData({
         name: "",
         quantity: 0,
-        price: "0.00",
+        priceInCents: "0",
         category: "",
         description: "",
         sku: "",
@@ -53,157 +65,193 @@ export default function Form({
     mode,
     itemName,
     itemQuantity,
-    itemPrice,
+    itemPriceInCents,
     itemCategory,
     itemDescription,
     itemSku,
   ]);
 
-  // 3. Verificação de modificação (usando o nome 'price')
-  const currentPriceInCents = Math.round(parseFloat(formData.price) * 100);
+  // 4. Lógica de Modificação
+  const currentPriceInCents = Math.round(
+    parseFloat(formData.priceInCents) * 100
+  );
   const isModified =
     formData.name !== itemName ||
-    formData.quantity !== itemQuantity ||
-    currentPriceInCents !== itemPrice ||
+    Number(formData.quantity) !== Number(itemQuantity) ||
+    currentPriceInCents !== Number(itemPriceInCents) ||
     formData.category !== itemCategory ||
     formData.description !== itemDescription ||
     formData.sku !== itemSku;
 
+  // 5. Handlers
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
+    const finalValue =
+      name === "priceInCents" ? cleanCurrencyString(value) : value;
 
-    // Se for preço, limpa a string, se não, salva normal
-    const finalValue = name === "price" ? cleanCurrencyString(value) : value;
     setFormData((prev) => ({ ...prev, [name]: finalValue }));
+
+    // Limpa o erro do campo enquanto o usuário digita
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors[name];
+      return newErrors;
+    });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validação com Zod
+    const validation = ItemSchema.safeParse(formData);
+
+    if (!validation.success) {
+      setErrors(validation.error.flatten().fieldErrors);
+      return;
+    }
+
+    // Se passou, envia o payload limpo
     const payload = {
       ...formData,
       id: itemId,
       quantity: Number(formData.quantity),
-      price: Math.round(parseFloat(formData.price) * 100),
+      priceInCents: Math.round(parseFloat(formData.priceInCents) * 100),
       updatedDate: new Date().toISOString().split("T")[0],
     };
 
     onSubmit(payload);
   };
 
-  console.log();
   return (
-    <>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+    >
+      {/* NOME */}
+      <div className={styles.input__container}>
+        <label htmlFor="name">Nome do item</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={errors.name ? styles.error__input : ""}
+        />
+        {errors.name && (
+          <span className={styles.error__text}>{errors.name[0]}</span>
+        )}
+      </div>
+
+      <div className={styles.row}>
+        {/* QUANTIDADE */}
         <div className={styles.input__container}>
-          <label htmlFor="name">Nome do item</label>
+          <label htmlFor="quantity">Quantidade</label>
+          <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+            className={errors.quantity ? styles.error__input : ""}
+          />
+          {errors.quantity && (
+            <span className={styles.error__text}>{errors.quantity[0]}</span>
+          )}
+        </div>
+
+        {/* PREÇO */}
+        <div className={styles.input__container}>
+          <label htmlFor="priceInCents">Preço unitário (R$)</label>
           <input
             type="text"
-            name="name"
-            id="name"
-            required
-            placeholder="Nome do item"
-            value={formData.name}
+            name="priceInCents"
+            id="priceInCents"
+            value={formatToCurrency(formData.priceInCents)}
             onChange={handleChange}
+            className={errors.priceInCents ? styles.error__input : ""}
           />
+          {errors.priceInCents && (
+            <span className={styles.error__text}>{errors.priceInCents[0]}</span>
+          )}
         </div>
 
-        <div className={styles.row}>
-          <div className={styles.input__container}>
-            <label htmlFor="quantity">Quantidade</label>
-            <input
-              type="number"
-              name="quantity"
-              id="quantity"
-              required
-              min={1}
-              value={formData.quantity}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className={styles.input__container}>
-            <label htmlFor="price">Preço unitário (R$)</label>
-            <input
-              type="text"
-              name="price"
-              id="price"
-              required
-              value={formatToCurrency(formData.price)}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className={styles.input__container}>
-            <label htmlFor="sku">Código/SKU</label>
-            <input
-              type="text"
-              name="sku"
-              id="sku"
-              required
-              value={formData.sku}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        {/* categoria */}
+        {/* SKU */}
         <div className={styles.input__container}>
-          <label htmlFor="category">Categoria</label>
-          <select
-            name="category"
-            id="category"
-            value={formData.category}
+          <label htmlFor="sku">Código/SKU</label>
+          <input
+            type="text"
+            name="sku"
+            id="sku"
+            value={formData.sku}
             onChange={handleChange}
+            className={errors.sku ? styles.error__input : ""}
+          />
+          {errors.sku && (
+            <span className={styles.error__text}>{errors.sku[0]}</span>
+          )}
+        </div>
+      </div>
+
+      {/* CATEGORIA */}
+      <div className={styles.input__container}>
+        <label htmlFor="category">Categoria</label>
+        <select
+          name="category"
+          id="category"
+          value={formData.category}
+          onChange={handleChange}
+          className={errors.category ? styles.error__input : ""}
+        >
+          <option
+            value=""
+            disabled
+            hidden
           >
+            Selecione uma categoria
+          </option>
+          {categories.map((cat) => (
             <option
-              value=""
-              disabled
-              hidden
+              key={cat}
+              value={cat}
             >
-              {formData.category || "Selecione uma categoria"}
+              {cat}
             </option>
-            {categories.map((cat) => (
-              <option
-                key={cat}
-                value={cat}
-              >
-                {cat}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* descrição */}
-        <div className={styles.input__container}>
-          <label htmlFor="description">Descrição</label>
-          <textarea
-            name="description"
-            id="description"
-            required
-            placeholder="Adicione detalhes sobre o item..."
-            value={formData.description}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-
-        {/* validação */}
-        {mode === "update" && (
-          <span className={styles.error}>
-            {!isModified ? "Altere algo para enviar." : ""}
-          </span>
+          ))}
+        </select>
+        {errors.category && (
+          <span className={styles.error__text}>{errors.category[0]}</span>
         )}
+      </div>
 
+      {/* DESCRIÇÃO */}
+      <div className={styles.input__container}>
+        <label htmlFor="description">Descrição</label>
+        <textarea
+          name="description"
+          id="description"
+          value={formData.description}
+          onChange={handleChange}
+          className={errors.description ? styles.error__input : ""}
+        ></textarea>
+        {errors.description && (
+          <span className={styles.error__text}>{errors.description[0]}</span>
+        )}
+      </div>
+
+      {/* RODAPÉ DO FORM */}
+      <div className={styles.footer}>
         <button
           disabled={mode === "update" && !isModified}
           type="submit"
         >
           {mode === "update" ? "Atualizar" : "Cadastrar"}
         </button>
-      </form>
-    </>
+
+        {mode === "update" && !isModified && (
+          <span className={styles.update__error}>Altere algo para enviar.</span>
+        )}
+      </div>
+    </form>
   );
 }

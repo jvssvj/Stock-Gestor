@@ -63,7 +63,7 @@ export default function StockTable({ items, allItems, setItems }) {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{Number(item.quantity)}</td>
-                <td>{formatCentsToBRL(item.price)}</td>
+                <td>{formatCentsToBRL(item.priceInCents)}</td>
                 <td>{item.category}</td>
                 <td>
                   <div className={styles.icons__container}>

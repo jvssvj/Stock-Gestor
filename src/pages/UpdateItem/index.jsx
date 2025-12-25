@@ -12,7 +12,7 @@ export default function UpdateItem() {
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
 
-  const item = items.find((it) => it.id === Number(itemId));
+  const item = items.find((item) => item.id === Number(itemId));
 
   if (!item) return <p>Item não encontrado.</p>;
 
@@ -49,7 +49,7 @@ export default function UpdateItem() {
         itemId={item.id}
         itemName={item.name}
         itemQuantity={item.quantity}
-        itemPrice={item.price}
+        itemPriceInCents={item.priceInCents}
         itemCategory={item.category}
         itemDescription={item.description}
         itemSku={item.sku}

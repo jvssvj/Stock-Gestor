@@ -26,7 +26,7 @@ export function cleanCurrencyString(value) {
 export function formatToCurrency(value, isCents = false) {
   let numberValue = parseFloat(value);
 
-  if (isNaN(numberValue)) return "R$ 0,00";
+  if (isNaN(numberValue)) return 0;
 
   // Se o valor estiver em centavos (vinda do localStorage), divide por 100
   if (isCents) {
