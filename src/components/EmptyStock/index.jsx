@@ -2,7 +2,7 @@ import styles from "./index.module.css";
 import emptyBoxIcon from "../../assets/images/empty-box.png";
 import AddItem from "../AddItem";
 
-export default function EmptyStock() {
+export default function EmptyStock({ url }) {
   return (
     <div className={styles.empty__container}>
       <section className={styles.empty__content}>
@@ -17,7 +17,7 @@ export default function EmptyStock() {
           organizar seu inventário.
         </p>
         <div className={styles.empty__button}>
-          <AddItem />
+          <AddItem url={url} />
         </div>
       </section>
     </div>

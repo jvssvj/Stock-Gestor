@@ -45,7 +45,10 @@ export default function Dashboard() {
           <section className={styles.dashboard__title__container}>
             <h2 className={styles.dashboard__title}>Dashboard</h2>
             <div className={styles.add__item}>
-              <AddItem maxWidth={200} />
+              <AddItem
+                url={"/dashboard/create"}
+                maxWidth={200}
+              />
             </div>
           </section>
 
@@ -76,7 +79,7 @@ export default function Dashboard() {
             <div className={styles.recent__items__container}>
               <section className={styles.title__table__container}>
                 <h3>Itens recentes</h3>
-                <Link to="/items">
+                <Link to="/dashboard/items">
                   <button className={styles.all__items}>Ver todos</button>
                 </Link>
               </section>
@@ -96,7 +99,7 @@ export default function Dashboard() {
           </div>
         </div>
       ) : (
-        <EmptyStock />
+        <EmptyStock url={"/dashboard/create"} />
       )}
     </>
   );

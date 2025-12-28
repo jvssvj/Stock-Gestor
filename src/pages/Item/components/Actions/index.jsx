@@ -9,7 +9,7 @@ export default function Actions({ item, setItemToDelete }) {
 
       <div className={styles.action__container}>
         <Link
-          to={`/update/${item.id}`}
+          to={`/dashboard/items/${item.id}/update`}
           className={`${styles.action} ${styles.update}`}
         >
           <Pencil className={styles.icon} /> Atualizar item

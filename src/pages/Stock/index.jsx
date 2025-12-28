@@ -9,7 +9,7 @@ import NoItemsFound from "./components/NoItemsFound";
 
 export default function Stock() {
   // carrega do localStorage
-  const { items, setItems, loading, error } = useGetItems();
+  const { items, loading, error } = useGetItems();
 
   // busca
   const [searchedItem, setSearchedItem] = useState("");
@@ -51,14 +51,14 @@ export default function Stock() {
         <StockTable
           items={findItem()}
           allItems={items}
-          setItems={setItems}
+          setItems={items}
         />
       );
     }
 
     //estoque vazio
     if (items.length === 0) {
-      return <EmptyStock />;
+      return <EmptyStock url={"/dashboard/create"} />;
     }
 
     // padrão;
@@ -66,7 +66,7 @@ export default function Stock() {
       <StockTable
         items={items}
         allItems={items}
-        setItems={setItems}
+        setItems={items}
       />
     );
   }
@@ -88,7 +88,10 @@ export default function Stock() {
                 event={handleSearchItem}
                 maxWidth={400}
               />
-              <AddItem maxWidth={200} />
+              <AddItem
+                url={"/dashboard/create"}
+                maxWidth={200}
+              />
             </header>
 
             {searching && (

@@ -13,8 +13,8 @@ export default function Sidebar() {
 
   // Sem isso → o botão só muda quando você clica no menu.
   useEffect(() => {
-    if (location.pathname === "/") setActive("home");
-    if (location.pathname === "/items") setActive("stock");
+    if (location.pathname === "/dashboard") setActive("home");
+    if (location.pathname === "/dashboard/items") setActive("stock");
   }, [location.pathname]);
   // Sem isso → o botão só muda quando você clica no menu.
 
@@ -39,7 +39,7 @@ export default function Sidebar() {
         <LayoutGroup>
           <nav className={styles.nav}>
             <Link
-              to="/"
+              to="/dashboard"
               style={{ textDecoration: "none" }}
             >
               <NavItem
@@ -51,7 +51,7 @@ export default function Sidebar() {
             </Link>
 
             <Link
-              to="/items"
+              to="items"
               style={{ textDecoration: "none" }}
             >
               <NavItem

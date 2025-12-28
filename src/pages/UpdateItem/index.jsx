@@ -27,7 +27,7 @@ export default function UpdateItem() {
     localStorage.setItem("items", JSON.stringify(newList));
 
     // navega pra página de sucesso com dados do item atualizado
-    navigate("/success", {
+    navigate("/dashboard/success", {
       state: {
         mode: "update",
         itemId: updatedItem.id,

@@ -36,11 +36,11 @@ export default function CreateItem() {
     localStorage.setItem("items", JSON.stringify(updatedList));
 
     // ✅ Redireciona pra página de sucesso
-    navigate("/success", {
+    navigate("/dashboard/success", {
       state: {
         mode: "create",
         itemId: newItem.id,
-        name: newItem.name,
+        itemName: newItem.name,
         itemQuantity: newItem.quantity,
         itemSku: newItem.sku,
       },

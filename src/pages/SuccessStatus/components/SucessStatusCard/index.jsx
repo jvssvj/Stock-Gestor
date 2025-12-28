@@ -32,7 +32,7 @@ export default function SucessStatusCard({
         {status === "update" && <p>O item foi atualizado.</p>}
         {status === "delete" && (
           <p>
-            <span className={styles.product__name}>"{itemName}</span> foi
+            <span className={styles.product__name}>"{itemName}"</span> foi
             deletado do seu inventário.
           </p>
         )}
@@ -61,7 +61,7 @@ export default function SucessStatusCard({
           {status === "delete" ? (
             <Link
               className={`${styles.button} ${styles.delete__status}`}
-              to={"/items"}
+              to={"/dashboard/items"}
             >
               Voltar para o estoque
             </Link>
@@ -69,13 +69,13 @@ export default function SucessStatusCard({
             <>
               <Link
                 className={`${styles.button} ${styles.to__stock}`}
-                to={"/items"}
+                to={"/dashboard/items"}
               >
                 Voltar para o estoque
               </Link>
               <Link
                 className={`${styles.button} ${styles.to__detail}`}
-                to={`/items/${itemId}`}
+                to={`/dashboard/items/${itemId}`}
               >
                 Ver detalhes do item
               </Link>

@@ -67,14 +67,14 @@ export default function StockTable({ items, allItems, setItems }) {
                 <td>{item.category}</td>
                 <td>
                   <div className={styles.icons__container}>
-                    <Link to={`/items/${item.id}`}>
+                    <Link to={`/dashboard/items/${item.id}`}>
                       <Actions
                         icon={<Eye />}
                         text="Visualizar"
                       />
                     </Link>
 
-                    <Link to={`/update/${item.id}`}>
+                    <Link to={`/dashboard/items/${item.id}/update`}>
                       <Actions
                         icon={<Pencil />}
                         text="Editar"
