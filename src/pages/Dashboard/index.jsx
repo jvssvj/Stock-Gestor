@@ -1,7 +1,7 @@
 import styles from "./index.module.css";
-import useGetItems from "../../hooks/useGetItems";
-import AddItem from "../../components/AddItem";
-import EmptyStock from "../../components/EmptyStock";
+import useGetItems from "@/hooks/useGetItems";
+import AddItem from "@/components/AddItem";
+import EmptyStock from "@/components/EmptyStock";
 import Infos from "./components/Infos";
 import RecentItems from "./components/RecentItems";
 import { ClipboardCheck, Shapes, TriangleAlert } from "lucide-react";

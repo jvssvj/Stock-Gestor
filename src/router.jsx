@@ -37,13 +37,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-/**
- * Quando estiver dentro de estoque a rota vira: /dashboard/items
- * Quando clicar em atualizar um item nas ações da tabela a rota vira: /dashboard/items/update/1
- * Quando clicar em visualizar um item a rota vira: /dashboard/items/1
- * Quando clicar em visualizar um item e clicar para *atualizar* dentro dele a rota vira: /dashboard/items/1/update // Ao atualizar vai para /dashboard/sucess
- *
- *
- */
-
 export default router;

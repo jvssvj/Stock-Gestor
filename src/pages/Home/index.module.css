@@ -40,4 +40,30 @@
     transform: scale(.92);
 }
 
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+    padding: 0rem 1rem;
+}
 
+.cards__container {
+    width: 100%;
+    max-width: var(--global-width);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+ @media (max-width: 1280px) {
+  .cards__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .cards__container {
+    grid-template-columns: 1fr;
+  }
+} 
