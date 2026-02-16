@@ -3,10 +3,9 @@
     align-items: center;
     justify-content: center;
     background-color: var(--white);
+    width: 100%;
     position: relative;
     padding: 1.5rem 1rem;
-    margin: 1rem;
-    border-radius: 2rem;
     border: 1px solid var(--very-light-grey);
 }
 
@@ -64,7 +63,7 @@
     color: var(--white);
     background-color: var(--blue);
     padding: .8rem 2rem;
-    border-radius: 2rem;
+    border-radius: .5rem;
     transition: .2s ease;
 }
 

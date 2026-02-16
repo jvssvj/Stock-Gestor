@@ -22,7 +22,7 @@ export default function Header() {
                         <a className={styles.header__nav__option} href="#Planos">Planos</a>
                     </li>
                     <li>
-                        <a className={styles.header__nav__option} href="#Duvidas">Duvidas</a>
+                        <a className={styles.header__nav__option} href="#Duvidas">Dúvidas</a>
                     </li>
                 </ul>
             </nav>
