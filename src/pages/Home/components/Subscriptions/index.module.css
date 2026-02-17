@@ -1,0 +1,138 @@
+.subscriptions__card {
+    background-color: var(--white);
+    width: 100%;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--light-grey);
+    display: flex;
+    flex-direction: column;
+}
+
+.subscriptions__card h4 {
+    font-size: var(--font24);
+    color: var(--very-dark-blue);
+}
+
+.subscriptions__card p {
+    color: var(--grey);
+    margin: .5rem 0rem 1rem;
+}
+
+.subscriptions__card>strong {
+    font-size: var(--font32);
+    color: var(--very-dark-blue);
+}
+
+.subscriptions__card>strong>span {
+    color: var(--grey);
+    font-weight: var(--fontWeight400);
+    font-size: var(--font16);
+}
+
+.subscriptions__card>ul {
+    list-style: none;
+    margin: 1rem 0rem 2rem;
+}
+
+.subscriptions__card>ul>li {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--grey);
+}
+
+.subscriptions__card>ul>li:not(:first-child) {
+    margin-top: .5rem;
+}
+
+.subscriptions__card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background-color: var(--blue);
+    margin-top: auto;
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    transition: .2s ease;
+    height: 54px;
+}
+
+.subscriptions__card__button:hover {
+    background-color: var(--light-blue);
+}
+
+.subscriptions__card__button:active {
+    transform: scale(.97);
+}
+
+/* Popular */
+/* Popular */
+/* Popular */
+.subscriptions__card__popular {
+    background-color: var(--very-dark-blue);
+    position: relative;
+}
+
+.subscriptions__card__popular>h4 {
+    color: var(--white);
+}
+
+.subscriptions__card__popular>p {
+    color: var(--light-grey);
+}
+
+.subscriptions__card__popular>strong {
+    color: var(--white);
+}
+
+.subscriptions__card__popular>strong>span {
+    color: var(--light-grey);
+}
+
+.subscriptions__card__popular>ul>li {
+    color: var(--light-grey);
+}
+
+.subscriptions__card__popular>.subscriptions__card__button {
+    color: var(--very-dark-blue);
+    background-color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.subscriptions__card__popular>.subscriptions__card__button:hover {
+    color: var(--white);
+    background-color: transparent;
+}
+
+.subscriptions__card__popular__tag {
+    position: absolute;
+    left: 0;
+    top: -1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.subscriptions__card__popular__tag>span {
+    background-color: var(--blue);
+    padding: .5rem 1rem;
+    border-radius: 2rem;
+    color: var(--white);
+}
+
+/* Popular */
+/* Popular */
+/* Popular */
+
+.subscriptions__card__enterprise>.subscriptions__card__button {
+    color: var(--white);
+    background-color: var(--very-dark-blue);
+    border: 1px solid var(--very-dark-blue);
+}
+
+.subscriptions__card__enterprise>.subscriptions__card__button:hover {
+    color: var(--very-dark-blue);
+    background-color: transparent;
+}
