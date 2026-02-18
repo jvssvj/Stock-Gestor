@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-  --global-width: 1920px;
+  --container-lg: 1920px;
 
   --fontFamily: "Inter", sans-serif;
   --font12: 0.75rem;
@@ -10,7 +10,9 @@
   --font20: 1.25rem;
   --font24: 1.5rem;
   --font32: 2rem;
+  --font36: 2.25rem;
   --font40: 2.5rem;
+  --font80: 5rem;
 
   --fontWeight400: 400;
   --fontWeight500: 500;
@@ -19,6 +21,7 @@
   --fontWeight900: 900;
 
   --white: #ffffff;
+  --off-white: #f7f7f7;
 
   --very-light-grey: #eeeeee;
   --light-grey: #d6d6d6;

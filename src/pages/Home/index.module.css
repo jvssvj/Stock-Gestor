@@ -1,5 +1,5 @@
 .home {
-    text-align: center;
+    text-align: start;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,35 +9,102 @@
     background-color: var(--white);
 }
 
-.home h1 {
+.home__content {
     width: 100%;
-    max-width: 600px;
-    text-align: center;
-    font-size: var(--font40);
-    color: var(--very-dark-blue);
+    max-width: var(--container-lg);
 }
 
-.home p {
-    margin: 2rem 0rem 1rem;
+.home__slug {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: var(--very-light-blue);
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    padding: .6rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.home__slug__dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--blue);
+    border-radius: 100%;
+    animation: dotAnimation .7s ease alternate infinite;
+}
+
+@keyframes dotAnimation {
+    0% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.home__content>h1 {
+    width: 100%;
+    max-width: 700px;
+    font-size: var(--font80);
+    color: var(--very-dark-blue);
+    line-height: 1em;
+}
+
+.home__content>h1>strong {
+    color: var(--blue);
+    font-weight: var(--fontWeight700);
+}
+
+.home__content>p {
+    margin: 1rem 0rem 2rem;
     max-width: 700px;
     color: var(--grey);
+    font-size: var(--font20);
+    line-height: 1.75rem;
 }
 
-.home button {
-    background-color: var(--blue);
-    color: var(--white);
-    padding: .9rem 2rem;
+.home__buttons__container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home__manage__stock__button,
+.home__view__plans__button {
+    padding: 1rem 2rem;
     border-radius: .5rem;
     cursor: pointer;
     transition: .2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
-.home button:hover {
+.home__manage__stock__button:active,
+.home__view__plans__button:active {
+    transform: scale(.92);
+}
+
+.home__manage__stock__button {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.home__view__plans__button {
+    color: var(--very-dark-blue);
+    border: 1px solid var(--light-grey);
+}
+
+.home__manage__stock__button:hover {
     background-color: var(--light-blue);
 }
 
-.home button:active {
-    transform: scale(.92);
+.home__view__plans__button:hover {
+    border: 1px solid var(--grey);
 }
 
 main {
@@ -50,7 +117,7 @@ main {
 }
 
 main>h2 {
-    font-size: var(--font32);
+    font-size: var(--font36);
     color: var(--very-dark-blue);
     text-align: center;
 }
@@ -63,7 +130,7 @@ main>p {
 
 .cards__container {
     width: 100%;
-    max-width: var(--global-width);
+    max-width: var(--container-lg);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
@@ -75,15 +142,16 @@ main>p {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: var(--off-white);
 }
 
-.subscriptions>h3 {
+.subscriptions>h4 {
     text-align: center;
-    font-size: var(--font32);
+    font-size: var(--font36);
     font-weight: var(--fontWeight700);
 }
 
-.subscriptions>p {
+.subscriptions__paragraph {
     text-align: center;
     color: var(--grey);
     margin: .5rem 0rem 3rem;
@@ -93,8 +161,18 @@ main>p {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    max-width: var(--global-width);
+    max-width: var(--container-lg);
     gap: 1.5em;
+}
+
+.subscriptions__contact {
+    color: var(--grey);
+    margin-top: 2rem;
+}
+
+.subscriptions__contact__link {
+    color: var(--blue);
+    text-decoration: none;
 }
 
 @media (max-width: 1280px) {
@@ -108,8 +186,37 @@ main>p {
     }
 }
 
+@media(max-width: 740px) {
+    .home__content>h1 {
+        font-size: var(--font36);
+    }
+
+    .home__content>p {
+        font-size: var(--font16);
+    }
+}
+
 @media (max-width: 560px) {
     .cards__container {
         grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:425px) {
+    .home__buttons__container {
+        flex-direction: column;
+    }
+
+    .home__manage__stock__button,
+    .home__view__plans__button {
+        width: 100%;
+    }
+
+    main>h2 {
+        font-size: var(--font24);
+    }
+
+    .subscriptions>h4 {
+        font-size: var(--font24);
     }
 }

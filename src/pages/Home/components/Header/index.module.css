@@ -9,23 +9,12 @@
     border: 1px solid var(--very-light-grey);
 }
 
-.header__logo {
+.header__logo__container {
     display: flex;
     align-items: center;
     gap: .5rem;
     position: absolute;
     left: 1rem;
-}
-
-.header__logo a {
-    text-decoration: none;
-    color: var(--blue);
-    font-weight: var(--fontWeight700);
-    font-size: var(--font20);
-}
-
-.header__logo img {
-    width: 30px;
 }
 
 .header__nav ul {
@@ -48,7 +37,7 @@
     height: 2px;
     background-color: var(--blue);
     position: absolute;
-    bottom:-.1rem;
+    bottom: -.1rem;
     transition: .2s ease;
 }
 
@@ -70,5 +59,3 @@
 .header__login:hover {
     background-color: var(--light-blue);
 }
-
-

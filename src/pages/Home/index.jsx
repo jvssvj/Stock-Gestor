@@ -1,19 +1,31 @@
+import { Link } from "react-router-dom";
 import Card from "./components/Card";
 import Header from "./components/header";
 import Subscriptions from "./components/Subscriptions";
 import styles from './index.module.css'
 
-import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn } from "lucide-react";
+import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight, Dot } from "lucide-react";
 
 export default function Home() {
     return (
         <>
             <Header />
             <section className={styles.home}>
-                <h1>Controle total do seu estoque, sem complexidade.</h1>
-                <p> Centralize entradas, saídas e níveis de produtos em um só lugar. Tenha visão clara do que entra, do que sai e do que precisa de reposição. Reduza erros, evite perdas e tome decisões mais rápidas no dia a dia.</p>
+                <div className={styles.home__content}>
+                    <span className={styles.home__slug}>
+                        <div className={styles.home__slug__dot}></div>
+                        Gestão de estoque simplificada
+                    </span>
+                    <h1>Controle total do seu <strong>estoque</strong>, em um só lugar.</h1>
+                    <p>Elimine planilhas complexas e erros de inventário. Gerencie produtos, acompanhe movimentações e tome decisões inteligentes com dados em tempo real.</p>
 
-                <button>Gerenciar estoque</button>
+                    <div className={styles.home__buttons__container}>
+                        <Link className={styles.home__manage__stock__button}>
+                            Gerenciar estoque <ArrowRight size={'20px'} />
+                        </Link>
+                        <Link className={styles.home__view__plans__button}>Ver planos</Link>
+                    </div>
+                </div>
             </section>
 
             <main>
@@ -65,8 +77,8 @@ export default function Home() {
             </main>
 
             <section className={styles.subscriptions}>
-                <h3>Escolha o plano ideal para seu negócio</h3>
-                <p>Sem taxas ocultas. Cancele quando quiser. Todos os planos incluem 14 dias de teste grátis.</p>
+                <h4>Escolha o plano ideal para seu negócio</h4>
+                <p className={styles.subscriptions__paragraph}>Sem taxas ocultas. Cancele quando quiser. Todos os planos incluem 14 dias de teste grátis.</p>
 
                 <div>
                     <Subscriptions
@@ -116,6 +128,7 @@ export default function Home() {
                         enterprise
                     />
                 </div>
+                <p className={styles.subscriptions__contact}>Precisa de algo diferente? <Link className={styles.subscriptions__contact__link}>Entre em contato</Link> para um plano personalizado.</p>
             </section>
         </>
     )

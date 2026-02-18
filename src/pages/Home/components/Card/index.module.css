@@ -15,13 +15,19 @@
     border-radius: 100%;
 }
 
-.card h2 {
+.card h3 {
     margin: 1rem 0rem;
     color: var(--very-dark-blue);
+    font-size: var(--font24);
 }
 
 .card p {
-    color:var(--grey);
+    color: var(--grey);
     line-height: 1.75rem;
 }
 
+@media(max-width:420px) {
+    .card h3 {
+        font-size: var(--font20);
+    }
+}
