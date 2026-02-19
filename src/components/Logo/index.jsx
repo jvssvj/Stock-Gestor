@@ -8,7 +8,6 @@ export default function Logo() {
             <div>
                 <img src={logoWhite} alt="" />
             </div>
-            Stock Gestor
         </Link>
     )
 }

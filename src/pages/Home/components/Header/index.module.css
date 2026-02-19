@@ -1,20 +1,18 @@
 .header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 1rem;
     background-color: var(--white);
     width: 100%;
-    position: relative;
     padding: 1.5rem 1rem;
     border: 1px solid var(--very-light-grey);
 }
 
-.header__logo__container {
+.header__nav {
     display: flex;
     align-items: center;
-    gap: .5rem;
-    position: absolute;
-    left: 1rem;
+    justify-content: start;
+    gap: 2rem;
 }
 
 .header__nav ul {
@@ -51,11 +49,112 @@
     text-decoration: none;
     color: var(--white);
     background-color: var(--blue);
-    padding: .8rem 2rem;
+    padding: .375rem 0rem;
     border-radius: .5rem;
     transition: .2s ease;
+    width: 137px;
+    text-align: center;
 }
 
 .header__login:hover {
     background-color: var(--light-blue);
+}
+
+.hamburger {
+    display: none;
+}
+
+@media(max-width:720px) {
+    .header {
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    .header__nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 5;
+
+        background-color: var(--white);
+        flex-direction: column;
+
+        width: 350px;
+        min-height: 100dvh;
+        align-items: start;
+        padding: 5rem 1rem;
+
+        transform: translateX(100%);
+        transition: transform .7s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: right;
+    }
+
+    .header__nav>ul {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .header__login {
+        position: unset;
+    }
+
+    .hamburger {
+        cursor: pointer;
+        z-index: 6;
+        display: unset;
+        height: 30px;
+        width: 30px;
+    }
+
+    .hamburger input {
+        display: none;
+    }
+
+    .hamburger svg {
+        transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .line {
+        fill: none;
+        stroke: var(--very-dark-blue);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3;
+        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .lineTopBottom {
+        stroke-dasharray: 12 63;
+    }
+
+    .hamburger input:checked+svg {
+        transform: rotate(-45deg);
+    }
+
+    .hamburger input:checked+svg .lineTopBottom {
+        stroke-dasharray: 20 300;
+        stroke-dashoffset: -32.42;
+    }
+
+    .menuOpenAnimation {
+        transform: translateX(0);
+    }
+
+    .overlay {
+        background-color: var(--black);
+        width: 100%;
+        min-height: 100dvh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        opacity: 0;
+        transition: .5s ease;
+        visibility: hidden;
+    }
+
+    .overlay__open {
+        opacity: .6;
+        visibility: visible;
+    }
 }
