@@ -1,0 +1,19 @@
+.footer__content__info>h3 {
+    color: var(--white);
+    font-size: var(--font20);
+    margin-bottom: 1rem;
+}
+
+.footer__content__info>ul {
+    list-style: none;
+}
+
+.footer__content__info>ul>li:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.footer__content__info>ul>li>a {
+    color: var(--light-grey);
+    text-decoration: none;
+    font-size: var(--font14);
+}

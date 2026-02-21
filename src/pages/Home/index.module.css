@@ -167,12 +167,79 @@ main>p {
 
 .subscriptions__contact {
     color: var(--grey);
-    margin-top: 2rem;
+    margin: 3rem 0rem;
+    text-align: center;
 }
 
 .subscriptions__contact__link {
     color: var(--blue);
     text-decoration: none;
+}
+
+.footer {
+    background-color: var(--very-dark-blue);
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 4rem 1rem;
+}
+
+.footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--container-lg);
+    flex-direction: column;
+}
+
+.footer__content__nav {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.footer__content__nav__logo {
+    max-width: 250px;
+}
+
+.footer__content__nav__logo>p {
+    margin-top: 1rem;
+    color: var(--light-grey);
+    font-size: var(--font14);
+}
+
+.line {
+    width: 100%;
+    height: .09rem;
+    background-color: var(--grey);
+    margin: 3rem 0rem;
+    opacity: .4;
+}
+
+.footer__content__copy {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.footer__content__copy>p {
+    color: var(--light-grey);
+}
+
+.footer__content__copy>div {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer__content__copy>div>a {
+    color: var(--light-grey);
+    text-decoration: none;
+    opacity: .7;
 }
 
 @media (max-width: 1280px) {
@@ -192,7 +259,22 @@ main>p {
     }
 
     .home__content>p {
-        font-size: var(--font16);
+        font-size: var(--font16)
+    }
+
+    .footer__content__nav {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer__content__nav__logo {
+        max-width: unset;
+    }
+
+    .footer__content__copy {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
     }
 }
 
@@ -218,5 +300,9 @@ main>p {
 
     .subscriptions>h4 {
         font-size: var(--font24);
+    }
+
+    .footer__content__copy {
+        font-size: var(--font12);
     }
 }

@@ -3,14 +3,15 @@ import Card from "./components/Card";
 import Header from "./components/header";
 import Subscriptions from "./components/Subscriptions";
 import styles from './index.module.css'
-
 import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight, Dot } from "lucide-react";
+import Logo from "@/components/Logo";
+import FooterNav from "./components/FooterNav";
 
 export default function Home() {
     return (
         <>
             <Header />
-            <section className={styles.home}>
+            <section id="home" className={styles.home}>
                 <div className={styles.home__content}>
                     <span className={styles.home__slug}>
                         <div className={styles.home__slug__dot}></div>
@@ -76,8 +77,8 @@ export default function Home() {
                 </div>
             </main>
 
-            <section className={styles.subscriptions}>
-                <h4>Escolha o plano ideal para seu negócio</h4>
+            <section id="subscriptions" className={styles.subscriptions}>
+                <h2>Escolha o plano ideal para seu negócio</h2>
                 <p className={styles.subscriptions__paragraph}>Sem taxas ocultas. Cancele quando quiser. Todos os planos incluem 14 dias de teste grátis.</p>
 
                 <div>
@@ -130,6 +131,54 @@ export default function Home() {
                 </div>
                 <p className={styles.subscriptions__contact}>Precisa de algo diferente? <Link className={styles.subscriptions__contact__link}>Entre em contato</Link> para um plano personalizado.</p>
             </section>
+            <footer className={styles.footer}>
+                <div className={styles.footer__content}>
+                    <div className={styles.footer__content__nav}>
+                        <div className={styles.footer__content__nav__logo}>
+                            <Logo color={'white'} label={"Stock Gestor"} />
+                            <p>Simplificando a gestão de estoque para empresas que querem crescer.</p>
+                        </div>
+                        <FooterNav
+                            title={'Produto'}
+                            links={[
+                                { label: 'Funcionalidades', link: '#features' },
+                                { label: 'Integrações', link: '#integrations' },
+                                { label: 'Preços', link: '#prices' },
+                                { label: 'Atualizações', link: '#updates' },
+                            ]}
+                        />
+                        <FooterNav
+                            title={'Empresa'}
+                            links={[
+                                { label: 'Sobre nós', link: '#about' },
+                                { label: 'Blog', link: '#blog' },
+                                { label: 'Carreiras', link: '#carrers' },
+                                { label: 'Contato', link: '#contact' },
+                            ]}
+                        />
+                        <FooterNav
+                            title={'Suporte'}
+                            links={[
+                                { label: 'Central de ajuda', link: '#help-center' },
+                                { label: 'Documentação', link: '#documentation' },
+                                { label: 'Status', link: '#status' },
+                                { label: 'Termos de uso', link: '#terms-of-use' },
+                            ]}
+                        />
+                    </div>
+
+                    <hr className={styles.line} />
+
+                    <div className={styles.footer__content__copy}>
+                        <p>&copy; 2026 Stock Gestor. Todos os direitos reservados.</p>
+
+                        <div>
+                            <Link>Privacidade</Link>
+                            <Link>Termos</Link>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 }

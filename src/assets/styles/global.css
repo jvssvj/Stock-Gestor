@@ -1,8 +1,11 @@
 @import url("./reset.css");
 @import url("./variables.css");
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-size: var(--font16);
   background-color: var(--very-light-grey);
 }
-

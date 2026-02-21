@@ -29,7 +29,7 @@ export default function Subscriptions({ title, paragraph, price, benefits = [], 
                 </div>
             )}
 
-            <h4>{title}</h4>
+            <h3>{title}</h3>
             <p>{paragraph}</p>
 
             {price === null ? (
