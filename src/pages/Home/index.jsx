@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Card from "./components/Card";
-import Header from "./components/header";
+import Header from "./components/Header";
 import Subscriptions from "./components/Subscriptions";
 import styles from './index.module.css'
-import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight, Dot } from "lucide-react";
+import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight } from "lucide-react";
 import Logo from "@/components/Logo";
 import FooterNav from "./components/FooterNav";
 
