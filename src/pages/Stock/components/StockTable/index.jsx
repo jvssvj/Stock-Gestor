@@ -5,8 +5,8 @@ import Stack from "@mui/material/Stack";
 import styles from "./index.module.css";
 import Actions from "./Actions";
 import { Link } from "react-router-dom";
-import useDeleteItem from "../../../../hooks/useDeleteItem";
-import ConfirmDeletion from "../../../../components/ConfirmDeletion";
+import useDeleteItem from "@/hooks/useDeleteItem";
+import ConfirmDeletion from "@/components/ConfirmDeletion";
 
 const formatCentsToBRL = (valueInCents) => {
   if (!valueInCents && valueInCents !== 0) return "R$ 0,00";

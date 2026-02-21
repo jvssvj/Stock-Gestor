@@ -16,16 +16,14 @@
   z-index: 2;
 }
 
-.active {
-  color: var(--blue);
+.nav__item:hover {
+  background-color: var(--very-light-blue);
 }
 
-.indicator {
-  position: absolute;
-  inset: 0;
-  background: var(--very-light-blue);
-  border-radius: 8px;
-  z-index: -1;
+.active {
+  transition: .5s ease;
+  color: var(--blue);
+  background-color: var(--very-light-blue);
 }
 
 .label {

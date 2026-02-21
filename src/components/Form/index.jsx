@@ -4,17 +4,6 @@ import {
   cleanCurrencyString,
   formatToCurrency,
 } from "../../utils/currencyUtils";
-import * as z from "zod";
-
-// 1. Schema de Validação (O contrato dos dados)
-const ItemSchema = z.object({
-  name: z.string().min(3, "Nome deve ter ao menos 3 caracteres"),
-  quantity: z.coerce.number().min(1, "Mínimo de 1 unidade"),
-  priceInCents: z.coerce.number().min(0.01, "Mínimo de R$0,01"),
-  // category: z.string().nonempty("Selecione uma categoria"),
-  description: z.string().min(5, "Descrição muito curta."),
-  sku: z.string().nonempty("SKU é obrigatório."),
-});
 
 export default function Form({
   mode = "create",
@@ -101,14 +90,6 @@ export default function Form({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validação com Zod
-    const validation = ItemSchema.safeParse(formData);
-
-    if (!validation.success) {
-      setErrors(validation.error.flatten().fieldErrors);
-      return;
-    }
 
     // Se passou, envia o payload limpo
     const payload = {
