@@ -4,8 +4,8 @@ import styles from './index.module.css'
 
 export default function Logo({ label, color, size }) {
     return (
-        <Link className={styles.logo} style={{ color: `var(--${color})`, width: `${size}px`, height: `${size}px` }} to={'/'}>
-            <div>
+        <Link className={styles.logo} style={{ color: `var(--${color})` }} to={'/'}>
+            <div style={{ color: `var(--${color})`, width: `${size}px`, height: `${size}px` }}>
                 <img src={logoWhite} alt="" />
             </div>
             {label}

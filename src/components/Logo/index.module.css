@@ -5,6 +5,7 @@
     text-decoration: none;
     font-weight: var(--fontWeight600);
     color: var(--very-dark-blue);
+    width: max-content;
 }
 
 .logo div {

@@ -4,8 +4,9 @@ import Header from "./components/Header";
 import Subscriptions from "./components/Subscriptions";
 import styles from './index.module.css'
 import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight } from "lucide-react";
-import Logo from "@/components/Logo";
+
 import FooterNav from "./components/FooterNav";
+import Logo from "../../components/Logo";
 
 export default function Home() {
     return (
@@ -135,7 +136,7 @@ export default function Home() {
                 <div className={styles.footer__content}>
                     <div className={styles.footer__content__nav}>
                         <div className={styles.footer__content__nav__logo}>
-                            <Logo color={'white'} label={"Stock Gestor"} />
+                            <Logo size={40} color={'white'} label={"Stock Gestor"} />
                             <p>Simplificando a gestão de estoque para empresas que querem crescer.</p>
                         </div>
                         <FooterNav
