@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import styles from "./index.module.css";
-import SucessStatusCard from "./components/SucessStatusCard";
+import SucessStatusCard from "./components/SuccessStatusCard";
 
 export default function SuccessStatus() {
   const location = useLocation();

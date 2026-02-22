@@ -2,9 +2,9 @@ import logoWhite from '@/assets/images/stockgestor-icon-white.png'
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 
-export default function Logo({ label, color }) {
+export default function Logo({ label, color, size }) {
     return (
-        <Link className={styles.logo} style={{ color: `var(--${color})` }} to={'/'}>
+        <Link className={styles.logo} style={{ color: `var(--${color})`, width: `${size}px`, height: `${size}px` }} to={'/'}>
             <div>
                 <img src={logoWhite} alt="" />
             </div>

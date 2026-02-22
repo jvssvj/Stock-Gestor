@@ -1,0 +1,125 @@
+.login__container {
+    min-height: 100dvh;
+}
+
+.login__container,
+.login__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login__content {
+    background-color: var(--white);
+    border-radius: .5rem;
+    padding: 5rem 1rem;
+    width: 100%;
+    max-width: 450px;
+}
+
+.login__content h1 {
+    font-size: var(--font24);
+    color: var(--very-dark-blue);
+    margin: 1rem 0rem 1rem;
+}
+
+.login__content p {
+    font-size: var(--font16);
+    color: var(--grey);
+}
+
+.login__content form {
+    margin-top: 2rem;
+}
+
+.login__content__form {
+    width: 100%;
+    text-align: center;
+}
+
+.login__content__form>label {
+    color: var(--very-dark-blue);
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.login__content__form>label>input {
+    border: 1px solid var(--light-grey);
+    padding: .75rem;
+    border-radius: .5rem;
+    width: 100%;
+}
+
+.login__content__form input:focus {
+    outline: none;
+    border: 1px solid var(--blue);
+}
+
+.login__content__reming {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0rem;
+}
+
+.login__content__reming label {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.login__content__reming a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.login__content__form button {
+    width: 100%;
+    padding: .75rem;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: var(--font16);
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.login__content__form button:hover {
+    background-color: var(--light-blue);
+}
+
+.login__content__form__divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0rem;
+}
+
+.login__content__form__divider hr {
+    width: 100%;
+    height: 1px;
+    background-color: var(--light-grey);
+}
+
+.login__content__form__divider span {
+    white-space: nowrap;
+    color: var(--grey);
+}
+
+.login__content__form__register {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: .75rem;
+    border-radius: .5rem;
+    transition: .2s ease;
+    border: 1px solid var(--light-grey);
+    color: var(--very-dark-blue);
+}
+
+.login__content__form__register:hover {
+    border: 1px solid var(--grey);
+}

@@ -6,8 +6,9 @@ import Item from "./pages/Item";
 import CreateItem from "./pages/CreateItem";
 import UpdateItem from "./pages/UpdateItem";
 import SuccessStatus from "./pages/SuccessStatus";
-import Login from "./pages/Login";
+
 import Home from "./pages/Home";
+import Login from "./pages/Auth/Login";
 
 const router = createBrowserRouter([
   {

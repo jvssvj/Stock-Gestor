@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CircleCheck } from "lucide-react";
 import styles from "./index.module.css";
-import Information from "../../../../components/Information";
+import Information from "@/components/Information";
 
 export default function SucessStatusCard({
   itemId,
@@ -21,10 +21,10 @@ export default function SucessStatusCard({
           {status === "update"
             ? "atualizado"
             : status === "create"
-            ? "cadastrado"
-            : status === "delete"
-            ? "deletado"
-            : "processado"}{" "}
+              ? "cadastrado"
+              : status === "delete"
+                ? "deletado"
+                : "processado"}{" "}
           com Sucesso!
         </h2>
 

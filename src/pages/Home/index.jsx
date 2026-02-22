@@ -143,7 +143,7 @@ export default function Home() {
                             links={[
                                 { label: 'Funcionalidades', link: '#features' },
                                 { label: 'Integrações', link: '#integrations' },
-                                { label: 'Preços', link: '#prices' },
+                                { label: 'Preços', link: '#subscriptions' },
                                 { label: 'Atualizações', link: '#updates' },
                             ]}
                         />

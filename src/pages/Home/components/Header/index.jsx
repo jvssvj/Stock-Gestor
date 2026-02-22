@@ -11,7 +11,7 @@ export default function Header() {
             <header className={styles.header}>
                 <div className={styles.header__content}>
                     <div className={styles.header__logo__container}>
-                        <Logo />
+                        <Logo size={36} />
                     </div>
                     <label className={styles.hamburger}>
                         <input checked={menuOpen} onChange={() => setMenuOpen(prev => !prev)} type="checkbox" />
