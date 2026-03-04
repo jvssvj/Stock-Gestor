@@ -13,7 +13,7 @@ export default function Register() {
                 <form className={styles.register__content__form}>
                     <label htmlFor="name">
                         Seu nome ou nome da empresa
-                        <input type="email" name="name" id="name" />
+                        <input type="name" name="name" id="name" />
                     </label>
                     <label htmlFor="email">
                         Email

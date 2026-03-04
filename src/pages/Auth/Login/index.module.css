@@ -1,5 +1,6 @@
 .login__container {
     min-height: 100dvh;
+    padding: 1rem;
 }
 
 .login__container,
@@ -16,6 +17,7 @@
     padding: 3rem 1rem;
     width: 100%;
     max-width: 450px;
+    text-align: center;
 }
 
 .login__content h1 {
@@ -47,9 +49,10 @@
     align-items: start;
     flex-direction: column;
     gap: .5rem;
+    position: relative;
 }
 
-.login__content__form>label>input {
+.login__content__form input {
     border: 1px solid var(--light-grey);
     padding: .75rem;
     border-radius: .5rem;
@@ -61,27 +64,22 @@
     border: 1px solid var(--blue);
 }
 
-.login__content__reming {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: .5rem 0rem;
-}
-
-.login__content__reming label {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.login__content__reming a {
+.login__content__forgot__password {
     color: var(--blue);
     text-decoration: none;
+    text-align: end;
+}
+
+.view__password {
+    position: absolute;
+    right: .75rem;
+    top: 2.45rem;
+    color: var(--very-dark-blue);
 }
 
 .login__content__form button {
     width: 100%;
-    padding: .75rem;
+    height: 45px;
     background-color: var(--blue);
     color: var(--white);
     font-size: var(--font16);
@@ -125,4 +123,25 @@
 
 .login__content__form__register:hover {
     border: 1px solid var(--grey);
+}
+
+.login__content__form input.input__error {
+    background-color: var(--very-light-red);
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.login__content__form input.input__error:focus {
+    border: 1px solid var(--red);
+}
+
+.message__error {
+    color: var(--red);
+    font-size: var(--font14);
+}
+
+@media(max-width:375px) {
+    .login__content__forgot__password {
+        font-size: var(--font14);
+    }
 }
