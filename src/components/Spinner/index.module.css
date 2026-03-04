@@ -1,0 +1,27 @@
+.loader {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 32px 0 #fff, -32px 0 #fff;
+    animation: flash 0.5s ease-out infinite alternate;
+    margin: 0 auto;
+}
+
+@keyframes flash {
+    0% {
+        background-color: #FFF2;
+        box-shadow: 22px 0 #FFF2, -22px 0 #FFF;
+    }
+
+    50% {
+        background-color: #FFF;
+        box-shadow: 22px 0 #FFF2, -22px 0 #FFF2;
+    }
+
+    100% {
+        background-color: #FFF2;
+        box-shadow: 22px 0 #FFF, -22px 0 #FFF2;
+    }
+}

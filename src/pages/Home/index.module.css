@@ -284,7 +284,7 @@ main>p {
     }
 }
 
-@media(max-width:425px) {
+@media(max-width:440px) {
     .home__buttons__container {
         flex-direction: column;
     }

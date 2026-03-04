@@ -1,0 +1,140 @@
+.profileDropdown {
+    margin-left: auto;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.profileDropdown__menu {
+    background-color: var(--white);
+    border: 1px solid var(--light-grey);
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: .5rem;
+    transition: .3s ease;
+}
+
+.profileDropdown__avatarButton {
+    font-size: var(--font16);
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.profileDropdown__userAvatar__arrow {
+    width: 24px;
+    height: 24px;
+    margin-left: .5rem;
+    transition: .4s ease;
+}
+
+.arrow__animation {
+    transform: rotate(180deg);
+}
+
+.profileDropdown__userAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: .5rem;
+    border: 2px solid var(--light-grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--very-dark-blue);
+}
+
+.profileDropdown__menu>hr {
+    height: 1px;
+    width: 100%;
+    background-color: var(--light-grey);
+    margin: 1rem 0rem;
+}
+
+.profileDropdown__menu>ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+}
+
+.profileDropdown__link,
+.profileDropdown__button__logout {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--very-dark-blue);
+    background-color: transparent;
+    font-size: var(--font16);
+    cursor: pointer;
+}
+
+.profileDropdown__link>svg,
+.profileDropdown__button__logout>svg {
+    transition: .2s ease;
+}
+
+.profileDropdown__link:hover>svg,
+.profileDropdown__button__logout:hover>svg {
+    color: var(--blue);
+}
+
+.openProfileDropdown {
+    visibility: visible;
+    opacity: 1;
+}
+
+.closeProfileDropdown {
+    opacity: 0;
+    visibility: hidden;
+}
+
+@media(max-width: 720px) {
+    .profileDropdown__menu {
+        position: unset;
+        padding: 0;
+        border: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .profileDropdown {
+        align-items: start;
+    }
+
+    .profileDropdown__avatarButton {
+        cursor: default;
+    }
+
+    .profileDropdown__userAvatar__arrow {
+        display: none;
+    }
+
+    .profileDropdown::before {
+        content: '';
+        width: 100%;
+        height: 1px;
+        background-color: var(--light-grey);
+        margin: 1rem 0rem;
+    }
+
+    .profileDropdown__menu>ul {
+        margin-top: 1rem;
+    }
+
+    .profileDropdown__menu>hr {
+        display: none;
+    }
+
+    .profileDropdown__button__logout {
+        margin-top: 1rem;
+    }
+}

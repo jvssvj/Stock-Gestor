@@ -35,7 +35,7 @@ export default function Sidebar() {
           <Link
             to="/dashboard"
             style={{ textDecoration: "none" }}
-            onClick={() => setIsMenuOpen((prev) => !prev)}
+            onClick={() => setIsMenuOpen(false)}
           >
             <NavItem
               isActive={active === "home"}
@@ -48,7 +48,7 @@ export default function Sidebar() {
           <Link
             to="items"
             style={{ textDecoration: "none" }}
-            onClick={() => setIsMenuOpen((prev) => !prev)}
+            onClick={() => setIsMenuOpen(false)}
           >
             <NavItem
               isActive={active === "stock"}

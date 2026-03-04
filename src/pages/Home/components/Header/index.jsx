@@ -3,8 +3,20 @@ import styles from './index.module.css'
 import Logo from '@/components/Logo'
 import { useState } from 'react'
 
+import { useAuth } from '@/hooks/useAuth'
+import ProfileDropdown from '../../../../components/ProfileDropdown'
+
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false)
+    const { user } = useAuth()
+
+    function handleUserConnected() {
+        if (user) {
+            return <ProfileDropdown navOnClick={() => setMenuOpen(prev => !prev)} />
+        } else {
+            return <Link className={styles.header__login} to={'/login'}>Entrar</Link>
+        }
+    }
 
     return (
         <>
@@ -51,7 +63,8 @@ export default function Header() {
                                 <a className={styles.header__nav__option} href="#doubts">Dúvidas</a>
                             </li>
                         </ul>
-                        <Link className={styles.header__login} to={'/login'}>Entrar</Link>
+
+                        {handleUserConnected()}
                     </nav>
 
                     <div onClick={() => setMenuOpen(prev => !prev)} className={`${styles.overlay} ${(menuOpen) ? styles.overlay__open : ''} `}></div>

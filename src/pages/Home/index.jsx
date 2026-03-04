@@ -22,10 +22,8 @@ export default function Home() {
                     <p>Elimine planilhas complexas e erros de inventário. Gerencie produtos, acompanhe movimentações e tome decisões inteligentes com dados em tempo real.</p>
 
                     <div className={styles.home__buttons__container}>
-                        <Link className={styles.home__manage__stock__button}>
-                            Gerenciar estoque <ArrowRight size={'20px'} />
-                        </Link>
-                        <Link className={styles.home__view__plans__button}>Ver planos</Link>
+                        <a className={styles.home__manage__stock__button} href="/dashboard">Gerenciar estoque <ArrowRight size={'20px'} /></a>
+                        <a className={styles.home__view__plans__button} href="#subscriptions">Ver planos</a>
                     </div>
                 </div>
             </section>
