@@ -1,5 +1,6 @@
 .register__container {
     min-height: 100dvh;
+    padding: 1rem;
 }
 
 .register__container,
@@ -27,6 +28,7 @@
 .register__content p {
     font-size: var(--font16);
     color: var(--grey);
+    text-align: center;
 }
 
 .register__content form {
@@ -47,6 +49,7 @@
     align-items: start;
     flex-direction: column;
     gap: .5rem;
+    text-align: start;
 }
 
 .register__content__form>label>input {
@@ -63,7 +66,7 @@
 
 .register__content__form button {
     width: 100%;
-    padding: .75rem;
+    height: 45px;
     background-color: var(--blue);
     color: var(--white);
     font-size: var(--font16);
@@ -107,4 +110,19 @@
 
 .register__content__form__login:hover {
     border: 1px solid var(--grey);
+}
+
+.register__content__form input.input__error {
+    background-color: var(--very-light-red);
+    color: var(--red);
+    border: 1px solid var(--red);
+}
+
+.register__content__form input.input__error:focus {
+    border: 1px solid var(--red);
+}
+
+.message__error {
+    color: var(--red);
+    font-size: var(--font14);
 }

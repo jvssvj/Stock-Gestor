@@ -5,8 +5,12 @@ export const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(() => {
-        const stored = localStorage.getItem("user")
-        return stored ? JSON.parse(stored) : null
+        try {
+            const stored = localStorage.getItem('user')
+            return stored ? JSON.parse(stored) : null
+        } catch {
+            return null
+        }
     })
 
     const login = useCallback((userData, token) => {
@@ -33,9 +37,11 @@ export function AuthProvider({ children }) {
         return () => window.removeEventListener("storage", handleStorageChange)
     }, [])
 
+    const getToken = useCallback(() => localStorage.getItem("token"), [])
+
     const value = useMemo(() => {
-        return { user, login, logout }
-    }, [user, login, logout])
+        return { user, login, logout, getToken }
+    }, [user, login, logout, getToken])
 
     return (
         <AuthContext.Provider value={value}>
