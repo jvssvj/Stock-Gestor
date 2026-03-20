@@ -6,18 +6,18 @@ import { loginService } from "@/services/authService";
 import { useAuth } from "@/hooks/useAuth";
 import Spinner from "@/components/Spinner";
 import { Eye, EyeOff } from "lucide-react";
+import { validateEmail, validatePassword } from "@/utils/validateForm";
 
 export default function Login() {
   const { login } = useAuth()
+
   const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
-
-
   const [password, setPassword] = useState('')
-  const [passwordError, setPasswordError] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const [error, setError] = useState(null)
+  const [clientErrors, setClientErrors] = useState({})
+  const [apiError, setApiError] = useState('')
+
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
@@ -26,31 +26,18 @@ export default function Login() {
     setShowPassword(prev => !prev)
   }
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email) return "O e-mail é obrigatório."
-    if (!regex.test(email)) return "Digite um e-mail válido."
-    return ""
-  }
-
-  const validatePassword = (password) => {
-    if (!password) return "A senha é obrigatória."
-    if (password.length < 6) return 'A senha precisa de pelo menos 6 digitos.'
-    return ""
-  }
-
   async function handleSubmit(e) {
     e.preventDefault()
-    setEmailError('')
-    setPasswordError('')
-    setError(null)
 
     const errorEmail = validateEmail(email)
     const errorPassword = validatePassword(password)
 
     if (errorEmail || errorPassword) {
-      setEmailError(errorEmail)
-      setPasswordError(errorPassword)
+      setClientErrors({
+        email: errorEmail,
+        password: errorPassword
+      })
+
       return
     }
 
@@ -62,8 +49,8 @@ export default function Login() {
       login(response.user, response.token)
       navigate('/dashboard')
     } catch (err) {
-      const msg = err.error || err.message || "Falha na conexão com o servidor."
-      setError(msg)
+      const isNetworkError = err instanceof TypeError
+      setApiError(isNetworkError ? "Falha na conexão." : err.message || "Erro inesperado.")
     } finally {
       setLoading(false)
     }
@@ -76,25 +63,40 @@ export default function Login() {
         <h1>Bem-vindo de volta!</h1>
         <p>Faça login para acessar seu painel de gestão.</p>
 
-        <form onSubmit={handleSubmit} className={styles.login__content__form} noValidate>
+        <form method="POST" onSubmit={handleSubmit} className={styles.login__content__form} noValidate>
           <label htmlFor="email">
             Email
             <input
-              className={`${emailError || error ? styles.input__error : ''}`}
-              onChange={(e) => setEmail(e.target.value)}
+              className={`${clientErrors.email || apiError ? styles.input__error : ''}`}
+              onBlur={(e) => {
+                const error = validateEmail(e.target.value)
+                if (error) setClientErrors(prev => ({ ...prev, email: error }))
+              }}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setClientErrors(prev => ({ ...prev, email: "" }))
+              }}
               type="email"
               name="email"
               id="email"
             />
-            {emailError && (
-              <span className={styles.message__error}>{emailError}</span>
+            {clientErrors.email && (
+              <span className={styles.message__error}>{clientErrors.email}</span>
             )}
           </label>
           <label htmlFor="password">
             Senha
             <input
-              className={`${passwordError || error ? styles.input__error : ''}`}
-              onChange={(e) => setPassword(e.target.value)}
+              className={`${clientErrors.password || apiError ? styles.input__error : ''}`}
+              onBlur={(e) => {
+                const error = validatePassword(e.target.value)
+                if (error) setClientErrors(prev => ({ ...prev, password: error }))
+              }}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setClientErrors(prev => ({ ...prev, password: "" }))
+                setApiError("")
+              }}
               type={showPassword ? "text" : "password"}
               name="password"
               id="password"
@@ -106,12 +108,10 @@ export default function Login() {
                 <Eye size={20} />
               }
             </div>
-            {passwordError && (
-              <span className={styles.message__error}>{passwordError}</span>
+            {clientErrors.password && (
+              <span className={styles.message__error}>{clientErrors.password}</span>
             )}
-            {error && (
-              <span className={styles.message__error}>{error}</span>
-            )}
+            {apiError && <span className={styles.message__error}>{apiError}</span>}
           </label>
 
           <a className={styles.login__content__forgot__password} href="#forgot-password">Esqueci minha senha</a>

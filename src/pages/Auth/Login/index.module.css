@@ -111,10 +111,12 @@
 }
 
 .login__content__form__register {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     width: 100%;
-    padding: .75rem;
+    height: 45px;
     border-radius: .5rem;
     transition: .2s ease;
     border: 1px solid var(--light-grey);
