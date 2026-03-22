@@ -1,7 +1,7 @@
 .card {
     width: 100%;
-    background-color: var(--white);
-    border: 1px solid var(--very-light-grey);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-bg);
     padding: 2rem 1rem;
     border-radius: .5rem;
 }
@@ -17,17 +17,17 @@
 
 .card h3 {
     margin: 1rem 0rem;
-    color: var(--very-dark-blue);
-    font-size: var(--font24);
+    color: var(--color-text);
+    font-size: var(--font-size-xl);
 }
 
 .card p {
-    color: var(--grey);
+    color: var(--color-text-muted);
     line-height: 1.75rem;
 }
 
 @media(max-width:420px) {
     .card h3 {
-        font-size: var(--font20);
+        font-size: var(--font-size-lg);
     }
 }

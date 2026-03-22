@@ -3,14 +3,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--white);
+    background-color: var(--color-white);
     padding: 1.5rem 1rem;
-    border: 1px solid var(--very-light-grey);
+    border: 1px solid var(--color-bg);
 }
 
 .header__content {
     width: 100%;
-    max-width: var(--container-lg);
+    max-width: var(--container-max-width);
     display: flex;
     align-items: center;
 }
@@ -36,7 +36,7 @@
 
 .header__nav__option {
     text-decoration: none;
-    color: var(--very-dark-blue);
+    color: var(--color-text);
     position: relative;
     transition: .2s ease;
 }
@@ -45,7 +45,7 @@
     content: '';
     width: 0%;
     height: 2px;
-    background-color: var(--blue);
+    background-color: var(--color-primary);
     position: absolute;
     bottom: -.1rem;
     transition: .2s ease;
@@ -58,18 +58,16 @@
 .header__login {
     margin-left: auto;
     text-decoration: none;
-    color: var(--white);
-    background-color: var(--blue);
-    padding: .375rem 0rem;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    padding: .5rem 1rem;
     border-radius: .5rem;
     transition: .2s ease;
-    width: 137px;
     text-align: center;
-    margin-top: 1.5rem;
 }
 
 .header__login:hover {
-    background-color: var(--light-blue);
+    background-color: var(--color-primary-light);
 }
 
 .hamburger {
@@ -94,7 +92,7 @@
         right: 0;
         z-index: 5;
 
-        background-color: var(--white);
+        background-color: var(--color-white);
         flex-direction: column;
 
         max-width: 350px;
@@ -119,6 +117,7 @@
 
     .header__login {
         margin-left: 0;
+        margin-top: 1.5rem;
     }
 
     .hamburger {
@@ -139,7 +138,7 @@
 
     .line {
         fill: none;
-        stroke: var(--very-dark-blue);
+        stroke: var(--color-text);
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 3;
@@ -164,7 +163,7 @@
     }
 
     .overlay {
-        background-color: var(--black);
+        background-color: var(--color-black);
         width: 100%;
         min-height: 100dvh;
         position: fixed;

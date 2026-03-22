@@ -6,6 +6,6 @@ html {
 }
 
 body {
-  font-size: var(--font16);
-  background-color: var(--very-light-grey);
+  font-size: var(--font-size-md);
+  background-color: var(--color-bg);
 }

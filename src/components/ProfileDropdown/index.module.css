@@ -9,8 +9,8 @@
 }
 
 .profileDropdown__menu {
-    background-color: var(--white);
-    border: 1px solid var(--light-grey);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
     position: absolute;
     top: 60px;
     width: 100%;
@@ -20,7 +20,7 @@
 }
 
 .profileDropdown__avatarButton {
-    font-size: var(--font16);
+    font-size: var(--font-size-md);
     background-color: transparent;
     cursor: pointer;
     display: flex;
@@ -43,18 +43,18 @@
     width: 40px;
     height: 40px;
     border-radius: .5rem;
-    border: 2px solid var(--light-grey);
+    border: 2px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--very-dark-blue);
+    color: var(--color-text);
 }
 
 .profileDropdown__menu>hr {
     height: 1px;
     width: 100%;
-    background-color: var(--light-grey);
+    background-color: var(--color-border);
     margin: 1rem 0rem;
 }
 
@@ -71,9 +71,9 @@
     align-items: center;
     gap: 1rem;
     text-decoration: none;
-    color: var(--very-dark-blue);
+    color: var(--color-text);
     background-color: transparent;
-    font-size: var(--font16);
+    font-size: var(--font-size-md);
     cursor: pointer;
 }
 
@@ -84,7 +84,7 @@
 
 .profileDropdown__link:hover>svg,
 .profileDropdown__button__logout:hover>svg {
-    color: var(--blue);
+    color: var(--color-primary);
 }
 
 .openProfileDropdown {
@@ -122,7 +122,7 @@
         content: '';
         width: 100%;
         height: 1px;
-        background-color: var(--light-grey);
+        background-color: var(--color-border);
         margin: 1rem 0rem;
     }
 

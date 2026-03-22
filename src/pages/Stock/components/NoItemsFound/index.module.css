@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--white);
+  background-color: var(--color-white);
   padding: 2rem 1rem;
   border-radius: 1rem;
   width: 100%;
@@ -11,7 +11,7 @@
 }
 
 .icon {
-  background-color: var(--very-light-grey);
+  background-color: var(--color-bg);
   padding: 1rem;
   border-radius: 100%;
   line-height: 0;
@@ -19,18 +19,18 @@
 }
 
 .title {
-  color: var(--very-dark-blue);
+  color: var(--color-text);
 }
 
 .description {
-  color: var(--grey);
+  color: var(--color-text-muted);
   margin: 1rem 0rem 2rem;
   max-width: 500px;
 }
 
 .clean__input {
-  background-color: var(--blue);
-  color: var(--white);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,5 +42,5 @@
 }
 
 .clean__input:hover {
-  background-color: var(--light-blue);
+  background-color: var(--color-primary-light);
 }

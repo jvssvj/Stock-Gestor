@@ -1,11 +1,11 @@
 .description__t {
-  font-size: var(--font24);
-  color: var(--very-dark-blue);
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
 .description__p {
-  color: var(--grey);
+  color: var(--color-text-muted);
   line-height: 1.5rem;
   word-wrap: break-word; /* compatibilidade antiga */
   overflow-wrap: break-word; /* padrão moderno */

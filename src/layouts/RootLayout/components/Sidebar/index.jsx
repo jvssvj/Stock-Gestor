@@ -19,6 +19,7 @@ export default function Sidebar() {
 
   return (
     <>
+      <div onClick={() => setIsMenuOpen((prev) => !prev)} className={`${isMenuOpen ? styles.overlay : ""}`}></div>
       <div className={`${styles.sidebar} ${isMenuOpen ? styles.active : ""}`}>
         <section className={styles.title}>
           <img
@@ -60,7 +61,6 @@ export default function Sidebar() {
         </nav>
 
       </div>
-      <div onClick={() => setIsMenuOpen((prev) => !prev)} className={`${isMenuOpen ? styles.overlay : ""}`}></div>
     </>
   );
 }

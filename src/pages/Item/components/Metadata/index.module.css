@@ -1,6 +1,6 @@
 .metadata__t {
-  font-size: var(--font24);
-  color: var(--very-dark-blue);
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -20,14 +20,14 @@
 }
 
 .title {
-  color: var(--grey);
+  color: var(--color-text-muted);
   white-space: nowrap;
   min-width: 150px;
 }
 
 .information {
-  color: var(--very-dark-blue);
-  font-weight: var(--fontWeight500);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
   overflow: hidden;
   text-overflow: ellipsis;
 }

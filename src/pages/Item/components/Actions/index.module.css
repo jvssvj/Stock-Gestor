@@ -11,8 +11,8 @@
 }
 
 .actions__panel__t {
-  font-size: var(--font20);
-  font-weight: var(--fontWeight500);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
   margin-bottom: 1.5rem;
 }
 
@@ -21,8 +21,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-size: var(--font16);
-  color: var(--white);
+  font-size: var(--font-size-md);
+  color: var(--color-white);
   padding: 1rem 2rem;
   border-radius: 1rem;
   width: 100%;
@@ -36,19 +36,19 @@
 }
 
 .update {
-  background-color: var(--blue);
+  background-color: var(--color-primary);
 }
 
 .update:hover {
-  background-color: var(--light-blue);
+  background-color: var(--color-primary-light);
 }
 
 .delete {
-  background-color: var(--red);
+  background-color: var(--color-danger);
 }
 
 .delete:hover {
-  background-color: var(--light-red);
+  background-color: var(--color-danger-light);
 }
 
 @media (max-width: 370px) {

@@ -1,57 +1,74 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-  --container-lg: 1440px;
+  /* ─── Layout ─── */
+  --container-max-width: 1440px;
 
-  --fontFamily: "Inter", sans-serif;
-  --font12: 0.75rem;
-  --font14: 0.875rem;
-  --font16: 1rem;
-  --font20: 1.25rem;
-  --font24: 1.5rem;
-  --font32: 2rem;
-  --font36: 2.25rem;
-  --font40: 2.5rem;
-  --font80: 5rem;
+  /* ─── Typography — Family ─── */
+  --font-family: "Inter", sans-serif;
 
-  --fontWeight400: 400;
-  --fontWeight500: 500;
-  --fontWeight600: 600;
-  --fontWeight700: 700;
-  --fontWeight900: 900;
+  /* ─── Typography — Size ─── */
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-md: 1rem;
+  /* 16px */
+  --font-size-lg: 1.25rem;
+  /* 20px */
+  --font-size-xl: 1.5rem;
+  /* 24px */
+  --font-size-2xl: 2rem;
+  /* 32px */
+  --font-size-3xl: 2.25rem;
+  /* 36px */
+  --font-size-4xl: 2.5rem;
+  /* 40px */
+  --font-size-hero: 5rem;
+  /* 80px */
 
-  --white: #ffffff;
-  --off-white: #f7f7f7;
+  /* ─── Typography — Weight ─── */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
 
-  --very-light-grey: #eeeeee;
-  --light-grey: #d6d6d6;
-  --grey: #5f5f5f;
+  /* ─── Neutrals ─── */
+  --color-white: #ffffff;
+  --color-off-white: #f7f7f7;
+  --color-bg: #eeeeee;
+  --color-border: #d6d6d6;
+  --color-text-muted: #5f5f5f;
+  --color-text: #000333;
+  --color-black: #000000;
 
-  --very-light-blue: #e4e5ff;
-  --light-blue: #989cff;
-  --blue: #696fc7;
-  --very-dark-blue: #000333;
+  /* ─── Primary (brand color — troque aqui para mudar tudo) ─── */
+  --color-primary-subtle: #e4e5ff;
+  --color-primary-light: #8387fc;
+  --color-primary: #545cc7;
 
-  --very-light-green: #e4ffe4;
-  --light-green: #dcffd8;
-  --green: #19d800;
+  /* ─── Success ─── */
+  --color-success-subtle: #e4ffe4;
+  --color-success-light: #dcffd8;
+  --color-success: #19d800;
 
-  --very-light-orange: #ffefe4;
-  --light-orange: #ffccb9;
-  --orange: #ff3c00;
+  /* ─── Warning ─── */
+  --color-warning-subtle: #ffefe4;
+  --color-warning-light: #ffccb9;
+  --color-warning: #ff3c00;
 
-  --very-light-purple: #f7e4ff;
-  --light-purple: #dfb9ff;
-  --purple: #9310ff;
+  /* ─── Danger ─── */
+  --color-danger-subtle: #ffe4e4;
+  --color-danger-light: #ffb9b9;
+  --color-danger: #ff1010;
 
-  --very-light-teal: #e6f7f5;
-  --light-teal: #9fe0d8;
-  --teal: #14b8a6;
+  /* ─── Accent colors (para cards e ilustrações) ─── */
+  --color-purple-subtle: #f7e4ff;
+  --color-purple-light: #dfb9ff;
+  --color-purple: #9310ff;
 
-
-  --very-light-red: #ffe4e4;
-  --light-red: #ffb9b9;
-  --red: #ff1010;
-
-  --black: #000000;
+  --color-teal-subtle: #e6f7f5;
+  --color-teal-light: #9fe0d8;
+  --color-teal: #14b8a6;
 }

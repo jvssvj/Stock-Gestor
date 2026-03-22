@@ -6,12 +6,12 @@
     justify-content: center;
     padding: 1rem;
     min-height: calc(100dvh - 70px);
-    background-color: var(--white);
+    background-color: var(--color-white);
 }
 
 .home__content {
     width: 100%;
-    max-width: var(--container-lg);
+    max-width: var(--container-max-width);
 }
 
 .home__slug {
@@ -19,9 +19,9 @@
     display: flex;
     align-items: center;
     gap: .5rem;
-    background-color: var(--very-light-blue);
-    border: 1px solid var(--blue);
-    color: var(--blue);
+    background-color: var(--color-primary-subtle);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
     padding: .6rem 1rem;
     border-radius: 2rem;
     margin-bottom: 1.5rem;
@@ -30,7 +30,7 @@
 .home__slug__dot {
     width: 10px;
     height: 10px;
-    background-color: var(--blue);
+    background-color: var(--color-primary);
     border-radius: 100%;
     animation: dotAnimation .7s ease alternate infinite;
 }
@@ -48,21 +48,21 @@
 .home__content>h1 {
     width: 100%;
     max-width: 700px;
-    font-size: var(--font80);
-    color: var(--very-dark-blue);
+    font-size: var(--font-size-hero);
+    color: var(--color-text);
     line-height: 1em;
 }
 
 .home__content>h1>strong {
-    color: var(--blue);
-    font-weight: var(--fontWeight700);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
 }
 
 .home__content>p {
     margin: 1rem 0rem 2rem;
     max-width: 700px;
-    color: var(--grey);
-    font-size: var(--font20);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
     line-height: 1.75rem;
 }
 
@@ -90,21 +90,21 @@
 }
 
 .home__manage__stock__button {
-    background-color: var(--blue);
-    color: var(--white);
+    background-color: var(--color-primary);
+    color: var(--color-white);
 }
 
 .home__view__plans__button {
-    color: var(--very-dark-blue);
-    border: 1px solid var(--light-grey);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
 }
 
 .home__manage__stock__button:hover {
-    background-color: var(--light-blue);
+    background-color: var(--color-primary-light);
 }
 
 .home__view__plans__button:hover {
-    border: 1px solid var(--grey);
+    border: 1px solid var(--color-text-muted);
 }
 
 main {
@@ -112,25 +112,25 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: var(--white);
+    background-color: var(--color-white);
     padding: 3rem 1rem;
 }
 
 main>h2 {
-    font-size: var(--font36);
-    color: var(--very-dark-blue);
+    font-size: var(--font-size-3xl);
+    color: var(--color-text);
     text-align: center;
 }
 
 main>p {
-    color: var(--grey);
+    color: var(--color-text-muted);
     margin: 1rem 0rem 2rem;
     text-align: center;
 }
 
 .cards__container {
     width: 100%;
-    max-width: var(--container-lg);
+    max-width: var(--container-max-width);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
@@ -142,18 +142,18 @@ main>p {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: var(--off-white);
+    background-color: var(--color-off-white);
 }
 
 .subscriptions>h4 {
     text-align: center;
-    font-size: var(--font36);
-    font-weight: var(--fontWeight700);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
 }
 
 .subscriptions__paragraph {
     text-align: center;
-    color: var(--grey);
+    color: var(--color-text-muted);
     margin: .5rem 0rem 3rem;
 }
 
@@ -161,23 +161,23 @@ main>p {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    max-width: var(--container-lg);
+    max-width: var(--container-max-width);
     gap: 1.5em;
 }
 
 .subscriptions__contact {
-    color: var(--grey);
+    color: var(--color-text-muted);
     margin: 3rem 0rem;
     text-align: center;
 }
 
 .subscriptions__contact__link {
-    color: var(--blue);
+    color: var(--color-primary);
     text-decoration: none;
 }
 
 .footer {
-    background-color: var(--very-dark-blue);
+    background-color: var(--color-text);
     display: flex;
     align-items: start;
     justify-content: center;
@@ -189,7 +189,7 @@ main>p {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: var(--container-lg);
+    max-width: var(--container-max-width);
     flex-direction: column;
 }
 
@@ -207,14 +207,14 @@ main>p {
 
 .footer__content__nav__logo>p {
     margin-top: 1rem;
-    color: var(--light-grey);
-    font-size: var(--font14);
+    color: var(--color-border);
+    font-size: var(--font-size-sm);
 }
 
 .line {
     width: 100%;
     height: .09rem;
-    background-color: var(--grey);
+    background-color: var(--color-text-muted);
     margin: 3rem 0rem;
     opacity: .4;
 }
@@ -228,7 +228,7 @@ main>p {
 }
 
 .footer__content__copy>p {
-    color: var(--light-grey);
+    color: var(--color-border);
 }
 
 .footer__content__copy>div {
@@ -237,7 +237,7 @@ main>p {
 }
 
 .footer__content__copy>div>a {
-    color: var(--light-grey);
+    color: var(--color-border);
     text-decoration: none;
     opacity: .7;
 }
@@ -255,11 +255,11 @@ main>p {
 
 @media(max-width: 740px) {
     .home__content>h1 {
-        font-size: var(--font36);
+        font-size: var(--font-size-3xl);
     }
 
     .home__content>p {
-        font-size: var(--font16)
+        font-size: var(--font-size-md)
     }
 
     .footer__content__nav {
@@ -275,6 +275,12 @@ main>p {
         flex-direction: column;
         justify-content: center;
         gap: 2rem;
+    }
+}
+
+@media(max-width: 720px) {
+    .home {
+        min-height: calc(100dvh + 70px);
     }
 }
 
@@ -295,14 +301,14 @@ main>p {
     }
 
     main>h2 {
-        font-size: var(--font24);
+        font-size: var(--font-size-xl);
     }
 
     .subscriptions>h4 {
-        font-size: var(--font24);
+        font-size: var(--font-size-xl);
     }
 
     .footer__content__copy {
-        font-size: var(--font12);
+        font-size: var(--font-size-xs);
     }
 }

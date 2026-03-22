@@ -1,32 +1,32 @@
 .subscriptions__card {
-    background-color: var(--white);
+    background-color: var(--color-white);
     width: 100%;
     padding: 2rem 1rem;
     border-radius: 1rem;
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
 }
 
 .subscriptions__card h3 {
-    font-size: var(--font24);
-    color: var(--very-dark-blue);
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
 }
 
 .subscriptions__card p {
-    color: var(--grey);
+    color: var(--color-text-muted);
     margin: .5rem 0rem 1rem;
 }
 
 .subscriptions__card>strong {
-    font-size: var(--font32);
-    color: var(--very-dark-blue);
+    font-size: var(--font-size-2xl);
+    color: var(--color-text);
 }
 
 .subscriptions__card>strong>span {
-    color: var(--grey);
-    font-weight: var(--fontWeight400);
-    font-size: var(--font16);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-md);
 }
 
 .subscriptions__card>ul {
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     gap: .5rem;
-    color: var(--grey);
+    color: var(--color-text-muted);
 }
 
 .subscriptions__card>ul>li:not(:first-child) {
@@ -50,9 +50,9 @@
     align-items: center;
     justify-content: center;
     gap: .5rem;
-    background-color: var(--blue);
+    background-color: var(--color-primary);
     margin-top: auto;
-    color: var(--white);
+    color: var(--color-white);
     padding: 1rem 2rem;
     border-radius: .5rem;
     text-decoration: none;
@@ -61,7 +61,7 @@
 }
 
 .subscriptions__card__button:hover {
-    background-color: var(--light-blue);
+    background-color: var(--color-primary-light);
 }
 
 .subscriptions__card__button:active {
@@ -72,38 +72,38 @@
 /* Popular */
 /* Popular */
 .subscriptions__card__popular {
-    background-color: var(--very-dark-blue);
+    background-color: var(--color-text);
     position: relative;
 }
 
 .subscriptions__card__popular>h3 {
-    color: var(--white);
+    color: var(--color-white);
 }
 
 .subscriptions__card__popular>p {
-    color: var(--light-grey);
+    color: var(--color-border);
 }
 
 .subscriptions__card__popular>strong {
-    color: var(--white);
+    color: var(--color-white);
 }
 
 .subscriptions__card__popular>strong>span {
-    color: var(--light-grey);
+    color: var(--color-border);
 }
 
 .subscriptions__card__popular>ul>li {
-    color: var(--light-grey);
+    color: var(--color-border);
 }
 
 .subscriptions__card__popular>.subscriptions__card__button {
-    color: var(--very-dark-blue);
-    background-color: var(--white);
-    border: 1px solid var(--white);
+    color: var(--color-text);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-white);
 }
 
 .subscriptions__card__popular>.subscriptions__card__button:hover {
-    color: var(--white);
+    color: var(--color-white);
     background-color: transparent;
 }
 
@@ -116,10 +116,10 @@
 }
 
 .subscriptions__card__popular__tag>span {
-    background-color: var(--blue);
+    background-color: var(--color-primary);
     padding: .5rem 1rem;
     border-radius: 2rem;
-    color: var(--white);
+    color: var(--color-white);
 }
 
 /* Popular */
@@ -127,26 +127,26 @@
 /* Popular */
 
 .subscriptions__card__enterprise>.subscriptions__card__button {
-    color: var(--white);
-    background-color: var(--very-dark-blue);
-    border: 1px solid var(--very-dark-blue);
+    color: var(--color-white);
+    background-color: var(--color-text);
+    border: 1px solid var(--color-text);
 }
 
 .subscriptions__card__enterprise>.subscriptions__card__button:hover {
-    color: var(--very-dark-blue);
+    color: var(--color-text);
     background-color: transparent;
 }
 
 @media(max-width:420px) {
     .subscriptions__card h4 {
-        font-size: var(--font20);
+        font-size: var(--font-size-lg);
     }
 
     .subscriptions__card>ul>li {
-        font-size: var(--font14);
+        font-size: var(--font-size-sm);
     }
 
     .subscriptions__card strong {
-        font-size: var(--font24);
+        font-size: var(--font-size-xl);
     }
 }

@@ -3,13 +3,13 @@
     align-items: center;
     gap: .5rem;
     text-decoration: none;
-    font-weight: var(--fontWeight600);
-    color: var(--very-dark-blue);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
     width: max-content;
 }
 
 .logo div {
-    background-color: var(--blue);
+    background-color: var(--color-primary);
     border-radius: .5rem;
     display: flex;
     align-items: center;

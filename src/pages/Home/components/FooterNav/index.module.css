@@ -1,6 +1,6 @@
 .footer__content__info>h3 {
-    color: var(--white);
-    font-size: var(--font20);
+    color: var(--color-white);
+    font-size: var(--font-size-lg);
     margin-bottom: 1rem;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .footer__content__info>ul>li>a {
-    color: var(--light-grey);
+    color: var(--color-border);
     text-decoration: none;
-    font-size: var(--font14);
+    font-size: var(--font-size-sm);
 }

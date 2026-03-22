@@ -1,7 +1,7 @@
 .container {
-  background-color: var(--white);
+  background-color: var(--color-white);
   border-radius: 0.5rem;
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--color-border);
   min-height: 565px;
   display: flex;
   overflow: auto;
@@ -14,7 +14,7 @@
 .table {
   width: 100%;
   min-width: 818px;
-  background-color: var(--white);
+  background-color: var(--color-white);
   border-collapse: collapse;
   table-layout: fixed;
   overflow: auto;
@@ -23,12 +23,12 @@
 .table th {
   text-align: start;
   padding: 1rem;
-  background-color: var(--very-light-grey);
+  background-color: var(--color-bg);
   text-transform: uppercase;
-  font-size: var(--font12);
-  font-weight: var(--fontWeight400);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0.1rem;
-  color: var(--grey);
+  color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -37,7 +37,7 @@
 .table td {
   max-width: 384px;
   padding: 1rem;
-  border-bottom: 1px solid var(--very-light-grey);
+  border-bottom: 1px solid var(--color-bg);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

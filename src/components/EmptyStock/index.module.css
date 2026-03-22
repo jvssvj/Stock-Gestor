@@ -17,12 +17,12 @@
 }
 
 .empty__t {
-  font-size: var(--font40);
-  color: var(--very--dark-blue);
+  font-size: var(--font-size-4xl);
+  color: var(--color-text);
 }
 
 .empty__p {
-  font-size: var(--font16);
+  font-size: var(--font-size-md);
   margin: 1rem 0rem 2rem;
   width: 100%;
   max-width: 400px;

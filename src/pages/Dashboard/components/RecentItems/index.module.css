@@ -4,8 +4,8 @@
 }
 
 .table {
-  background-color: var(--white);
-  border: 1px solid var(--light-grey);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
   width: 100%;
   border-collapse: collapse;
   border-radius: 0.5rem;
@@ -13,7 +13,7 @@
 
 .table__header {
   text-align: start;
-  background-color: var(--very-light-grey);
+  background-color: var(--color-bg);
 }
 
 .table__header th {
@@ -23,14 +23,14 @@
 }
 
 .table__header__name {
-  font-size: var(--font12);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   font-weight: 400;
 }
 
 .table__row__container {
   text-align: start;
-  border-bottom: 1px solid var(--light-grey);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .table__row__container:last-child {
@@ -46,5 +46,5 @@
 }
 
 .table__row__item {
-  color: var(--grey);
+  color: var(--color-text-muted);
 }

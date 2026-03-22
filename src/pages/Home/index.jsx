@@ -33,42 +33,48 @@ export default function Home() {
                 <p>Recursos essenciais para controle, segurança e crescimento do seu negócio.</p>
                 <div className={styles.cards__container}>
                     <Card
-                        color="blue"
+                        bgColor="var(--color-primary-subtle)"
+                        iconColor={"var(--color-primary)"}
                         icon={TrendingUp}
                         title="Escalabilidade"
                         paragraph="Seu estoque cresce conosco. Nossa arquitetura suporta desde pequenos negócios até grandes centros de distribuição."
                     />
 
                     <Card
-                        color="green"
+                        bgColor="var(--color-success-subtle)"
+                        iconColor={"var(--color-success)"}
                         icon={ShieldCheck}
                         title="Segurança e Dados"
                         paragraph="Suas informações são criptografadas e protegidas com os mais altos padrões de segurança cibernética do mercado."
                     />
 
                     <Card
-                        color="orange"
+                        bgColor="var(--color-warning-subtle)"
+                        iconColor={"var(--color-warning)"}
                         icon={Headset}
                         title="Suporte Especializado"
                         paragraph="Atendimento humanizado e ágil por especialistas prontos para resolver qualquer dúvida operacional."
                     />
 
                     <Card
-                        color="purple"
+                        bgColor="var(--color-purple-subtle)"
+                        iconColor={"var(--color-purple)"}
                         icon={WandSparkles}
                         title="Interface Intuitiva"
                         paragraph="Fácil de usar para todos. Design pensado na experiência do usuário para minimizar a curva de aprendizado."
                     />
 
                     <Card
-                        color="teal"
+                        bgColor="var(--color-teal-subtle)"
+                        iconColor={"var(--color-teal)"}
                         icon={Settings}
                         title="Automação de Processos"
                         paragraph="Automatize tarefas repetitivas, reduza erros manuais e ganhe eficiência operacional no controle do estoque."
                     />
 
                     <Card
-                        color="red"
+                        bgColor="var(--color-danger-subtle)"
+                        iconColor={"var(--color-danger)"}
                         icon={ChartNoAxesColumn}
                         title="Relatórios em Tempo Real"
                         paragraph="Acompanhe métricas vitais e tome decisões estratégicas com dados atualizados instantaneamente."

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: var(--white);
+  background-color: var(--color-white);
   padding: 1rem;
   border-radius: 0.5rem;
   width: 100%;
@@ -22,7 +22,7 @@
 .form input,
 .form select,
 .form textarea {
-  border: 1px solid var(--light-grey);
+  border: 1px solid var(--color-border);
   padding: 0.5rem;
   border-radius: 0.2rem;
   margin-top: 0.5rem;
@@ -33,7 +33,7 @@
 .form select:focus,
 .form textarea:focus {
   outline: none;
-  border-color: var(--blue);
+  border-color: var(--color-primary);
 }
 
 .form textarea {
@@ -44,15 +44,15 @@
 .form button {
   width: max-content;
   padding: 0.81rem 2rem;
-  background-color: var(--blue);
-  color: var(--white);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
 .form button:hover {
-  background-color: var(--light-blue);
+  background-color: var(--color-primary-light);
 }
 
 .form button:active {
@@ -65,19 +65,19 @@
 }
 
 .error__input {
-  outline: 1px solid var(--red);
+  outline: 1px solid var(--color-danger);
 }
 
 .error__text {
-  color: var(--red);
-  font-size: var(--font14);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
   margin-top: 0.5rem;
 }
 
 .update__error {
   display: block;
-  color: var(--red);
-  font-size: var(--font14);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
   margin-top: 0.5rem;
 }
 

@@ -44,7 +44,7 @@ export default function Subscriptions({ title, paragraph, price, benefits = [], 
             <ul>
                 {benefits.map((b) => (
                     <li key={b}>
-                        <CircleCheck color="var(--green)" aria-hidden />
+                        <CircleCheck color="var(--color-success)" aria-hidden />
                         {b}
                     </li>
                 ))}

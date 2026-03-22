@@ -12,7 +12,7 @@
 }
 
 .register__content {
-    background-color: var(--white);
+    background-color: var(--color-white);
     border-radius: .7rem;
     padding: 3rem 1rem;
     width: 100%;
@@ -20,14 +20,14 @@
 }
 
 .register__content h1 {
-    font-size: var(--font24);
-    color: var(--very-dark-blue);
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
     margin: 1rem 0rem 1rem;
 }
 
 .register__content p {
-    font-size: var(--font16);
-    color: var(--grey);
+    font-size: var(--font-size-md);
+    color: var(--color-text-muted);
     text-align: center;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .register__content__form>label {
-    color: var(--very-dark-blue);
+    color: var(--color-text);
     display: flex;
     align-items: start;
     flex-direction: column;
@@ -53,7 +53,7 @@
 }
 
 .register__content__form>label>input {
-    border: 1px solid var(--light-grey);
+    border: 1px solid var(--color-border);
     padding: .75rem;
     border-radius: .5rem;
     width: 100%;
@@ -61,22 +61,22 @@
 
 .register__content__form input:focus {
     outline: none;
-    border: 1px solid var(--blue);
+    border: 1px solid var(--color-primary);
 }
 
 .register__content__form button {
     width: 100%;
     height: 45px;
-    background-color: var(--blue);
-    color: var(--white);
-    font-size: var(--font16);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--font-size-md);
     border-radius: .5rem;
     cursor: pointer;
     transition: .2s ease;
 }
 
 .register__content__form button:hover {
-    background-color: var(--light-blue);
+    background-color: var(--color-primary-light);
 }
 
 .register__content__form__divider {
@@ -89,12 +89,12 @@
 .register__content__form__divider hr {
     width: 100%;
     height: 1px;
-    background-color: var(--light-grey);
+    background-color: var(--color-border);
 }
 
 .register__content__form__divider span {
     white-space: nowrap;
-    color: var(--grey);
+    color: var(--color-text-muted);
 }
 
 .register__content__form__login {
@@ -106,25 +106,25 @@
     height: 45px;
     border-radius: .5rem;
     transition: .2s ease;
-    border: 1px solid var(--light-grey);
-    color: var(--very-dark-blue);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
 }
 
 .register__content__form__login:hover {
-    border: 1px solid var(--grey);
+    border: 1px solid var(--color-text-muted);
 }
 
 .register__content__form input.input__error {
-    background-color: var(--very-light-red);
-    color: var(--red);
-    border: 1px solid var(--red);
+    background-color: var(--color-danger-subtle);
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger);
 }
 
 .register__content__form input.input__error:focus {
-    border: 1px solid var(--red);
+    border: 1px solid var(--color-danger);
 }
 
 .message__error {
-    color: var(--red);
-    font-size: var(--font14);
+    color: var(--color-danger);
+    font-size: var(--font-size-sm);
 }

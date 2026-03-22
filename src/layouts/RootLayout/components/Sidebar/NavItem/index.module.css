@@ -4,26 +4,26 @@
   justify-content: start;
   gap: 0.5rem;
   cursor: pointer;
-  font-size: var(--font16);
+  font-size: var(--font-size-md);
   background-color: transparent;
   width: 100%;
-  color: var(--grey);
+  color: var(--color-text-muted);
   padding: 0.5rem;
   border-radius: 0.5rem;
   transition: 0.2s ease;
-  font-weight: var(--fontWeight500);
+  font-weight: var(--font-weight-medium);
   position: relative;
   z-index: 2;
 }
 
 .nav__item:hover {
-  background-color: var(--very-light-blue);
+  background-color: var(--color-primary-subtle);
 }
 
 .active {
   transition: .5s ease;
-  color: var(--blue);
-  background-color: var(--very-light-blue);
+  color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
 }
 
 .label {
