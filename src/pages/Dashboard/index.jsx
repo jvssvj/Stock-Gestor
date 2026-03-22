@@ -6,10 +6,13 @@ import Infos from "./components/Infos";
 import RecentItems from "./components/RecentItems";
 import { ClipboardCheck, Shapes, TriangleAlert } from "lucide-react";
 import LowStock from "./components/LowStock";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Welcome from "../../components/Welcome";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems();
+  const location = useLocation()
+  const navigate = useNavigate()
 
   if (loading) return <p>Carregando itens..</p>;
   if (error) return <p>Erro ao carregar itens: {error}</p>;
@@ -40,6 +43,9 @@ export default function Dashboard() {
 
   return (
     <>
+      {location.state && (
+        <Welcome name={location.state.name} onClick={() => navigate(location.pathname, { replace: true })} />
+      )}
       {items.length > 0 ? (
         <div className={styles.dashboard__container}>
           <section className={styles.dashboard__title__container}>

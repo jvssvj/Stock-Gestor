@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
 import styles from './index.module.css'
 import { useState } from "react";
-import { registerService } from "@/services/authService";
 import Spinner from "@/components/Spinner";
 import { validateEmail, validateName, validatePassword } from "@/utils/validateForm";
 import { useAuth } from "@/hooks/useAuth";
 import { parseApiValidationErrors } from "@/utils/parseApiValidationErrors";
+import { registerService } from "@/services/authService";
 import { loginService } from "@/services/authService";
 
 export default function Register() {
     const { login } = useAuth()
 
+    const navigate = useNavigate()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -50,7 +51,14 @@ export default function Register() {
             await registerService({ name, email, password })
             const loginResponse = await loginService({ email, password })
             login(loginResponse.user, loginResponse.token)
+
+            navigate('/dashboard', {
+                state: {
+                    name
+                }
+            })
         } catch (err) {
+            console.log(err)
             if (err.errors) {
                 setServerErrors(parseApiValidationErrors(err.errors))
             } else {
