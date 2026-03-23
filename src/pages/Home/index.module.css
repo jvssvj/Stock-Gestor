@@ -211,7 +211,7 @@ main>p {
     font-size: var(--font-size-sm);
 }
 
-.line {
+.footer__line {
     width: 100%;
     height: .09rem;
     background-color: var(--color-text-muted);
@@ -227,7 +227,7 @@ main>p {
     text-align: center;
 }
 
-.footer__content__copy>p {
+.footer__content__copy p {
     color: var(--color-border);
 }
 

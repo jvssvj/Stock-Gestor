@@ -6,10 +6,10 @@ import Item from "./pages/Item";
 import CreateItem from "./pages/CreateItem";
 import UpdateItem from "./pages/UpdateItem";
 import SuccessStatus from "./pages/SuccessStatus";
-
 import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,21 +25,26 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/dashboard",
-    element: <RootLayout />,
+    element: <PrivateRoute />,
     children: [
-      { index: true, element: <Dashboard /> },
-      { path: "create", element: <CreateItem /> },
       {
-        path: "items",
+        path: "/dashboard",
+        element: <RootLayout />,
         children: [
-          { index: true, element: <Stock /> },
-          { path: ":itemId", element: <Item /> },
-          { path: ":itemId/update", element: <UpdateItem /> },
+          { index: true, element: <Dashboard /> },
+          { path: "create", element: <CreateItem /> },
+          {
+            path: "items",
+            children: [
+              { index: true, element: <Stock /> },
+              { path: ":itemId", element: <Item /> },
+              { path: ":itemId/update", element: <UpdateItem /> },
+            ],
+          },
+          { path: "success", element: <SuccessStatus /> },
         ],
       },
-      { path: "success", element: <SuccessStatus /> },
-    ],
+    ]
   },
 ]);
 

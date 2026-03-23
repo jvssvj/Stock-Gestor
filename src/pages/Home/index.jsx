@@ -4,9 +4,8 @@ import Header from "./components/Header";
 import Subscriptions from "./components/Subscriptions";
 import styles from './index.module.css'
 import { TrendingUp, ShieldCheck, Headset, WandSparkles, Settings, ChartNoAxesColumn, ArrowRight } from "lucide-react";
-
-import FooterNav from "./components/FooterNav";
-import Logo from "../../components/Logo";
+// import FooterNav from "./components/FooterNav";
+// import Logo from "../../components/Logo";
 
 export default function Home() {
     return (
@@ -98,6 +97,7 @@ export default function Home() {
                             "Suporte por comunidade"
                         ]}
                         buttonTitle={"Selecionar"}
+                        buttonLink={'/dashboard'}
                     />
                     <Subscriptions
                         title={"Pro"}
@@ -114,6 +114,7 @@ export default function Home() {
                             "Suporte prioritário"
                         ]}
                         buttonTitle={"Selecionar"}
+                        buttonLink={'/dashboard'}
                         popular
                     />
                     <Subscriptions
@@ -131,6 +132,7 @@ export default function Home() {
                             "Suporte técnico especializado"
                         ]}
                         buttonTitle={"Falar com vendas"}
+                        buttonLink={'/dashboard'}
                         enterprise
                     />
                 </div>
@@ -138,7 +140,7 @@ export default function Home() {
             </section>
             <footer className={styles.footer}>
                 <div className={styles.footer__content}>
-                    <div className={styles.footer__content__nav}>
+                    {/* <div className={styles.footer__content__nav}>
                         <div className={styles.footer__content__nav__logo}>
                             <Logo size={40} color={'white'} label={"Stock Gestor"} />
                             <p>Simplificando a gestão de estoque para empresas que querem crescer.</p>
@@ -172,15 +174,12 @@ export default function Home() {
                         />
                     </div>
 
-                    <hr className={styles.line} />
+                    <hr className={styles.footer__line} /> */}
 
                     <div className={styles.footer__content__copy}>
                         <p>&copy; 2026 Stock Gestor. Todos os direitos reservados.</p>
 
-                        <div>
-                            <Link>Privacidade</Link>
-                            <Link>Termos</Link>
-                        </div>
+                        <p>Feito com 💙 e código</p>
                     </div>
                 </div>
             </footer>
