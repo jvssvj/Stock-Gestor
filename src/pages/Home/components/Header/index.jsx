@@ -30,7 +30,7 @@ export default function Header() {
 
                         <svg viewBox="0 0 32 32">
                             <path
-                                className={`${styles.line} ${styles.lineTopBottom}`}
+                                className={`${styles.hamburger__line} ${styles.hamburger__lineTopBottom}`}
                                 d="M27 10 13 10
                                 C10.8 10 9 8.2 9 6
                                 9 3.5 10.8 2 13 2
@@ -42,7 +42,7 @@ export default function Header() {
                                 L7 22"
                             />
                             <path
-                                className={styles.line}
+                                className={styles.hamburger__line}
                                 d="M7 16 27 16"
                             />
                         </svg>
