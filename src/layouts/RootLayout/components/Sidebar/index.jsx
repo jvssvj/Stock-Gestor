@@ -1,11 +1,14 @@
 import NavItem from "./NavItem";
 import styles from "./index.module.css";
 import stockflowicon from "@/assets/images/stockgestor-icon-blue.png";
-import { LayoutDashboard, Box } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { LayoutDashboard, Box, LogOut, Settings } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export default function Sidebar() {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const location = useLocation();
   const [active, setActive] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +32,7 @@ export default function Sidebar() {
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className={`${styles.icon} ${isMenuOpen ? styles.activeIcon : ""}`}
           />
-          <h1>Stock Flow</h1>
+          <h1>StockFlow</h1>
         </section>
 
         <nav className={styles.nav}>
@@ -59,6 +62,46 @@ export default function Sidebar() {
             />
           </Link>
         </nav>
+
+        <div className={styles.profile__container}>
+          <hr className={styles.profile__container__line} />
+          <div className={styles.profile__content}>
+            {(user?.avatarUrl) ?
+              <img
+                className={styles.profile__userAvatar}
+                src={user.avatarUrl}
+                alt=""
+              />
+              :
+              <span className={styles.profile__userAvatar}>
+                {user?.name.slice(0, 1)}
+              </span>
+            }
+            <span className={styles.profile__userName}>{user.name}</span>
+          </div>
+
+          <button
+            className={styles.profile__content__button}
+          >
+            <div>
+              <Settings />
+            </div>
+            Configurações
+          </button>
+
+          <button
+            className={styles.profile__content__button}
+            onClick={() => {
+              navigate('/', { replace: true })
+              setTimeout(() => logout(), 1);
+            }}
+          >
+            <div>
+              <LogOut />
+            </div>
+            Sair
+          </button>
+        </div>
 
       </div>
     </>
