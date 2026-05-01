@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Form from "../../components/Form";
-import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 
 export default function UpdateItem() {
@@ -8,7 +7,6 @@ export default function UpdateItem() {
   const navigate = useNavigate();
   const { items, loading, error } = useGetItems();
 
-  // enquanto carrega
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
 
@@ -19,14 +17,12 @@ export default function UpdateItem() {
   const categories = [...new Set(items.map((it) => it.category))].sort();
 
   const handleUpdate = (updatedItem) => {
-    // atualiza o array mantendo todos os outros itens
     const newList = items.map((i) =>
       i.id === updatedItem.id ? { ...i, ...updatedItem } : i
     );
 
     localStorage.setItem("items", JSON.stringify(newList));
 
-    // navega pra página de sucesso com dados do item atualizado
     navigate("/dashboard/success", {
       state: {
         mode: "update",
@@ -39,9 +35,9 @@ export default function UpdateItem() {
   };
 
   return (
-    <section className={styles.container}>
-      <h2 className={styles.register__t}>Atualização do item</h2>
-      <p className={styles.register__p}>
+    <section className="w-full max-w-[1920px]">
+      <h2 className="text-text-dark font-bold text-3xl">Atualização do item</h2>
+      <p className="text-text-muted mt-2 mb-8">
         Atualize os detalhes abaixo para atualizar o item no seu inventário.
       </p>
       <Form

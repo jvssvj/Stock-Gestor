@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom'
-import styles from './index.module.css'
 
 export default function FooterNav({ title, links = [{ link: '', label: '' }] }) {
     return (
-        <section className={styles.footer__content__info}>
-            <h3>{title}</h3>
-            <ul>
+        <section>
+            <h3 className="text-white text-xl mb-4">{title}</h3>
+            <ul className="list-none">
                 {links.map((link) => (
-
-                    <li key={link.label}>
-                        <a key={link.label} href={link.link}>{link.label}</a>
+                    <li key={link.label} className="[&:not(:first-child)]:mt-4">
+                        <a key={link.label} href={link.link} className="text-border no-underline text-sm">
+                            {link.label}
+                        </a>
                     </li>
                 ))}
             </ul>

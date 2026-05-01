@@ -1,12 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
-import styles from './index.module.css';
 import { useState } from "react";
 import { loginService } from "@/services/authService";
 import { useAuth } from "@/hooks/useAuth";
 import Spinner from "@/components/Spinner";
 import { Eye, EyeOff } from "lucide-react";
 import { validateEmail, validatePassword } from "@/utils/validateForm";
+
+const inputBase = "border border-border py-3 px-3 rounded-lg w-full focus:outline-none focus:border-primary";
+const inputErrorClass = "bg-danger-subtle text-danger border border-danger focus:border-danger";
 
 export default function Login() {
   const { login } = useAuth()
@@ -33,11 +35,7 @@ export default function Login() {
     const errorPassword = validatePassword(password)
 
     if (errorEmail || errorPassword) {
-      setClientErrors({
-        email: errorEmail,
-        password: errorPassword
-      })
-
+      setClientErrors({ email: errorEmail, password: errorPassword })
       return
     }
 
@@ -45,7 +43,6 @@ export default function Login() {
 
     try {
       const response = await loginService({ email, password })
-
       login(response.user, response.token)
       navigate('/dashboard')
     } catch (err) {
@@ -57,17 +54,22 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.login__container}>
-      <section className={styles.login__content}>
+    <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
+      <section className="bg-white rounded-[0.7rem] py-12 px-4 w-full max-w-[450px] text-center flex flex-col items-center justify-center">
         <Logo size={40} />
-        <h1>Bem-vindo de volta!</h1>
-        <p>Faça login para acessar seu painel de gestão.</p>
+        <h1 className="text-2xl text-[var(--color-text)] my-4">Bem-vindo de volta!</h1>
+        <p className="text-base text-text-muted">Faça login para acessar seu painel de gestão.</p>
 
-        <form method="POST" onSubmit={handleSubmit} className={styles.login__content__form} noValidate>
-          <label htmlFor="email">
+        <form
+          method="POST"
+          onSubmit={handleSubmit}
+          className="w-full text-center flex flex-col gap-4 mt-8"
+          noValidate
+        >
+          <label htmlFor="email" className="text-[var(--color-text)] flex items-start flex-col gap-2 relative">
             Email
             <input
-              className={`${clientErrors.email || apiError ? styles.input__error : ''}`}
+              className={`${inputBase} ${clientErrors.email || apiError ? inputErrorClass : ''}`}
               onBlur={(e) => {
                 const error = validateEmail(e.target.value)
                 if (error) setClientErrors(prev => ({ ...prev, email: error }))
@@ -81,13 +83,14 @@ export default function Login() {
               id="email"
             />
             {clientErrors.email && (
-              <span className={styles.message__error}>{clientErrors.email}</span>
+              <span className="text-danger text-sm">{clientErrors.email}</span>
             )}
           </label>
-          <label htmlFor="password">
+
+          <label htmlFor="password" className="text-[var(--color-text)] flex items-start flex-col gap-2 relative">
             Senha
             <input
-              className={`${clientErrors.password || apiError ? styles.input__error : ''}`}
+              className={`${inputBase} ${clientErrors.password || apiError ? inputErrorClass : ''}`}
               onBlur={(e) => {
                 const error = validatePassword(e.target.value)
                 if (error) setClientErrors(prev => ({ ...prev, password: error }))
@@ -101,36 +104,46 @@ export default function Login() {
               name="password"
               id="password"
             />
-            <div onClick={() => handleShowPassword()} className={styles.view__password}>
-              {showPassword ?
-                <EyeOff size={20} />
-                :
-                <Eye size={20} />
-              }
+            <div
+              onClick={() => handleShowPassword()}
+              className="absolute right-3 top-[2.45rem] text-[var(--color-text)]"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </div>
             {clientErrors.password && (
-              <span className={styles.message__error}>{clientErrors.password}</span>
+              <span className="text-danger text-sm">{clientErrors.password}</span>
             )}
-            {apiError && <span className={styles.message__error}>{apiError}</span>}
+            {apiError && <span className="text-danger text-sm">{apiError}</span>}
           </label>
 
-          <a className={styles.login__content__forgot__password} href="#forgot-password">Esqueci minha senha</a>
+          <a
+            className="text-primary no-underline text-end max-[375px]:text-sm"
+            href="#forgot-password"
+          >
+            Esqueci minha senha
+          </a>
 
           <button
             disabled={loading}
             type="submit"
             aria-label={loading ? "Carregando acesso, aguarde" : "Entrar no sistema"}
+            className="w-full h-[45px] bg-primary text-white text-base rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-primary-light"
           >
             {loading ? <Spinner /> : 'Entrar'}
           </button>
 
-          <div className={styles.login__content__form__divider}>
-            <hr />
-            <span>Não tem uma conta?</span>
-            <hr />
+          <div className="flex items-center gap-4 my-2">
+            <hr className="w-full h-px bg-border" />
+            <span className="whitespace-nowrap text-text-muted">Não tem uma conta?</span>
+            <hr className="w-full h-px bg-border" />
           </div>
 
-          <Link to={'/register'} className={styles.login__content__form__register}>Registre-se</Link>
+          <Link
+            to={'/register'}
+            className="flex items-center justify-center no-underline w-full h-[45px] rounded-lg transition-all duration-200 ease-in-out border border-border text-[var(--color-text)] hover:border-text-muted"
+          >
+            Registre-se
+          </Link>
         </form>
       </section>
     </div>

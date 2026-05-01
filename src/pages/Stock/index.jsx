@@ -1,17 +1,15 @@
 import { useState } from "react";
-import AddItem from "../../components/AddItem";
 import StockTable from "./components/StockTable";
 import EmptyStock from "../../components/EmptyStock";
-import styles from "./index.module.css";
 import useGetItems from "../../hooks/useGetItems";
 import SearchInput from "./components/Search";
 import NoItemsFound from "./components/NoItemsFound";
+import { Link } from "react-router-dom";
+import { Plus } from "lucide-react";
 
 export default function Stock() {
-  // carrega do localStorage
   const { items, loading, error } = useGetItems();
 
-  // busca
   const [searchedItem, setSearchedItem] = useState("");
   const [searching, setSearching] = useState(false);
 
@@ -32,7 +30,6 @@ export default function Stock() {
   }
 
   function renderContent() {
-    // buscando e não achou nada
     if (searching && findItem().length === 0) {
       return (
         <NoItemsFound
@@ -45,54 +42,39 @@ export default function Stock() {
       );
     }
 
-    // buscando e achou
     if (searching) {
-      return (
-        <StockTable
-          items={findItem()}
-          allItems={items}
-          setItems={items}
-        />
-      );
+      return <StockTable items={findItem()} allItems={items} setItems={items} />;
     }
 
-    //estoque vazio
     if (items.length === 0) {
       return <EmptyStock url={"/dashboard/create"} />;
     }
 
-    // padrão;
-    return (
-      <StockTable
-        items={items}
-        allItems={items}
-        setItems={items}
-      />
-    );
+    return <StockTable items={items} allItems={items} setItems={items} />;
   }
 
   return (
     <>
-      <section className={styles.container}>
+      <section className="w-full max-w-container">
         {items.length > 0 && (
           <>
-            <h2 className={styles.title}>
-              {searching ? "Resultados da pesquisa" : "Estoque"}
-            </h2>
+            <header className="flex items-end justify-between">
+              <h2 className="text-text-dark font-bold text-3xl">
+                {searching ? "Resultados da pesquisa" : "Estoque"}
+              </h2>
 
-            <hr className={styles.line} />
-
-            <header className={styles.header}>
-              <SearchInput
-                value={searchedItem}
-                event={handleSearchItem}
-                maxWidth={400}
-              />
-              <AddItem
-                url={"/dashboard/create"}
-                maxWidth={200}
-              />
+              <Link
+                to={"/dashboard/create"}
+                className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
+              >
+                <Plus />  Adicionar item
+              </Link>
             </header>
+
+            <hr className="my-10 border-t border-border" />
+
+
+            <SearchInput value={searchedItem} event={handleSearchItem} maxWidth={400} />
 
             {searching && (
               <p style={{ marginTop: "1rem" }}>

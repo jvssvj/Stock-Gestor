@@ -1,18 +1,1 @@
-.infomation__container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 1rem;
-  grid-template-areas:
-    ". ."
-    ". ."
-    ". .";
-}
-
-@media (max-width: 830px) {
-  .infomation__container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
+/* migrado para Tailwind */

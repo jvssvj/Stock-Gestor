@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/components/Logo";
-import styles from './index.module.css'
 import { useState } from "react";
 import Spinner from "@/components/Spinner";
 import { validateEmail, validateName, validatePassword } from "@/utils/validateForm";
@@ -8,6 +7,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { parseApiValidationErrors } from "@/utils/parseApiValidationErrors";
 import { registerService } from "@/services/authService";
 import { loginService } from "@/services/authService";
+
+const inputBase = "border border-border py-3 px-3 rounded-lg w-full focus:outline-none focus:border-primary";
+const inputErrorClass = "bg-danger-subtle text-danger border border-danger focus:border-danger";
 
 export default function Register() {
     const { login } = useAuth()
@@ -52,11 +54,7 @@ export default function Register() {
             const loginResponse = await loginService({ email, password })
             login(loginResponse.user, loginResponse.token)
 
-            navigate('/dashboard', {
-                state: {
-                    name
-                }
-            })
+            navigate('/dashboard', { state: { name } })
         } catch (err) {
             console.log(err)
             if (err.errors) {
@@ -71,14 +69,19 @@ export default function Register() {
     }
 
     return (
-        <div className={styles.register__container}>
-            <section className={styles.register__content}>
+        <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
+            <section className="bg-white rounded-[0.7rem] py-12 px-4 w-full max-w-[450px] flex flex-col items-center justify-center">
                 <Logo size={40} />
-                <h1>Crie sua conta</h1>
-                <p>Comece a gerenciar seu estoque hoje mesmo</p>
+                <h1 className="text-2xl text-[var(--color-text)] my-4">Crie sua conta</h1>
+                <p className="text-base text-text-muted text-center">Comece a gerenciar seu estoque hoje mesmo</p>
 
-                <form noValidate onSubmit={handleSubmit} method="POST" className={styles.register__content__form}>
-                    <label htmlFor="name">
+                <form
+                    noValidate
+                    onSubmit={handleSubmit}
+                    method="POST"
+                    className="w-full text-center flex flex-col gap-4 mt-8"
+                >
+                    <label htmlFor="name" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
                         Seu nome ou nome da empresa
                         <input
                             onChange={(e) => {
@@ -92,13 +95,14 @@ export default function Register() {
                             type="text"
                             name="name"
                             id="name"
-                            className={clientErrors.name ? styles.input__error : ""}
+                            className={`${inputBase} ${clientErrors.name ? inputErrorClass : ""}`}
                         />
                         {clientErrors.name && (
-                            <span className={styles.message__error}>{clientErrors.name}</span>
+                            <span className="text-danger text-sm">{clientErrors.name}</span>
                         )}
                     </label>
-                    <label htmlFor="email">
+
+                    <label htmlFor="email" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
                         Email
                         <input
                             onChange={(e) => {
@@ -112,14 +116,15 @@ export default function Register() {
                             type="email"
                             name="email"
                             id="email"
-                            className={`${clientErrors.email || serverErrors.email ? styles.input__error : ""}`}
+                            className={`${inputBase} ${clientErrors.email || serverErrors.email ? inputErrorClass : ""}`}
                         />
                         {clientErrors.email && (
-                            <span className={styles.message__error}>{clientErrors.email}</span>
+                            <span className="text-danger text-sm">{clientErrors.email}</span>
                         )}
-                        {serverErrors.email && <span className={styles.message__error}>{serverErrors.email}</span>}
+                        {serverErrors.email && <span className="text-danger text-sm">{serverErrors.email}</span>}
                     </label>
-                    <label htmlFor="password">
+
+                    <label htmlFor="password" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
                         Senha
                         <input
                             onChange={(e) => {
@@ -133,13 +138,14 @@ export default function Register() {
                             type="password"
                             name="password"
                             id="password"
-                            className={clientErrors.password ? styles.input__error : ""}
+                            className={`${inputBase} ${clientErrors.password ? inputErrorClass : ""}`}
                         />
                         {clientErrors.password && (
-                            <span className={styles.message__error}>{clientErrors.password}</span>
+                            <span className="text-danger text-sm">{clientErrors.password}</span>
                         )}
                     </label>
-                    <label htmlFor="confirm-password">
+
+                    <label htmlFor="confirm-password" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
                         Confirmar senha
                         <input
                             onChange={(e) => {
@@ -153,31 +159,38 @@ export default function Register() {
                             type="password"
                             name="confirm-password"
                             id="confirm-password"
-                            className={clientErrors.confirmPassword ? styles.input__error : ""}
+                            className={`${inputBase} ${clientErrors.confirmPassword ? inputErrorClass : ""}`}
                         />
                         {clientErrors.confirmPassword && (
-                            <span className={styles.message__error}>{clientErrors.confirmPassword}</span>
+                            <span className="text-danger text-sm">{clientErrors.confirmPassword}</span>
                         )}
                     </label>
-                    {apiError && <span className={styles.message__error}>{apiError}</span>}
+
+                    {apiError && <span className="text-danger text-sm">{apiError}</span>}
+
                     <button
                         disabled={loading}
                         type="submit"
                         aria-label={loading ? "Carregando acesso, aguarde" : "Registrar"}
+                        className="w-full h-[45px] bg-primary text-white text-base rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-primary-light"
                     >
                         {loading ? <Spinner /> : 'Registrar'}
                     </button>
 
-                    <div className={styles.register__content__form__divider}>
-                        <hr />
-                        <span>Já possui uma conta?</span>
-                        <hr />
+                    <div className="flex items-center gap-4 my-2">
+                        <hr className="w-full h-px bg-border" />
+                        <span className="whitespace-nowrap text-text-muted">Já possui uma conta?</span>
+                        <hr className="w-full h-px bg-border" />
                     </div>
 
-                    <Link to={'/login'} className={styles.register__content__form__login}>Entrar</Link>
+                    <Link
+                        to={'/login'}
+                        className="flex items-center justify-center no-underline w-full h-[45px] rounded-lg transition-all duration-200 ease-in-out border border-border text-[var(--color-text)] hover:border-text-muted"
+                    >
+                        Entrar
+                    </Link>
                 </form>
             </section>
         </div>
-
     )
 }

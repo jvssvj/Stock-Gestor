@@ -1,13 +1,11 @@
-import styles from "./index.module.css";
 import useGetItems from "@/hooks/useGetItems";
-import AddItem from "@/components/AddItem";
 import EmptyStock from "@/components/EmptyStock";
 import Infos from "./components/Infos";
 import RecentItems from "./components/RecentItems";
-import { ClipboardCheck, Shapes, TriangleAlert } from "lucide-react";
 import LowStock from "./components/LowStock";
+import { ClipboardCheck, Plus, Shapes, TriangleAlert } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Welcome from "../../components/Welcome";
+import Welcome from "@/components/Welcome";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems();
@@ -47,66 +45,68 @@ export default function Dashboard() {
         <Welcome name={location.state.name} onClick={() => navigate(location.pathname, { replace: true })} />
       )}
       {items.length > 0 ? (
-        <div className={styles.dashboard__container}>
-          <section className={styles.dashboard__title__container}>
-            <h2 className={styles.dashboard__title}>Dashboard</h2>
-            <div className={styles.add__item}>
-              <AddItem
-                url={"/dashboard/create"}
-                maxWidth={200}
-              />
-            </div>
+        <div className="w-full max-w-container">
+          <section className="flex items-end flex-col gap-4 sm:flex-row sm:justify-between">
+            <h2 className="text-text-dark font-bold text-3xl">Dashboard</h2>
+
+            <Link
+              to={"/dashboard/create"}
+              className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
+            >
+              <Plus />  Adicionar item
+            </Link>
           </section>
 
-          <hr className={styles.line} />
+          <hr className="my-10 border-t border-border" />
 
-          <div className={styles.dashboard__infos}>
+          <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
             <Infos
               iconElement={<Shapes />}
               title={"Total de itens diferentes"}
               quantity={items.length}
-              iconClass={"component"}
+              color={"success"}
             />
             <Infos
               iconElement={<ClipboardCheck />}
               title={"Total de itens"}
               quantity={items.length.toLocaleString("pt-BR")}
-              iconClass={"clipboard--check"}
+              color={"primary"}
             />
             <Infos
               iconElement={<TriangleAlert />}
               title={"Itens com baixo estoque"}
               quantity={runningOut.length}
-              iconClass={"triangle--alert"}
+              color={"danger"}
             />
           </div>
 
-          <div className={styles.dashboard__tables__container}>
-            <div className={styles.recent__items__container}>
-              <section className={styles.title__table__container}>
-                <h3>Itens recentes</h3>
-                <Link to="/dashboard/items">
-                  <button className={styles.all__items}>Ver todos</button>
+          <div className="">
+            <div>
+              <section className="flex items-center justify-between mt-8 mb-5">
+                <h3 className="font-semibold">Itens recentes</h3>
+                <Link to="/dashboard/items" className="text-primary hover:text-primary-light font-semibold">
+                  Ver todos
                 </Link>
               </section>
               <RecentItems data={recentItems} />
             </div>
 
             {runningOut.length >= 1 && (
-              <div className={styles.running__out__items__container}>
-                <section className={styles.title__table__container}>
-                  <h3>{`Itens com baixo estoque`}</h3>
-                  <button className={styles.report}>Gerar relatório</button>
+              <div>
+                <section className="flex items-center justify-between mt-8 mb-5">
+                  <h3 className="font-semibold" >Itens com baixo estoque</h3>
+                  <Link to={'#'} className="text-primary hover:text-primary-light font-semibold">Gerar relatório</Link>
                 </section>
 
                 <LowStock data={runningOut} />
               </div>
             )}
           </div>
-        </div>
+        </div >
       ) : (
         <EmptyStock url={"/dashboard/create"} />
-      )}
+      )
+      }
     </>
   );
 }

@@ -1,18 +1,21 @@
-import React from "react";
-import styles from "./index.module.css";
+import { cloneElement } from "react"
 
-export default function Infos({ iconElement, title, quantity, iconClass }) {
-  const styledIcon = React.cloneElement(iconElement, {
-    className: styles[iconClass] || styles.icon__default,
-  });
+export default function Infos({ iconElement, title, quantity, color }) {
+  const styledIcon = cloneElement(iconElement, {
+    className: `text-${color}`
+  })
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title__container}>
+    <div className="flex-1 flex flex-col gap-3 p-6 bg-white border border-border rounded-xl shadow-sm">
+      <div className="flex items-center gap-2">
         {styledIcon}
-        <span className={styles.title}>{title}</span>
+        <span className="text-sm font-medium text-text-muted">
+          {title}
+        </span>
       </div>
-      <span className={styles.quantity}>{quantity}</span>
+      <span className="text-2xl font-bold text-text-main">
+        {quantity}
+      </span>
     </div>
-  );
+  )
 }

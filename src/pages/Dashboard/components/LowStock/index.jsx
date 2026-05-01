@@ -1,30 +1,34 @@
-import styles from "./index.module.css";
-
 export default function LowStock({ data }) {
   return (
-    <div className={styles.container}>
-      <table className={styles.table}>
-        <thead className={styles.table__header}>
+    /* 1. Div pai controla o arredondamento e o scroll */
+    <div className="w-full overflow-x-auto rounded-xl border border-border">
+      <table className="bg-white w-full min-w-[600px] border-separate border-spacing-0">
+        <thead className="bg-border">
           <tr>
-            <th className={styles.table__header__name}>Nome</th>
-            <th className={styles.table__header__name}>Quatidade</th>
+            <th className="p-4 text-start text-xs uppercase font-medium text-text-muted">Nome</th>
+            <th className="p-4 text-center text-xs uppercase font-medium text-text-muted">Quantidade</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item) => (
             <tr
               key={item.id}
-              className={styles.table__row__container}
+              className="group hover:bg-off-white transition-colors"
             >
-              <td>{item.name}</td>
-              <td className={styles.badge__container}>
-                <span
-                  className={`${styles.badge} ${
-                    item.quantity <= 5 ? styles.very__bad : styles.bad
-                  }`}
-                >
-                  {item.quantity}
-                </span>
+              <td className="p-4 text-sm text-text-main border-t border-border whitespace-nowrap overflow-hidden text-ellipsis max-w-[245px]">
+                {item.name}
+              </td>
+              <td className="p-4 border-t border-border whitespace-nowrap">
+                <div className="flex items-center justify-center">
+                  <span
+                    className={`flex items-center justify-center font-bold rounded-md w-8 h-8 ${item.quantity <= 5
+                      ? "bg-danger-subtle text-danger"
+                      : "bg-warning-subtle text-warning"
+                      }`}
+                  >
+                    {item.quantity}
+                  </span>
+                </div>
               </td>
             </tr>
           ))}

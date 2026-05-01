@@ -1,4 +1,3 @@
-import styles from './index.module.css'
 import { ChevronDown, IdCard, LogOut, ShieldUser, Star } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -11,41 +10,53 @@ export default function ProfileDropdown({ navOnClick }) {
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false)
 
     return (
-        <div className={styles.profileDropdown}>
+        <div className="ml-auto relative w-full max-w-[350px] flex flex-col items-end max-[720px]:items-start max-[720px]:before:content-[''] max-[720px]:before:w-full max-[720px]:before:h-px max-[720px]:before:bg-border max-[720px]:before:my-4">
 
-            <div onClick={() => setProfileDropdownOpen(prev => !prev)} className={styles.profileDropdown__avatarButton}>
+            <div
+                onClick={() => setProfileDropdownOpen(prev => !prev)}
+                className="text-base bg-transparent cursor-pointer flex items-center gap-2 max-[720px]:cursor-default"
+            >
                 {(user?.avatarUrl) ?
                     <img
-                        className={styles.profileDropdown__userAvatar}
+                        className="w-[40px] h-[40px] rounded-lg border-2 border-border flex items-center justify-center no-underline text-[var(--color-text)]"
                         src={user.avatarUrl}
                         alt=""
                     />
                     :
-                    <span className={styles.profileDropdown__userAvatar}>
+                    <span className="w-[40px] h-[40px] rounded-lg border-2 border-border flex items-center justify-center no-underline text-[var(--color-text)]">
                         {user?.name.slice(0, 1)}
                     </span>
                 }
                 <span>{user.name}</span>
-                <span className={`${styles.profileDropdown__userAvatar__arrow} ${profileDropdownOpen ? styles.arrow__animation : ''}`}>{<ChevronDown />}</span>
+                <span className={`w-[24px] h-[24px] ml-2 transition-all duration-[400ms] ease-in-out max-[720px]:hidden ${profileDropdownOpen ? 'rotate-180' : ''}`}>
+                    {<ChevronDown />}
+                </span>
             </div>
 
-            <div className={`${styles.profileDropdown__menu} ${profileDropdownOpen ? styles.openProfileDropdown : styles.closeProfileDropdown}`}>
-                <ul className={styles.profileDropdown__list}>
-                    <li className={styles.profileDropdown__item}>
-                        <a className={styles.profileDropdown__link} href="#">
+            <div className={`bg-white border border-border absolute top-[60px] w-full py-6 px-4 rounded-lg transition-all duration-300 ease-in-out max-[720px]:static max-[720px]:p-0 max-[720px]:border-0 max-[720px]:opacity-100 max-[720px]:visible ${profileDropdownOpen ? 'visible opacity-100' : 'opacity-0 invisible'}`}>
+                <ul className="flex flex-col items-start gap-4 max-[720px]:mt-4">
+                    <li>
+                        <a
+                            className="flex items-center gap-4 no-underline text-[var(--color-text)] bg-transparent text-base cursor-pointer [&>svg]:transition-[0.2s] hover:[&>svg]:text-primary"
+                            href="#"
+                        >
                             <ShieldUser />
                             Minha conta
                         </a>
                     </li>
-                    <li className={styles.profileDropdown__item}>
-                        <a className={styles.profileDropdown__link} href="#">
+                    <li>
+                        <a
+                            className="flex items-center gap-4 no-underline text-[var(--color-text)] bg-transparent text-base cursor-pointer [&>svg]:transition-[0.2s] hover:[&>svg]:text-primary"
+                            href="#"
+                        >
                             <IdCard />
                             Meus dados
                         </a>
                     </li>
-                    <li className={styles.profileDropdown__item}>
+                    <li>
                         <a
-                            className={styles.profileDropdown__link} href="#subscriptions"
+                            className="flex items-center gap-4 no-underline text-[var(--color-text)] bg-transparent text-base cursor-pointer [&>svg]:transition-[0.2s] hover:[&>svg]:text-primary"
+                            href="#subscriptions"
                             onClick={() => {
                                 navOnClick()
                                 setProfileDropdownOpen(prev => !prev)
@@ -57,10 +68,10 @@ export default function ProfileDropdown({ navOnClick }) {
                     </li>
                 </ul>
 
-                <hr className={styles.profileDropdown__divider} />
+                <hr className="h-px w-full bg-border my-4 max-[720px]:hidden" />
 
                 <button
-                    className={styles.profileDropdown__button__logout}
+                    className="flex items-center gap-4 no-underline text-[var(--color-text)] bg-transparent text-base cursor-pointer [&>svg]:transition-[0.2s] hover:[&>svg]:text-primary max-[720px]:mt-4"
                     onClick={() => {
                         logout()
                         navigate('/')

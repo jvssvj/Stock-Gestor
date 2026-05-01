@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
+import SettingsPage from "./pages/SettingsPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,13 @@ const router = createBrowserRouter([
           { path: "success", element: <SuccessStatus /> },
         ],
       },
+      {
+        path: "/settings",
+        element: <RootLayout />,
+        children: [
+          { index: true, element: <SettingsPage /> }
+        ]
+      }
     ]
   },
 ]);

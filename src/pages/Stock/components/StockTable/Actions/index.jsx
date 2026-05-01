@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
-import styles from "./index.module.css";
 
 export default function Actions({ icon, isTrash, text, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={styles.icon__container}
+      className="relative flex items-center justify-center flex-col"
     >
       <span
         aria-label={text}
-        className={`${styles.icon} ${isTrash ? styles.icon__trash : ""}`}
+        className={`cursor-pointer text-text-muted transition-all duration-200 ease-in-out hover:scale-110 ${isTrash ? "text-danger" : ""}`}
       >
         {icon}
       </span>

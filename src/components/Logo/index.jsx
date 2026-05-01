@@ -1,12 +1,18 @@
-import logoWhite from '@/assets/images/stockgestor-icon-white.png'
+import { Box } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import styles from './index.module.css'
 
 export default function Logo({ label, color, size }) {
     return (
-        <Link className={styles.logo} style={{ color: `var(--color-${color})` }} to={'/'}>
-            <div style={{ color: `var(--color-${color})`, width: `${size}px`, height: `${size}px` }}>
-                <img src={logoWhite} alt="" />
+        <Link
+            className="flex items-center gap-2 no-underline font-semibold text-[var(--color-text)] w-max"
+            style={{ color: `var(--color-${color})` }}
+            to={'/'}
+        >
+            <div
+                className="bg-primary rounded-lg flex items-center justify-center"
+                style={{ color: `var(--color-${color})`, width: `${size}px`, height: `${size}px` }}
+            >
+                <Box />
             </div>
             {label}
         </Link>

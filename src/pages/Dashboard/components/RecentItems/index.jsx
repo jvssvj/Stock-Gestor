@@ -1,29 +1,47 @@
-import { Link } from "react-router-dom";
-import styles from "./index.module.css";
-
 export default function RecentItems({ data }) {
   return (
-    <div className={styles.table__container}>
-      <table className={styles.table}>
-        <thead className={styles.table__header}>
+    /* 1. Container com arredondamento, borda e scroll lateral */
+    <div className="w-full overflow-x-auto rounded-xl border border-border">
+      <table className="bg-white w-full min-w-[700px] border-separate border-spacing-0">
+        <thead className="bg-border">
           <tr>
-            <th className={styles.table__header__name}>Nome</th>
-            <th className={styles.table__header__name}>Quatidade</th>
-            <th className={styles.table__header__name}>Adicionado em</th>
+            <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-text-muted">
+              Nome
+            </th>
+            <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-text-muted">
+              Quantidade
+            </th>
+            <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-text-muted">
+              Adicionado em
+            </th>
           </tr>
         </thead>
         <tbody>
-          {data &&
+          {data && data.length > 0 ? (
             data.map((item) => (
               <tr
                 key={item.id}
-                className={styles.table__row__container}
+                className="group hover:bg-off-white transition-colors"
               >
-                <td>{item.name}</td>
-                <td className={styles.table__row__item}>{item.quantity}</td>
-                <td className={styles.table__row__item}>{item.date}</td>
+                {/* Usamos border-t para evitar conflito com o arredondamento da div pai */}
+                <td className="p-4 text-sm text-text-main border-t border-border whitespace-nowrap overflow-hidden text-ellipsis max-w-[245px]">
+                  {item.name}
+                </td>
+                <td className="p-4 text-sm text-text-muted border-t border-border whitespace-nowrap">
+                  {item.quantity}
+                </td>
+                <td className="p-4 text-sm text-text-muted border-t border-border whitespace-nowrap">
+                  {item.date}
+                </td>
               </tr>
-            ))}
+            ))
+          ) : (
+            <tr>
+              <td colSpan={3} className="p-8 text-center text-text-muted border-t border-border">
+                Nenhum item recente encontrado.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

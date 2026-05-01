@@ -1,6 +1,4 @@
 import { useLocation } from "react-router-dom";
-
-import styles from "./index.module.css";
 import SucessStatusCard from "./components/SuccessStatusCard";
 
 export default function SuccessStatus() {
@@ -9,7 +7,7 @@ export default function SuccessStatus() {
     location.state || {};
 
   return (
-    <div className={styles.container}>
+    <div className="h-full w-full flex items-center justify-center">
       <SucessStatusCard
         itemId={itemId}
         itemName={itemName}

@@ -1,22 +1,9 @@
-import styles from "./index.module.css";
-
-export default function Information({
-  title,
-  information,
-  emphasis,
-  inStatusCard,
-}) {
+export default function Information({ title, information, emphasis, inStatusCard }) {
   return (
-    <div
-      className={`${styles.information__container} ${
-        inStatusCard ? styles.in__status__card : ""
-      }`}
-    >
-      <span className={styles.title}>{title}</span>
+    <div className={`flex items-start flex-col gap-[0.2rem] ${inStatusCard ? 'flex-row gap-2' : ''}`}>
+      <span className="text-text-muted whitespace-nowrap">{title}</span>
       <span
-        className={`${styles.information} ${emphasis ? styles.emphasis : ""} ${
-          inStatusCard ? styles.in__status__card__information : ""
-        }`}
+        className={`text-[var(--color-text)] font-medium ${emphasis ? 'text-success break-all' : ''} ${inStatusCard ? 'whitespace-nowrap overflow-hidden text-ellipsis' : ''}`}
       >
         {information}
       </span>

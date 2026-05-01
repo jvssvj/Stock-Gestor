@@ -1,5 +1,53 @@
-@import url("./reset.css");
-@import url("./variables.css");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-primary);
+}
+
+@theme {
+  /* ─── Layout ─── */
+  --max-width-container: 1440px;
+
+  /* ─── Typography — Family ─── */
+  --font-primary: "Inter", sans-serif;
+
+  /* ─── Colors (Mapeia para bg-*, text-*, border-*) ─── */
+  --color-text-main: #000333;
+  --color-white: #ffffff;
+  --color-off-white: #f7f7f7;
+  --color-bg: #eeeeee;
+  --color-border: #b0b0b0;
+  --color-text-muted: #5f5f5f;
+  --color-black: #000000;
+
+  /* ─── Brand ─── */
+  --color-primary: #3852B4;
+  --color-primary-light: #9bace9;
+
+  /* ─── Status ─── */
+  --color-success-subtle: #e4ffe4;
+  --color-success-light: #dcffd8;
+  --color-success: #19d800;
+
+  --color-warning-subtle: #ffefe4;
+  --color-warning-light: #ffccb9;
+  --color-warning: #ff3c00;
+
+  --color-danger-subtle: #ffe4e4;
+  --color-danger-light: #ffb9b9;
+  --color-danger: #ff1010;
+
+  /* ─── Accents ─── */
+  --color-purple-subtle: #f7e4ff;
+  --color-purple-light: #dfb9ff;
+  --color-purple: #9310ff;
+
+  --color-teal-subtle: #e6f7f5;
+  --color-teal-light: #9fe0d8;
+  --color-teal: #14b8a6;
+}
 
 html {
   scroll-behavior: smooth;
