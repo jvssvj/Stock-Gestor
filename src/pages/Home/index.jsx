@@ -13,7 +13,7 @@ export default function Home() {
                 id="home"
                 className="text-start flex flex-col items-center justify-center p-4 min-h-[calc(100dvh-70px)] bg-white max-[720px]:min-h-[calc(100dvh+70px)]"
             >
-                <div className="w-full max-w-[var(--container-max-width)]">
+                <div className="w-full max-w-container">
                     <span className="w-max flex items-center gap-2 bg-primary-subtle border border-primary text-primary py-[0.6rem] px-4 rounded-[2rem] mb-6">
                         <div className={styles.home__slug__dot}></div>
                         Gestão de estoque simplificada
@@ -45,7 +45,7 @@ export default function Home() {
             <main className="flex items-center justify-center flex-col bg-white py-12 px-4">
                 <h2 className="text-4xl text-[var(--color-text)] text-center max-[440px]:text-2xl">Tudo o que você precisa para gerenciar seu estoque</h2>
                 <p className="text-text-muted my-4 mb-8 text-center">Recursos essenciais para controle, segurança e crescimento do seu negócio.</p>
-                <div className="w-full max-w-[var(--container-max-width)] grid grid-cols-3 gap-6 max-[1280px]:grid-cols-2 max-[560px]:grid-cols-1">
+                <div className="w-full max-w-container grid grid-cols-3 gap-6 max-[1280px]:grid-cols-2 max-[560px]:grid-cols-1">
                     <Card
                         bgColor="var(--color-primary-subtle)"
                         iconColor={"var(--color-primary)"}
@@ -91,11 +91,11 @@ export default function Home() {
                 </div>
             </main>
 
-            <section id="subscriptions" className="py-8 px-4 flex items-center justify-center flex-col bg-off-white">
+            {/* <section id="subscriptions" className="py-8 px-4 flex items-center justify-center flex-col bg-off-white">
                 <h2 className="text-center text-4xl font-bold max-[440px]:text-2xl">Escolha o plano ideal para seu negócio</h2>
                 <p className="text-center text-text-muted my-2 mb-12">Sem taxas ocultas. Cancele quando quiser. Todos os planos incluem 14 dias de teste grátis.</p>
 
-                <div className="grid grid-cols-3 w-full max-w-[var(--container-max-width)] gap-6 max-[1280px]:grid-cols-1 max-[1280px]:gap-8">
+                <div className="grid grid-cols-3 w-full max-w-container gap-6 max-[1280px]:grid-cols-1 max-[1280px]:gap-8">
                     <Subscriptions
                         title={"Free"}
                         paragraph={"Ideal para pequenos negócios com recursos básicos."}
@@ -128,13 +128,13 @@ export default function Home() {
                     <Link className="text-primary no-underline">Entre em contato</Link>
                     {' '}para um plano personalizado.
                 </p>
-            </section>
+            </section> */}
 
-            <footer className="bg-[var(--color-text)] flex items-start justify-center py-16 px-4">
-                <div className="flex items-center justify-center w-full max-w-[var(--container-max-width)] flex-col">
+            <footer className="bg-text-main flex items-start justify-center py-16 px-4">
+                <div className="flex items-center justify-center w-full max-w-container flex-col">
                     <div className="w-full flex items-center justify-between text-center max-[740px]:flex-col max-[740px]:justify-center max-[740px]:gap-8">
                         <p className="text-border max-[440px]:text-xs">&copy; 2026 Stock Gestor. Todos os direitos reservados.</p>
-                        <p className="max-[440px]:text-xs">Feito com 💙 e código</p>
+                        <p className="text-white max-[440px]:text-xs">Feito com 💙 e código</p>
                     </div>
                 </div>
             </footer>

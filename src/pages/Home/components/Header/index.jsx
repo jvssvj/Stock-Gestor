@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import styles from './index.module.css'
-import Logo from '@/components/Logo'
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import ProfileDropdown from '../../../../components/ProfileDropdown'
@@ -27,10 +26,8 @@ export default function Header() {
     return (
         <>
             <header className="w-full flex items-center justify-center bg-white py-6 px-4 border border-bg max-[720px]:fixed max-[720px]:justify-between max-[720px]:p-4 max-[720px]:z-[5]">
-                <div className="w-full max-w-[var(--container-max-width)] flex items-center max-[720px]:justify-between">
-                    {/* <div className="mr-8 max-[720px]:mr-0">
-                        <Logo size={36} />
-                    </div> */}
+
+                <div className="w-full max-w-container flex items-center max-[720px]:justify-between">
 
                     <label className="hidden max-[720px]:cursor-pointer max-[720px]:z-[6] max-[720px]:block max-[720px]:h-[40px] max-[720px]:w-[40px]">
                         <input
