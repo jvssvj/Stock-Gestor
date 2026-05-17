@@ -76,7 +76,6 @@ export default function SucessStatusCard({
           </>
         )}
       </div>
-
     </section>
   );
 }
