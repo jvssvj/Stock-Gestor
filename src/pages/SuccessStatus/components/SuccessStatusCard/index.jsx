@@ -54,7 +54,7 @@ export default function SucessStatusCard({
       <div className={`w-full flex gap-3 mt-8 ${status === "delete" ? "" : "flex-col sm:flex-row"}`}>
         {status === "delete" ? (
           <Link
-            to="/dashboard/items"
+            to="/app/items"
             className="no-underline w-full py-4 px-6 bg-primary hover:bg-primary-light text-white text-sm font-semibold rounded-lg text-center transition-colors duration-200"
           >
             Voltar para o estoque
@@ -62,13 +62,13 @@ export default function SucessStatusCard({
         ) : (
           <>
             <Link
-              to="/dashboard/items"
+              to="/app/items"
               className="no-underline w-full py-4 px-6 border border-border hover:border-text-muted text-text-main text-sm font-semibold rounded-lg text-center transition-colors duration-200"
             >
               Voltar para o estoque
             </Link>
             <Link
-              to={`/dashboard/items/${itemId}`}
+              to={`/app/items/${itemId}`}
               className="no-underline w-full py-4 px-6 bg-primary hover:bg-primary-light text-white text-sm font-semibold rounded-lg text-center transition-colors duration-200"
             >
               Ver detalhes
