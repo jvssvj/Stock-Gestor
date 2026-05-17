@@ -1,12 +1,14 @@
-import { LayoutDashboard, Box, LogOut, Settings, ChevronRight, ChevronLeft } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+/* eslint-disable no-unused-vars */
+import { useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { LayoutDashboard, Box, LogOut, Settings, ChevronRight, ChevronLeft, Tags } from 'lucide-react'
+import { useAuth } from '@/hooks/useAuth'
 
 const navItems = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/dashboard/items", label: "Estoque", icon: Box },
-];
+  { to: '/app', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/app/items', label: 'Estoque', icon: Box },
+  { to: '/app/categories', label: 'Categorias', icon: Tags },
+]
 
 function Tooltip({ label }) {
   return (
@@ -19,145 +21,159 @@ function Tooltip({ label }) {
     ">
       {label}
     </span>
-  );
+  )
 }
 
 export default function Sidebar() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [collapsed, setCollapsed] = useState(true);
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [collapsed, setCollapsed] = useState(true)
+  const [prevPathname, setPrevPathname] = useState('')
+
+  // Fecha ao trocar de rota — mesma lógica do SimulaDev
+  if (prevPathname !== location.pathname) {
+    setPrevPathname(location.pathname)
+    setCollapsed(true)
+  }
+
+  const initials = `${user?.firstName?.[0] ?? ''}${user?.lastName?.[0] ?? ''}`.toUpperCase()
 
   return (
     <>
-      {/* Overlay */}
       {!collapsed && (
         <div
-          className="fixed inset-0 bg-black opacity-80 z-[4]"
+          className="fixed inset-0 bg-black/50 z-[4]"
           onClick={() => setCollapsed(true)}
         />
       )}
 
       <aside className={`
         flex flex-col fixed z-[5] bg-white border-r border-border shrink-0
-        overflow-hidden h-dvh transition-[width] duration-[350ms] ease-in-out
-        ${collapsed ? "w-14" : "w-[240px]"}
+        overflow-hidden h-dvh transition-[width] duration-[250ms] ease-in-out
+        ${collapsed ? 'w-14' : 'w-[240px]'}
       `}>
 
         {/* ── Logo ── */}
         <div className="flex items-center justify-center p-3 border-b border-border min-h-14">
-
-          <div className="flex items-center gap-2 overflow-hidden flex-1 min-w-0">
-            <span className="leading-[0] shrink-0">
-              <Box className="text-primary" />
-            </span>
-
-            <h2
-              className={`text-base font-semibold text-text-main whitespace-nowrap overflow-hidden transition-[opacity,width] duration-200 ease-in-out ${collapsed ? "opacity-0 w-0" : "opacity-100 w-auto"}`}
-            >
+          <div className="flex items-center gap-2 overflow-hidden flex-1">
+            <div className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center shrink-0">
+              <Box size={14} color="white" />
+            </div>
+            <span className={`
+              text-[15px] font-semibold text-text-main whitespace-nowrap
+              transition-[opacity,width] duration-200
+              ${collapsed ? 'opacity-0 w-0' : 'opacity-100'}
+            `}>
               StockFlow
-            </h2>
+            </span>
           </div>
           <button
-            className="w-[35px] h-[35px] rounded-sm bg-transparent border border-border cursor-pointer flex items-center justify-center shrink-0 text-text-muted hover:bg-color-bg transition-colors duration-150"
+            className="w-[35px] h-[35px] rounded-sm bg-transparent border border-border cursor-pointer flex items-center justify-center shrink-0 text-text-muted hover:bg-bg transition-colors duration-150"
             onClick={() => setCollapsed(!collapsed)}
           >
-            {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+            {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
           </button>
         </div>
 
         {/* ── Nav ── */}
         <nav className="flex-1 px-2 py-2.5 flex flex-col gap-1 overflow-hidden">
+          {navItems.map(({ to, label, icon: Icon }) => {
+            const isActive = to === '/app'
+              ? location.pathname === '/app'
+              : location.pathname.startsWith(to)
 
-          {// eslint-disable-next-line no-unused-vars
-            navItems.map(({ to, label, icon: IconComponent }) => {
-              const isActive = to === "/dashboard"
-                ? location.pathname === "/dashboard"
-                : location.pathname.startsWith(to)
-
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  onClick={() => setCollapsed(true)}
-                  className={`
-                  group relative flex items-center justify-start gap-2
-                  cursor-pointer w-full p-2 rounded-lg font-medium z-[2]
-                  transition-all duration-200 ease-in-out no-underline
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`
+                  group relative flex items-center gap-2.5 p-2.5 rounded-lg
+                  text-[13px] whitespace-nowrap no-underline
+                  transition-[background,color] duration-150
                   ${isActive
-                      ? "bg-primary-subtle text-primary"
-                      : "text-text-muted hover:bg-primary-subtle hover:text-primary"
-                    }
+                    ? 'bg-primary text-white font-medium'
+                    : 'text-text-muted hover:bg-primary hover:text-white'
+                  }
                 `}
-                >
-                  <span className="pl-[2px]"><IconComponent size={20} /></span>
-                  <span className={`text-base whitespace-nowrap overflow-hidden text-ellipsis transition-[opacity,width] duration-200 ${collapsed ? "opacity-0 w-0" : ""}`}>
-                    {label}
-                  </span>
-                  {collapsed && <Tooltip label={label} />}
-                </Link>
-              )
-            })}
+              >
+                <span className="shrink-0"><Icon size={19} /></span>
+                <span className={`overflow-hidden transition-[opacity,width] duration-200 ${collapsed ? 'opacity-0 w-0' : ''}`}>
+                  {label}
+                </span>
+                {collapsed && <Tooltip label={label} />}
+              </Link>
+            )
+          })}
         </nav>
 
         {/* ── Footer ── */}
         <div className="flex flex-col gap-1 border-t border-border px-2 py-2.5">
 
           {/* User */}
-          <div className={`flex items-center gap-2.5 mb-5`}>
+          <div className="group relative flex items-center gap-2.5 h-14 pl-[3px] rounded-md overflow-visible">
             {user?.avatarUrl ? (
               <img
-                className="w-[39px] h-[39px] rounded-full shrink-0 object-cover border border-border"
+                className="w-8 h-8 rounded-full shrink-0 object-cover border border-border"
                 src={user.avatarUrl}
                 alt="Avatar"
               />
             ) : (
-              <span className="w-[39px] h-[39px] rounded-full shrink-0 flex items-center justify-center bg-primary-subtle text-primary text-[11px] font-bold border border-border">
-                {user?.name?.slice(0, 1)}
-              </span>
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[11px] font-medium text-white shrink-0">
+                {initials}
+              </div>
             )}
-
-            <span className={`
-              text-base text-ellipsis font-medium text-text-main whitespace-nowrap
-              overflow-hidden transition-[opacity,width] duration-200
-              ${collapsed ? "opacity-0 w-0" : "opacity-100"}
-            `}>
-              {user?.name}
-            </span>
-            {/* {collapsed && <Tooltip label={user?.name ?? ""} />} */}
-
+            {!collapsed ? (
+              <div className="flex-1 overflow-hidden">
+                <div className="text-[13px] font-medium text-text-main truncate">
+                  {user?.firstName} {user?.lastName}
+                </div>
+                {user?.email && (
+                  <span className="text-[11px] block text-text-muted truncate">{user.email}</span>
+                )}
+              </div>
+            ) : (
+              <Tooltip label={`${user?.firstName ?? ''} ${user?.lastName ?? ''}`} />
+            )}
           </div>
 
           {/* Configurações */}
           <Link
-            to="/settings"
-            className={`group relative flex items-center justify-start gap-2 cursor-pointer w-full p-2 rounded-lg font-medium z-[2] transition-all duration-200 ease-in-out no-underline ${location.pathname === "/settings"
-              ? "bg-primary-subtle text-text-main"
-              : "text-text-muted hover:bg-primary-subtle hover:text-text-main"
-              }`}
-            onClick={() => setCollapsed(true)}
+            to="/app/settings"
+            className={`
+              group relative flex gap-2.5 items-center p-2.5 rounded-lg
+              no-underline transition-colors duration-150
+              ${location.pathname === '/app/settings'
+                ? 'bg-primary text-white'
+                : 'text-text-muted hover:bg-primary hover:text-white'
+              }
+            `}
           >
-            <span className="pl-[2px]"><Settings size={20} /></span>
-            <span className={`text-base whitespace-nowrap overflow-hidden text-ellipsis transition-[opacity,width] duration-200 ${collapsed ? "opacity-0 w-0" : ""}`}>
+            <Settings size={19} className="shrink-0" />
+            <span className={`text-[13px] whitespace-nowrap overflow-hidden transition-[opacity,width] duration-200 ${collapsed ? 'opacity-0 w-0' : ''}`}>
               Configurações
             </span>
+            {collapsed && <Tooltip label="Configurações" />}
           </Link>
 
           {/* Logout */}
           <button
-            className="group relative flex items-center justify-start gap-2 cursor-pointer w-full p-2 rounded-lg font-medium z-[2] transition-all duration-200 ease-in-out text-text-muted hover:bg-danger-subtle hover:text-danger"
+            className="group relative w-full bg-transparent border-none cursor-pointer text-text-muted flex gap-2.5 items-center p-2.5 rounded-lg hover:bg-danger hover:text-white transition-colors duration-150"
             onClick={() => {
-              navigate("/", { replace: true });
-              setTimeout(() => logout(), 1);
+              navigate('/', { replace: true })
+              setTimeout(() => logout(), 1)
             }}
           >
-            <span className="pl-[2px]"><LogOut size={20} /></span>
-            <span className={`text-base whitespace-nowrap overflow-hidden text-ellipsis transition-[opacity,width] duration-200 ${collapsed ? "opacity-0 w-0" : ""}`}>
+            <LogOut size={19} className="shrink-0" />
+            <span className={`text-[13px] whitespace-nowrap overflow-hidden transition-[opacity,width] duration-200 ${collapsed ? 'opacity-0 w-0' : ''}`}>
               Sair
             </span>
+            {collapsed && <Tooltip label="Sair" />}
           </button>
+
         </div>
+
       </aside>
     </>
-  );
+  )
 }
