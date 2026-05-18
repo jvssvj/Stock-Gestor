@@ -1,55 +1,76 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useGetItems from "../../hooks/useGetItems";
-import useDeleteItem from "../../hooks/useDeleteItem";
 import ConfirmDeletion from "../../components/ConfirmDeletion";
 import { formatToCurrency } from "../../utils/currencyUtils";
 import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode } from "lucide-react";
+import { useEffect, useState } from "react";
+import Spinner from "@/components/Spinner";
+import { getItemService } from "@/services/appService";
 
 function formatDateISO(dateStr) {
-  if (!dateStr) return "";
-  const [y, m, d] = dateStr.split("-");
-  return `${d}/${m}/${y}`;
+  if (!dateStr) return ""
+  const [y, m, d] = dateStr.split("-")
+  return `${d}/${m}/${y}`
 }
 
-const TABS = ["Visão Geral", "Movimentações", "Fornecedores"];
+const TABS = ["Visão Geral", "Movimentações", "Fornecedores"]
 
 export default function Item() {
-  const { items: initialItems, loading, error } = useGetItems();
-  const [items, setItems] = useState([]);
-  const [activeTab, setActiveTab] = useState("Visão Geral");
+  const [activeTab, setActiveTab] = useState("Visão Geral")
+  const { itemId } = useParams()
+  const [item, setItem] = useState(null)
+  const [loadingItem, setLoadingItem] = useState(true)
+  const [errorItem, setErrorItem] = useState(null)
 
-  useEffect(() => { setItems(initialItems); }, [initialItems]);
+  useEffect(() => {
+    async function fetchItem() {
+      try {
+        setLoadingItem(true)
+        const response = await getItemService(itemId)
+        setItem(response?.data ?? response)
+      } catch (err) {
+        setErrorItem("Erro ao carregar os detalhes do item.")
+        console.error(err)
+      } finally {
+        setLoadingItem(false)
+      }
+    }
 
-  const { itemToDelete, setItemToDelete, confirmDelete } = useDeleteItem({ items, setItems });
-  const { itemId } = useParams();
-  const item = items.find((i) => i.id === Number(itemId));
+    if (itemId) fetchItem()
+  }, [itemId])
 
-  if (loading) return <p className="p-8 text-text-muted">Carregando...</p>;
-  if (error) return <p className="p-8 text-danger">Erro ao carregar item.</p>;
-  if (!item) return <p className="p-8 text-text-muted">Item não encontrado.</p>;
+  if (loadingItem) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
+  if (errorItem) return <p>{errorItem}</p>
+  if (!item) return <p className="p-8 text-text-muted">Item não encontrado.</p>
 
-  const price = (item.priceInCents / 100).toFixed(2);
-  const totalPrice = (parseFloat(price) * item.quantity).toFixed(2);
-  const [totalInt, totalDec] = formatToCurrency(totalPrice).toString().split(",");
+  const price = (item.priceInCents / 100).toFixed(2)
+  const totalPrice = (parseFloat(price) * item.quantity).toFixed(2)
+  const [totalInt, totalDec] = formatToCurrency(totalPrice).toString().split(",")
+
+  console.log(item.imageUrl)
 
   return (
     <>
-      {itemToDelete && (
+      {/* {itemToDelete && (
         <ConfirmDeletion
           productName={itemToDelete.name}
           productSku={itemToDelete.sku}
           cancelAction={() => setItemToDelete(null)}
           confirmAction={confirmDelete}
         />
-      )}
+      )} */}
 
       <div className="w-full max-w-container">
 
         {/* ── Breadcrumb + Header ── */}
         <div className="mb-6">
           <nav className="flex items-center gap-1.5 text-sm text-text-muted mb-3">
-            <Link to="/dashboard/items" className="hover:text-text-main transition-colors no-underline text-text-muted">Itens</Link>
+            <Link to="/app/items" className="hover:text-text-main transition-colors no-underline text-text-muted">Itens</Link>
             <span>›</span>
             {item.category && <><span className="hover:text-text-main transition-colors cursor-default">{item.category}</span><span>›</span></>}
             <span className="text-text-main font-medium">Detalhes</span>
@@ -67,14 +88,14 @@ export default function Item() {
 
             <div className="flex items-center gap-3">
               <Link
-                to={`/dashboard/items/${item.id}/update`}
+                to={`/app/items/${item.id}/update`}
                 className="no-underline flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-white text-text-main text-sm font-medium hover:bg-bg transition-colors"
               >
                 <Pencil size={15} />
                 Atualizar Item
               </Link>
               <button
-                onClick={() => setItemToDelete(item)}
+                // onClick={() => setItemToDelete(item)}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-danger text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
               >
                 <Trash2 size={15} />
@@ -92,10 +113,10 @@ export default function Item() {
 
             {/* Imagem */}
             <div className="w-full relative bg-white rounded-2xl border border-border overflow-hidden">
-              {item.image ? (
+              {item.imageUrl ? (
                 <img
-                  className="w-full aspect-square object-cover object-center"
-                  src={item.image}
+                  className="w-full object-cover object-center"
+                  src={item.imageUrl}
                   alt={item.name}
                 />
               ) : (
@@ -124,7 +145,7 @@ export default function Item() {
                   </div>
                   <div>
                     <p className="text-xs text-text-muted mb-0.5">Data de Adição</p>
-                    <p className="text-sm font-semibold text-text-main">{formatDateISO(item.date)}</p>
+                    <p className="text-sm font-semibold text-text-main">{formatDateISO(item.createdAt)}</p>
                   </div>
                 </div>
 
@@ -239,5 +260,5 @@ export default function Item() {
         </div>
       </div>
     </>
-  );
+  )
 }
