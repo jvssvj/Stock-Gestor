@@ -6,51 +6,62 @@ import LowStock from "./components/LowStock";
 import { ClipboardCheck, Plus, Shapes, TriangleAlert } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Welcome from "@/components/Welcome";
+import Spinner from "@/components/Spinner";
 
 export default function Dashboard() {
-  const { items, loading, error } = useGetItems();
+  const { items, loading, error } = useGetItems()
   const location = useLocation()
   const navigate = useNavigate()
 
-  if (loading) return <p>Carregando itens..</p>;
-  if (error) return <p>Erro ao carregar itens: {error}</p>;
+  if (loading) {
+    return (
+      <div className="min-h-[100dvh] grid items-center">
+        < Spinner />
+      </div>
+    )
+  }
+
+  if (error) return <p>Erro ao carregar itens: {error}</p>
 
   function formatDate(dateString) {
     if (!dateString) return "";
-    const [year, month, day] = dateString.split("-");
-    return `${day}/${month}/${year}`; // sem risco de timezone!
+
+    const [datePart, timePart] = dateString.split("T");
+    const [year, month, day] = datePart.split("-")
+    const [hour, minute] = timePart.split(":")
+
+    return `${day}/${month}/${year} às ${hour}:${minute}`
   }
 
-  const dbFormatted = items
-    .map((item) => ({
+  const recentItems = [...(items?.data || [])]
+    .sort((a, b) => new Date(b.updatedAt || b.createdAt).getTime() - new Date(a.updatedAt || a.createdAt).getTime())
+    .slice(0, 10)
+    .map(item => ({
       ...item,
-      dateISO: item.date,
+      formattedDate: formatDate(item.updatedAt || item.createdAt)
     }))
-    .sort((a, b) => new Date(b.dateISO) - new Date(a.dateISO))
-    .map((item) => ({
-      ...item,
-      date: formatDate(item.dateISO),
-    }))
-    .slice(0, 10);
 
-  const recentItems = dbFormatted;
-  const runningOut = items
+  const runningOut = (items?.data || [])
     .filter((item) => item.quantity <= 10)
-    .sort((a, b) => a.quantity - b.quantity);
-  // const differentItems = [...new Set(items.map((item) => item.category))];
+    .sort((a, b) => a.quantity - b.quantity)
+
+  const uniqueCategories = [...new Set((items?.data || [])
+    .map((item) => item.category?.name || item.category)
+    .filter(Boolean)
+  )]
 
   return (
     <>
       {location.state && (
         <Welcome name={location.state.name} onClick={() => navigate(location.pathname, { replace: true })} />
       )}
-      {items.length > 0 ? (
+      {items.data.length > 0 ? (
         <div className="w-full max-w-container">
           <section className="flex items-end flex-col gap-4 sm:flex-row sm:justify-between">
             <h2 className="text-text-dark font-bold text-3xl">Dashboard</h2>
 
             <Link
-              to={"/dashboard/create"}
+              to={"/app/create"}
               className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
             >
               <Plus />  Adicionar item
@@ -63,13 +74,13 @@ export default function Dashboard() {
             <Infos
               iconElement={<Shapes />}
               title={"Total de itens diferentes"}
-              quantity={items.length}
+              quantity={uniqueCategories.length}
               color={"success"}
             />
             <Infos
               iconElement={<ClipboardCheck />}
               title={"Total de itens"}
-              quantity={items.length.toLocaleString("pt-BR")}
+              quantity={items.data.length}
               color={"primary"}
             />
             <Infos
@@ -84,7 +95,7 @@ export default function Dashboard() {
             <div>
               <section className="flex items-center justify-between mt-8 mb-5">
                 <h3 className="font-semibold">Itens recentes</h3>
-                <Link to="/dashboard/items" className="text-primary hover:text-primary-light font-semibold">
+                <Link to="/app/items" className="text-primary hover:text-primary-light font-semibold">
                   Ver todos
                 </Link>
               </section>
@@ -104,9 +115,9 @@ export default function Dashboard() {
           </div>
         </div >
       ) : (
-        <EmptyStock url={"/dashboard/create"} />
+        <EmptyStock url={"/app/create"} />
       )
       }
     </>
-  );
+  )
 }

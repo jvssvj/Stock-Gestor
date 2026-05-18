@@ -31,7 +31,7 @@ export default function RecentItems({ data }) {
                   {item.quantity}
                 </td>
                 <td className="p-4 text-sm text-text-muted border-t border-border whitespace-nowrap">
-                  {item.date}
+                  {item.formattedDate}
                 </td>
               </tr>
             ))
