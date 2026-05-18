@@ -8,8 +8,13 @@ import { getItemService } from "@/services/appService";
 
 function formatDateISO(dateStr) {
   if (!dateStr) return ""
-  const [y, m, d] = dateStr.split("-")
-  return `${d}/${m}/${y}`
+
+  const formatted = new Date(dateStr).toLocaleString("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short"
+  })
+
+  return formatted.replace(",", " -")
 }
 
 const TABS = ["Visão Geral", "Movimentações", "Fornecedores"]
@@ -38,6 +43,8 @@ export default function Item() {
     if (itemId) fetchItem()
   }, [itemId])
 
+  console.log(item)
+
   if (loadingItem) {
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -51,8 +58,6 @@ export default function Item() {
   const price = (item.priceInCents / 100).toFixed(2)
   const totalPrice = (parseFloat(price) * item.quantity).toFixed(2)
   const [totalInt, totalDec] = formatToCurrency(totalPrice).toString().split(",")
-
-  console.log(item.imageUrl)
 
   return (
     <>
@@ -115,7 +120,7 @@ export default function Item() {
             <div className="w-full relative bg-white rounded-2xl border border-border overflow-hidden">
               {item.imageUrl ? (
                 <img
-                  className="w-full object-cover object-center"
+                  className="w-full aspect-square object-cover object-center"
                   src={item.imageUrl}
                   alt={item.name}
                 />
@@ -155,7 +160,7 @@ export default function Item() {
                   </div>
                   <div>
                     <p className="text-xs text-text-muted mb-0.5">Última Modificação</p>
-                    <p className="text-sm font-semibold text-text-main">{formatDateISO(item.updatedDate)}</p>
+                    <p className="text-sm font-semibold text-text-main">{formatDateISO(item.updatedAt)}</p>
                   </div>
                 </div>
               </div>
