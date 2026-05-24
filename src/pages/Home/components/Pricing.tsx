@@ -63,7 +63,7 @@ export function Pricing() {
                             </ul>
 
                             <a
-                                href="#"
+                                href="/app"
                                 className={`mt-auto text-center rounded-xl px-5 py-3 text-sm font-semibold transition-colors ${p.featured
                                     ? "bg-primary text-white hover:bg-primary-glow"
                                     : "border border-border hover:bg-surface-elevated"

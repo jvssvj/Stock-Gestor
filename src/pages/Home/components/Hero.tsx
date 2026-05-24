@@ -34,7 +34,7 @@ export function Hero() {
 
                         <div className="mt-10 flex flex-wrap items-center gap-4">
                             <Link
-                                to="/register"
+                                to="/app"
                                 className="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-glow hover:scale-[1.02] transition-transform"
                             >
                                 Gerenciar estoque
