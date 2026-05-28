@@ -4,8 +4,8 @@ import { useState } from "react";
 import { loginService } from "@/services/authService";
 import { useAuth } from "@/hooks/useAuth";
 import Spinner from "@/components/Spinner";
-import { Eye, EyeOff } from "lucide-react";
-import { validateEmail, validatePassword } from "@/utils/validateForm";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import { validateEmail } from "@/utils/validateForm";
 
 const inputBase = "border border-border py-3 px-3 rounded-lg w-full focus:outline-none focus:border-primary";
 const inputErrorClass = "bg-danger-subtle text-danger border border-danger focus:border-danger";
@@ -28,14 +28,20 @@ export default function Login() {
     setShowPassword(prev => !prev)
   }
 
+  const validatePassword = (password) => {
+    if (!password) {
+      return "A senha é obrigatória"
+    }
+    return null
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
 
     const errorEmail = validateEmail(email)
-    const errorPassword = validatePassword(password)
 
-    if (errorEmail || errorPassword) {
-      setClientErrors({ email: errorEmail, password: errorPassword })
+    if (errorEmail || validatePassword(password)) {
+      setClientErrors({ email: errorEmail, password: validatePassword() })
       return
     }
 
@@ -44,7 +50,7 @@ export default function Login() {
     try {
       const response = await loginService({ email, password })
       login(response.user, response.token)
-      navigate('/dashboard')
+      navigate('/app')
     } catch (err) {
       const isNetworkError = err instanceof TypeError
       setApiError(isNetworkError ? "Falha na conexão." : err.message || "Erro inesperado.")
@@ -56,9 +62,9 @@ export default function Login() {
   return (
     <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
       <section className="bg-white rounded-[0.7rem] py-12 px-4 w-full max-w-[450px] text-center flex flex-col items-center justify-center">
-        <Logo size={40} />
-        <h1 className="text-2xl text-[var(--color-text)] my-4">Bem-vindo de volta!</h1>
-        <p className="text-base text-text-muted">Faça login para acessar seu painel de gestão.</p>
+        <Logo showLabel />
+        <h1 className="text-3xl text-text-main font-semibold my-4">Bem-vindo de volta!</h1>
+        <p className="text-base text-muted">Faça login para acessar seu painel de gestão.</p>
 
         <form
           method="POST"
@@ -81,6 +87,7 @@ export default function Login() {
               type="email"
               name="email"
               id="email"
+              placeholder="email@email.com"
             />
             {clientErrors.email && (
               <span className="text-danger text-sm">{clientErrors.email}</span>
@@ -103,10 +110,11 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               name="password"
               id="password"
+              placeholder="*******"
             />
             <div
               onClick={() => handleShowPassword()}
-              className="absolute right-3 top-[2.45rem] text-[var(--color-text)]"
+              className="absolute right-3 top-[2.95rem] text-[var(--color-text)]"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </div>
@@ -117,33 +125,30 @@ export default function Login() {
           </label>
 
           <a
-            className="text-primary no-underline text-end max-[375px]:text-sm"
+            className="text-primary text-sm no-underline text-end"
             href="#forgot-password"
           >
-            Esqueci minha senha
+            Esqueci a senha?
           </a>
 
           <button
             disabled={loading}
             type="submit"
             aria-label={loading ? "Carregando acesso, aguarde" : "Entrar no sistema"}
-            className="w-full h-[45px] bg-primary text-white text-base rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-primary-light"
+            className="flex items-center justify-center gap-2 w-full h-[45px] bg-primary border border-primary text-white text-base rounded-lg cursor-pointer transition-all duration-200 ease-in-out hover:bg-transparent hover:text-primary"
           >
             {loading ? <Spinner /> : 'Entrar'}
+            < ArrowRight size={20} />
           </button>
-
-          <div className="flex items-center gap-4 my-2">
-            <hr className="w-full h-px bg-border" />
-            <span className="whitespace-nowrap text-text-muted">Não tem uma conta?</span>
-            <hr className="w-full h-px bg-border" />
-          </div>
-
-          <Link
-            to={'/register'}
-            className="flex items-center justify-center no-underline w-full h-[45px] rounded-lg transition-all duration-200 ease-in-out border border-border text-[var(--color-text)] hover:border-text-muted"
-          >
-            Registre-se
-          </Link>
+          <p className="text-muted">Não tem uma conta?
+            {' '}
+            <Link
+              to={'/register'}
+              className="text-primary font-semibold"
+            >
+              Criar conta
+            </Link>
+          </p>
         </form>
       </section>
     </div>
