@@ -1,7 +1,7 @@
 export function Logos() {
     return (
-        <section className="py-12 border-y border-border/50">
-            <div className="mx-auto max-w-7xl px-6">
+        <section className="py-12 border-y border-border/50 mx-6">
+            <div className="mx-auto max-w-container">
                 <p className="text-center text-xs uppercase tracking-[0.2em] text-muted-foreground mb-8">
                     Mais de 2.300 negócios confiam no Stock Gestor
                 </p>

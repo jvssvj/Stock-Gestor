@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 export function Hero() {
     return (
-        <section className="relative pt-32 pb-24 overflow-hidden">
-            <div className="relative mx-auto max-w-7xl px-6">
+        <section className="relative pt-32 pb-24 overflow-hidden mx-6">
+            <div className="relative mx-auto max-w-container">
                 <div className="grid lg:grid-cols-12 gap-12 items-center">
                     <div className="lg:col-span-7">
                         {/* <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur-sm">

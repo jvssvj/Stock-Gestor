@@ -35,9 +35,9 @@ export function Features() {
     ];
 
     return (
-        <section id="features" className="py-28 relative">
-            <div className="mx-auto max-w-7xl px-6">
-                <div className="max-w-2xl">
+        <section id="features" className="py-28 relative mx-6">
+            <div className="mx-auto max-w-container">
+                <div className="text-center">
                     <span className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Recursos</span>
                     <h2 className="mt-4 text-4xl md:text-5xl font-bold">
                         Tudo que falta nas planilhas — <span className="text-muted-foreground">sem o que sobra nos ERPs.</span>

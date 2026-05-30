@@ -1,7 +1,7 @@
 export function Stats() {
     return (
-        <section className="py-20">
-            <div className="mx-auto max-w-7xl px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="py-20 mx-6">
+            <div className="mx-auto max-w-container grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[
                     { v: "37%", l: "Menos rupturas em 60 dias" },
                     { v: "2.5h", l: "Economizadas por semana" },
