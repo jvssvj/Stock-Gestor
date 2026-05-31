@@ -62,7 +62,7 @@ export default function Login() {
   return (
     <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
       <section className="bg-white rounded-[0.7rem] py-12 px-4 w-full max-w-[450px] text-center flex flex-col items-center justify-center">
-        <Logo showLabel />
+        <Logo />
         <h1 className="text-3xl text-text-main font-semibold my-4">Bem-vindo de volta!</h1>
         <p className="text-base text-muted">Faça login para acessar seu painel de gestão.</p>
 

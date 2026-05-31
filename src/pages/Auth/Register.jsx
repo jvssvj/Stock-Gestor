@@ -15,7 +15,8 @@ export default function Register() {
     const { login } = useAuth()
 
     const navigate = useNavigate()
-    const [name, setName] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -32,14 +33,16 @@ export default function Register() {
         setClientErrors({})
         setServerErrors({})
 
-        const checkName = validateName(name)
+        const checkFirstName = validateName(firstName, false)
+        const checkLastName = validateName(lastName, true)
         const checkEmail = validateEmail(email)
         const checkPassword = validatePassword(password)
         const checkSamePassword = validatePassword(password, confirmPassword)
 
-        if (checkName || checkEmail || checkPassword || checkSamePassword) {
+        if (checkFirstName || checkLastName || checkEmail || checkPassword || checkSamePassword) {
             setClientErrors({
-                name: checkName,
+                firstName: checkFirstName,
+                lastName: checkLastName,
                 email: checkEmail,
                 password: checkPassword,
                 confirmPassword: checkSamePassword
@@ -50,11 +53,12 @@ export default function Register() {
         setLoading(true)
 
         try {
-            await registerService({ name, email, password })
+            await registerService({ firstName, lastName, email, password })
+
             const loginResponse = await loginService({ email, password })
             login(loginResponse.user, loginResponse.token)
 
-            navigate('/dashboard', { state: { name } })
+            navigate('/app', { state: { firstName } })
         } catch (err) {
             console.log(err)
             if (err.errors) {
@@ -70,9 +74,9 @@ export default function Register() {
 
     return (
         <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
-            <section className="bg-white rounded-[0.7rem] py-12 px-4 w-full max-w-[450px] flex flex-col items-center justify-center">
-                <Logo size={40} />
-                <h1 className="text-2xl text-[var(--color-text)] my-4">Crie sua conta</h1>
+            <section className="bg-white rounded-[0.7rem] w-full max-w-[450px] flex flex-col items-center justify-center">
+                <Logo />
+                <h1 className="text-3xl text-text-main font-semibold my-4">Crie sua conta</h1>
                 <p className="text-base text-text-muted text-center">Comece a gerenciar seu estoque hoje mesmo</p>
 
                 <form
@@ -81,28 +85,50 @@ export default function Register() {
                     method="POST"
                     className="w-full text-center flex flex-col gap-4 mt-8"
                 >
-                    <label htmlFor="name" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
-                        Seu nome ou nome da empresa
-                        <input
-                            onChange={(e) => {
-                                setName(e.target.value)
-                                setClientErrors(prev => ({ ...prev, name: "" }))
-                            }}
-                            onBlur={(e) => {
-                                const error = validateName(e.target.value)
-                                if (error) setClientErrors(prev => ({ ...prev, name: error }))
-                            }}
-                            type="text"
-                            name="name"
-                            id="name"
-                            className={`${inputBase} ${clientErrors.name ? inputErrorClass : ""}`}
-                        />
-                        {clientErrors.name && (
-                            <span className="text-danger text-sm">{clientErrors.name}</span>
-                        )}
-                    </label>
+                    <div className="flex gap-4">
+                        <label htmlFor="first-name" className="text-text-main flex items-start flex-1 flex-col gap-2 text-start">
+                            Primeiro nome
+                            <input
+                                onChange={(e) => {
+                                    setFirstName(e.target.value)
+                                    setClientErrors(prev => ({ ...prev, firstName: "" }))
+                                }}
+                                onBlur={(e) => {
+                                    const error = validateName(e.target.value, false)
+                                    if (error) setClientErrors(prev => ({ ...prev, firstName: error }))
+                                }}
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                className={`${inputBase} ${clientErrors.firstName ? inputErrorClass : ""}`}
+                            />
+                            {clientErrors.firstName && (
+                                <span className="text-danger text-sm">{clientErrors.firstName}</span>
+                            )}
+                        </label>
+                        <label htmlFor="last-name" className="text-text-main flex items-start flex-1 flex-col gap-2 text-start">
+                            Último nome
+                            <input
+                                onChange={(e) => {
+                                    setLastName(e.target.value)
+                                    setClientErrors(prev => ({ ...prev, lastName: "" }))
+                                }}
+                                onBlur={(e) => {
+                                    const error = validateName(e.target.value, true)
+                                    if (error) setClientErrors(prev => ({ ...prev, lastName: error }))
+                                }}
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                className={`${inputBase} ${clientErrors.lastName ? inputErrorClass : ""}`}
+                            />
+                            {clientErrors.lastName && (
+                                <span className="text-danger text-sm">{clientErrors.lastName}</span>
+                            )}
+                        </label>
+                    </div>
 
-                    <label htmlFor="email" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
+                    <label htmlFor="email" className="text-text-main flex items-start flex-col gap-2 text-start">
                         Email
                         <input
                             onChange={(e) => {
@@ -124,7 +150,7 @@ export default function Register() {
                         {serverErrors.email && <span className="text-danger text-sm">{serverErrors.email}</span>}
                     </label>
 
-                    <label htmlFor="password" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
+                    <label htmlFor="password" className="text-text-main flex items-start flex-col gap-2 text-start">
                         Senha
                         <input
                             onChange={(e) => {
@@ -145,7 +171,7 @@ export default function Register() {
                         )}
                     </label>
 
-                    <label htmlFor="confirm-password" className="text-[var(--color-text)] flex items-start flex-col gap-2 text-start">
+                    <label htmlFor="confirm-password" className="text-text-main flex items-start flex-col gap-2 text-start">
                         Confirmar senha
                         <input
                             onChange={(e) => {
@@ -177,18 +203,15 @@ export default function Register() {
                         {loading ? <Spinner /> : 'Registrar'}
                     </button>
 
-                    <div className="flex items-center gap-4 my-2">
-                        <hr className="w-full h-px bg-border" />
-                        <span className="whitespace-nowrap text-text-muted">Já possui uma conta?</span>
-                        <hr className="w-full h-px bg-border" />
-                    </div>
-
-                    <Link
-                        to={'/login'}
-                        className="flex items-center justify-center no-underline w-full h-[45px] rounded-lg transition-all duration-200 ease-in-out border border-border text-[var(--color-text)] hover:border-text-muted"
-                    >
-                        Entrar
-                    </Link>
+                    <p className="text-muted">Já possui uma conta?
+                        {' '}
+                        <Link
+                            to={'/login'}
+                            className="text-primary font-semibold"
+                        >
+                            Entrar
+                        </Link>
+                    </p>
                 </form>
             </section>
         </div>
