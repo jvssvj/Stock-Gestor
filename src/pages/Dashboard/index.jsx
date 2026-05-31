@@ -53,7 +53,7 @@ export default function Dashboard() {
   return (
     <>
       {location.state && (
-        <Welcome name={location.state.name} onClick={() => navigate(location.pathname, { replace: true })} />
+        <Welcome firstName={location.state.firstName} onClick={() => navigate(location.pathname, { replace: true })} />
       )}
       {items.data.length > 0 ? (
         <div className="w-full max-w-container">
