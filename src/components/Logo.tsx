@@ -12,7 +12,7 @@ export default function Logo({ showLabel }: LogoProps) {
             </div>
             {showLabel && (
                 <span className="font-display font-bold text-lg tracking-tight">
-                    Stock<span className="text-primary">Gestor</span>
+                    Stock <span className="text-primary">Gestor</span>
                 </span>
             )}
         </div>
