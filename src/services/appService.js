@@ -1,21 +1,17 @@
 import { apiFetch } from "./api";
 
 export async function createItemService(data) {
-    const response = await apiFetch("/items", {
+    return await apiFetch("/items", {
         method: "POST",
-        body: JSON.stringify(data)
+        body: data
     })
-
-    return response.data
 }
 
 export async function updateItemService(id, data) {
-    const response = await apiFetch(`/items/${id}`, {
+    return await apiFetch(`/items/${id}`, {
         method: "PUT",
         body: data
     })
-
-    return response.data
 }
 
 export async function getItemsService() {

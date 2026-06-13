@@ -1,9 +1,20 @@
-export const validateName = (name) => {
-    if (!name || name.trim().length === 0) return "O nome é obrigatório."
-    if (name.trim().length < 4) return "O nome precisa ter no mínimo 4 caracteres."
-    if (name.length > 50) return "O nome deve ter no máximo 50 caracteres."
-    return null
-}
+export const validateName = (name, isLastName) => {
+    const value = name?.trim();
+
+    if (!value) {
+        return `O ${isLastName ? "último nome" : "nome"} é obrigatório.`;
+    }
+
+    if (value.length < 2) {
+        return `O ${isLastName ? "último nome" : "nome"} precisa ter no mínimo 2 caracteres.`;
+    }
+
+    if (value.length > 50) {
+        return `O ${isLastName ? "último nome" : "nome"} deve ter no máximo 50 caracteres.`;
+    }
+
+    return null;
+};
 
 export const validateEmail = (email) => {
     if (!email || email.trim().length === 0) return "O e-mail é obrigatório."

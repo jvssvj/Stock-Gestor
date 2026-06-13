@@ -22,7 +22,7 @@ export default function useDeleteItem({ items, setItems }) {
   useEffect(() => {
     if (!deletedItem) return;
 
-    navigate("/dashboard/success", {
+    navigate("/app/success", {
       state: {
         mode: "delete",
         itemName: deletedItem.name,

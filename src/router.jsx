@@ -11,6 +11,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import SettingsPage from "./pages/SettingsPage";
+import Categories from "./pages/Categories";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        path: "/dashboard",
+        path: "/app",
         element: <RootLayout />,
         children: [
           { index: true, element: <Dashboard /> },
@@ -42,16 +43,11 @@ const router = createBrowserRouter([
               { path: ":itemId/update", element: <UpdateItem /> },
             ],
           },
+          { path: "settings", element: <SettingsPage /> },
           { path: "success", element: <SuccessStatus /> },
+          { path: "categories", element: <Categories /> }
         ],
       },
-      {
-        path: "/settings",
-        element: <RootLayout />,
-        children: [
-          { index: true, element: <SettingsPage /> }
-        ]
-      }
     ]
   },
 ]);

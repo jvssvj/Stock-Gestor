@@ -10,7 +10,7 @@ export async function loginService(data) {
 }
 
 export async function registerService(data) {
-    return apiFetch("/users", {
+    return apiFetch("/register", {
         method: "POST",
         body: JSON.stringify(data),
     })

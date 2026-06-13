@@ -1,3 +1,4 @@
+import { getItemsService } from "@/services/appService";
 import { useEffect, useState } from "react";
 
 export default function useGetItems() {
@@ -6,18 +7,20 @@ export default function useGetItems() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-      const data = localStorage.getItem("items");
-      if (!data) {
-        setItems([]);
-      } else {
-        setItems(JSON.parse(data));
+    const fetchItems = async () => {
+      setLoading(true)
+
+      try {
+        const data = await getItemsService()
+        setItems(data)
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
     }
+
+    fetchItems()
   }, []);
 
   return { items, setItems, loading, error };
