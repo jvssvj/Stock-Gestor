@@ -1,16 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import CreateItemForm from "@/components/CreateItemForm";
-import useGetItems from "@/hooks/useGetItems";
 import { createItemService } from "@/services/appService";
 import { useState } from "react";
+import { useCategories } from "@/hooks/useGetCategories";
+import Spinner from "@/components/Spinner";
 
 export default function CreateItem() {
   const navigate = useNavigate()
   const [serverErrors, setServerErrors] = useState({})
   const [loading, setLoading] = useState(false)
-  const { items } = useGetItems()
-  const categories = [...new Set(items?.data?.map((item) => item.category))].sort()
+  const { categories, loading: loadingCategories } = useCategories()
 
+  if (loadingCategories) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
 
   const handleCreateItem = async (formData) => {
     setLoading(true)
@@ -54,7 +61,7 @@ export default function CreateItem() {
       <h2 className="text-text-dark font-bold text-3xl">Cadastro de item</h2>
       <p className="text-text-muted mt-2 mb-8">Preencha os detalhes abaixo para cadastrar o item no seu inventário.</p>
       <CreateItemForm
-        categories={categories || []}
+        categories={categories}
         onSubmit={handleCreateItem}
         serverErrors={serverErrors}
         loading={loading}

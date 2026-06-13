@@ -233,35 +233,42 @@ export default function CreateItemForm({ categories = [], onSubmit, serverErrors
 
       {/* CATEGORIA */}
       <div className="flex flex-col gap-1">
-        <div className="flex justify-between items-center">
-          <label htmlFor="category" className={labelClass}>Categoria</label>
+        <div className="flex flex-col">
           {(!categories || categories.length === 0) && (
-            <Link to="/app/categories" className="text-xs text-primary hover:underline">
-              Cadastrar categoria
-            </Link>
+            <>
+              <span className={labelClass}>Categoria</span>
+              <p className="mt-1.5 text-sm">Nenhuma categoria disponível.{" "}
+                <Link
+                  to="/app/categories"
+                  className=" text-primary hover:underline font-semibold"
+                >
+                  Cadastrar categoria
+                </Link>
+              </p>
+            </>
           )}
         </div>
 
-        <select
-          name="category"
-          id="category"
-          value={formData.category ?? ""}
-          onChange={handleChange}
-          className={`${inputBase} ${allErrors.category ? inputErrorClass : ""}`}
-        >
-          {categories && categories.length > 0 ? (
-            <>
-              <option value="">Nenhuma (Sem categoria)</option>
-              {categories.map((cat) => (
-                <option key={cat?.id ?? cat} value={cat?.id ?? cat}>
-                  {cat?.name ?? ""}
+        {categories && categories.length > 0 && (
+          <div>
+            <label htmlFor="category" className={labelClass}>Categoria</label>
+            <select
+              name="category"
+              id="category"
+              value={formData.category ?? ""}
+              onChange={handleChange}
+              className={`${inputBase} ${allErrors.category ? inputErrorClass : ""}`}
+            >
+              <option value="">Sem categoria (nenhuma)</option>
+
+              {categories?.map((category) => (
+                <option key={category?.id ?? category} value={category?.id ?? category}>
+                  {category?.name ?? ""}
                 </option>
               ))}
-            </>
-          ) : (
-            <option value="" disabled>Nenhuma categoria disponível</option>
-          )}
-        </select>
+            </select>
+          </div>
+        )}
 
         {allErrors.category && <span className={errorText}>{allErrors.category}</span>}
       </div>
