@@ -11,7 +11,6 @@ export function useCategories() {
             try {
                 setLoading(true);
                 const response = await getCategoriesService();
-                // Ajuste aqui dependendo se sua API retorna direto o array ou dentro de .data
                 setCategories(response?.data ?? response ?? []);
             } catch (err) {
                 setError("Erro ao carregar categorias");
