@@ -100,7 +100,7 @@ export default function SettingsPage() {
     return (
         <div className="w-full max-w-container mx-auto">
             <Link
-                to="/dashboard"
+                to="/app"
                 className="inline-flex items-center gap-2 text-text-muted hover:text-text-main transition-colors mb-6"
             >
                 <ArrowLeft size={18} />

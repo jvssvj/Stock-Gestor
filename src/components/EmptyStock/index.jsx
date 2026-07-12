@@ -1,4 +1,6 @@
 import emptyBoxIcon from "@/assets/images/empty-box.png";
+import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function EmptyStock() {
   return (
@@ -15,7 +17,7 @@ export default function EmptyStock() {
           organizar seu inventário.
         </p>
         <Link
-          to={"/dashboard/create"}
+          to={"/app/create"}
           className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
         >
           <Plus />  Adicionar item

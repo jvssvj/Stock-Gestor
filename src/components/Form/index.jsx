@@ -11,7 +11,7 @@ const errorText = "text-danger text-xs mt-1";
 
 export default function Form({
   mode = "create",
-  itemId = null,
+  itemId = "",
   itemName = "",
   itemQuantity = 0,
   itemPriceInCents = 0,
@@ -149,7 +149,7 @@ export default function Form({
       id: itemId,
       quantity: Number(formData.quantity),
       priceInCents: Math.round(parseFloat(formData.priceInCents) * 100),
-      updatedDate: new Date().toISOString().split("T")[0],
+      updatedAt: new Date().toISOString().split("T")[0],
       image: imageFile,
     };
 
