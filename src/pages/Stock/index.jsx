@@ -1,92 +1,121 @@
 import { useState } from "react";
 import StockTable from "./components/StockTable";
-import EmptyStock from "../../components/EmptyStock";
-import useGetItems from "../../hooks/useGetItems";
-import SearchInput from "./components/Search";
+import EmptyStock from "@/components/EmptyStock";
+import useGetItems from "@/hooks/useGetItems";
 import NoItemsFound from "./components/NoItemsFound";
 import { Link } from "react-router-dom";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
+import Spinner from "@/components/Spinner";
 
 export default function Stock() {
-  const { items, loading, error } = useGetItems();
+  // 1. Extraímos o setCurrentPage do hook para controlar a paginação
+  const { items, loading, loadingPage, error, setCurrentPage } = useGetItems()
 
-  const [searchedItem, setSearchedItem] = useState("");
-  const [searching, setSearching] = useState(false);
+  const [searchedItem, setSearchedItem] = useState("")
+  const [searching, setSearching] = useState(false)
 
-  if (loading) return <p>Carregando itens...</p>;
-  if (error) return <p>Erro ao carregar itens.</p>;
+  if (loading) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
+
+  if (error) return <p>Erro ao carregar itens.</p>
 
   function handleSearchItem(ev) {
-    const value = ev.target.value;
-    setSearchedItem(value);
-    setSearching(value.trim() !== "");
+    const value = ev.target.value
+    setSearchedItem(value)
+    setSearching(value.trim() !== "")
   }
 
   function findItem() {
-    if (!searchedItem.trim()) return [];
-    return items.filter((i) =>
+    const data = items?.data || []
+    if (!searchedItem.trim()) return []
+    return data.filter((i) =>
       i.name.toLowerCase().includes(searchedItem.toLowerCase())
-    );
+    )
   }
 
   function renderContent() {
+    const data = items?.data || []
+
     if (searching && findItem().length === 0) {
       return (
         <NoItemsFound
           value={searchedItem}
           onCLick={() => {
-            setSearching(false);
-            setSearchedItem("");
+            setSearching(false)
+            setSearchedItem("")
           }}
         />
-      );
+      )
     }
 
     if (searching) {
-      return <StockTable items={findItem()} allItems={items} setItems={items} />;
+      return <StockTable items={{ data: findItem(), meta: { totalPages: 1 } }} allItems={data} />
     }
 
-    if (items.length === 0) {
-      return <EmptyStock url={"/dashboard/create"} />;
-    }
-
-    return <StockTable items={items} allItems={items} setItems={items} />;
+    return (
+      <StockTable
+        items={items} // Enviamos o objeto completo {data, meta}
+        allItems={data}
+        loadingPage={loadingPage}
+        onPageChange={(page) => setCurrentPage(page)} // Função para o hook buscar nova página
+      />
+    )
   }
+
+  if (items?.meta?.totalItems <= 0) {
+    return <EmptyStock url={"/app/create"} />
+  }
+
 
   return (
     <>
+      {items.meta.totalItems <= 0 && (
+        <EmptyStock url={"/app/create"} />
+      )}
+
       <section className="w-full max-w-container">
-        {items.length > 0 && (
-          <>
-            <header className="flex items-end justify-between">
-              <h2 className="text-text-dark font-bold text-3xl">
-                {searching ? "Resultados da pesquisa" : "Estoque"}
-              </h2>
+        <header >
+          <h2 className="text-text-main font-bold text-3xl">Estoque</h2>
+          <p>Gerencie a disponibilidade e informações dos produtos.</p>
+        </header>
 
-              <Link
-                to={"/dashboard/create"}
-                className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
-              >
-                <Plus />  Adicionar item
-              </Link>
-            </header>
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-between">
+          <div
+            className="relative flex items-center w-full sm:max-w-[500px]"
+          >
+            <label
+              className="absolute w-px h-px p-0 -m-px overflow-hidden clip-[rect(0,0,0,0)] whitespace-nowrap border-0"
+              htmlFor="search-product"
+            >
+              Pesquisar produto
+            </label>
+            <Search className="absolute ml-4 text-text-muted w-[20px] pointer-events-none text-border" />
+            <input
+              value={searchedItem}
+              className="w-full py-2 pl-12 rounded-lg border border-border text-base focus:border-primary-light focus:outline-none"
+              type="text"
+              name="search-product"
+              id="search-product"
+              placeholder="Pesquisar item"
+              onChange={handleSearchItem}
+            />
+          </div>
 
-            <hr className="my-10 border-t border-border" />
-
-
-            <SearchInput value={searchedItem} event={handleSearchItem} maxWidth={400} />
-
-            {searching && (
-              <p style={{ marginTop: "1rem" }}>
-                Exibindo {findItem().length} resultados para{" "}
-                <strong>"{searchedItem}"</strong>
-              </p>
-            )}
-          </>
-        )}
-      </section>
+          <Link
+            to={"/app/create"}
+            className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 px-4 py-2 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[150px]"
+          >
+            <Plus />  Adicionar item
+          </Link>
+        </div>
+      </section >
 
       {renderContent()}
     </>
-  );
+  )
 }

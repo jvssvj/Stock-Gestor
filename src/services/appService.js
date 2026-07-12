@@ -14,8 +14,14 @@ export async function updateItemService(id, data) {
     })
 }
 
-export async function getItemsService() {
-    return await apiFetch("/items", {
+export async function deleteItemService(id) {
+    return await apiFetch(`/items/${id}`, {
+        method: "DELETE",
+    })
+}
+
+export async function getItemsService(page = 1) {
+    return await apiFetch(`/items?page=${page}`, {
         method: "GET"
     })
 }

@@ -5,6 +5,7 @@ import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode } from "l
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import { getItemService } from "@/services/appService";
+import useDeleteItem from "@/hooks/useDeleteItem";
 
 function formatDateISO(dateStr) {
   if (!dateStr) return ""
@@ -20,6 +21,8 @@ function formatDateISO(dateStr) {
 const TABS = ["Visão Geral", "Movimentações", "Fornecedores"]
 
 export default function Item() {
+  const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({})
+
   const [activeTab, setActiveTab] = useState("Visão Geral")
   const { itemId } = useParams()
   const [item, setItem] = useState(null)
@@ -43,8 +46,6 @@ export default function Item() {
     if (itemId) fetchItem()
   }, [itemId])
 
-  console.log(item)
-
   if (loadingItem) {
     return (
       <div className="w-full h-full flex items-center justify-center">
@@ -61,14 +62,14 @@ export default function Item() {
 
   return (
     <>
-      {/* {itemToDelete && (
+      {itemToDelete && (
         <ConfirmDeletion
           productName={itemToDelete.name}
           productSku={itemToDelete.sku}
           cancelAction={() => setItemToDelete(null)}
           confirmAction={confirmDelete}
         />
-      )} */}
+      )}
 
       <div className="w-full max-w-container">
 
@@ -100,7 +101,7 @@ export default function Item() {
                 Atualizar Item
               </Link>
               <button
-                // onClick={() => setItemToDelete(item)}
+                onClick={() => setItemToDelete(item)}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-danger text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
               >
                 <Trash2 size={15} />

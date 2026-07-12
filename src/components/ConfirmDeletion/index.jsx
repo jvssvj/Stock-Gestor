@@ -14,13 +14,13 @@ export default function ConfirmDeletion({
           <span className="bg-danger-light leading-[0] rounded-full p-4">
             {<AlertTriangle color="#ff1010" />}
           </span>
-          <h2 className="text-[var(--color-text)] mt-8">Você tem certeza?</h2>
+          <h2 className="text-text-main font-bold text-2xl mt-8">Você tem certeza?</h2>
           <p className="mt-2 mb-4 text-text-muted">
-            Esta ação não pode ser desfeita. Você está prestes a excluir
-            permanentemente o item:
+            Esta ação não pode ser desfeita. Você está prestes a <strong>excluir
+              permanentemente o item:</strong>
           </p>
-          <h3 className="w-full max-w-[400px] overflow-hidden text-ellipsis text-nowrap">"{productName}"</h3>
-          <span className="w-full max-w-[400px] overflow-hidden text-ellipsis text-nowrap">SKU: [{productSku}]</span>
+          <h3 className="w-full max-w-[400px] font-semibold overflow-hidden text-ellipsis text-nowrap">{productName}</h3>
+          <span className="w-full max-w-[400px] overflow-hidden text-muted text-ellipsis text-nowrap">SKU: [{productSku}]</span>
 
           <div className="w-full flex items-center justify-center gap-4 mt-8 max-[395px]:flex-col">
             <button

@@ -1,110 +1,110 @@
-import { useState } from "react";
-import { Eye, Pencil, Trash2 } from "lucide-react";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import Actions from "./Actions";
-import { Link } from "react-router-dom";
-import useDeleteItem from "@/hooks/useDeleteItem";
-import ConfirmDeletion from "@/components/ConfirmDeletion";
+import { Eye, Image, Pencil, SquareArrowOutUpLeft, Trash2 } from "lucide-react"
+import Pagination from "@mui/material/Pagination"
+import Stack from "@mui/material/Stack"
+import { Link } from "react-router-dom"
+import useDeleteItem from "@/hooks/useDeleteItem"
+import ConfirmDeletion from "@/components/ConfirmDeletion"
 
 const formatCentsToBRL = (valueInCents) => {
-  if (!valueInCents && valueInCents !== 0) return "R$ 0,00";
-  const decimalValue = valueInCents / 100;
-
-  return decimalValue.toLocaleString("pt-BR", {
+  if (!valueInCents && valueInCents !== 0) return "R$ 0,00"
+  return (valueInCents / 100).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
-  });
-};
+  })
+}
 
-export default function StockTable({ items, allItems, setItems }) {
+function SkeletonRows() {
+  return Array.from({ length: 10 }).map((_, i) => (
+    <tr key={i}>
+      {Array.from({ length: 5 }).map((_, j) => (
+        <td key={j} className="p-4 border-t border-border">
+          <div className="h-4 bg-border rounded animate-pulse" />
+        </td>
+      ))}
+    </tr>
+  ))
+}
+
+export default function StockTable({ items, allItems, setItems, onPageChange }) {
   const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({
     items: allItems,
     setItems,
-  });
+  })
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = items.slice(startIndex, endIndex);
+  const currentItems = items?.data || []
+  const { totalPages, currentPage } = items?.meta || { totalPages: 1, currentPage: 1 }
 
   const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
+    onPageChange(value)
+  }
 
   return (
     <>
-      {/* 1. Container Principal com arredondamento e sombra sutil */}
-      <div className="bg-white rounded-xl border border-border min-h-[565px] flex flex-col w-full max-w-container mt-8 overflow-hidden">
+      <div className="bg-white min-h-[565px] flex flex-col w-full max-w-container mt-8 overflow-hidden">
 
         {itemToDelete && (
           <ConfirmDeletion
             productName={itemToDelete.name}
             productSku={itemToDelete.sku}
             cancelAction={() => setItemToDelete(null)}
-            confirmAction={confirmDelete}
+            confirmAction={() => confirmDelete()}
           />
         )}
 
-        {/* 2. Wrapper para Scroll Horizontal */}
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[818px] border-separate border-spacing-0 table-fixed">
-            <thead>
-              <tr>
-                {/* bg-bg trocado para bg-border para combinar com o seu @theme */}
-                <th className="text-start p-4 bg-border uppercase text-xs font-medium tracking-widest text-text-muted whitespace-nowrap overflow-hidden text-ellipsis">Nome</th>
-                <th className="text-start p-4 bg-border uppercase text-xs font-medium tracking-widest text-text-muted whitespace-nowrap overflow-hidden text-ellipsis">Quantidade</th>
-                <th className="text-start p-4 bg-border uppercase text-xs font-medium tracking-widest text-text-muted whitespace-nowrap overflow-hidden text-ellipsis">Preço unitário</th>
-                <th className="text-start p-4 bg-border uppercase text-xs font-medium tracking-widest text-text-muted whitespace-nowrap overflow-hidden text-ellipsis">Categoria</th>
-                <th className="text-start p-4 bg-border uppercase text-xs font-medium tracking-widest text-text-muted whitespace-nowrap overflow-hidden text-ellipsis">Ações</th>
-              </tr>
-            </thead>
+        <div className="flex flex-col gap-4 mb-10">
+          {currentItems.map((item) => (
+            <section
+              key={item.id}
+              className="flex flex-col sm:flex-row sm:items-center gap-4 border border-border rounded-2xl px-4 py-6"
+            >
+              {/* Imagem + Nome */}
+              <div className="flex items-center gap-4 flex-1 min-w-0">
+                {item.imageUrl ? (
+                  <img className="w-16 h-16 rounded-xl object-cover shrink-0" src={item.imageUrl} alt="" />
+                ) : (
+                  <div className="w-16 h-16 rounded-xl bg-bg flex items-center justify-center shrink-0">
+                    <Image color="gray" size={24} />
+                  </div>
+                )}
 
-            <tbody className="divide-y divide-border">
-              {currentItems.map((item) => (
-                <tr key={item.id} className="group hover:bg-off-white transition-colors">
-                  <td className="max-w-[384px] p-4 text-sm text-text-main whitespace-nowrap overflow-hidden text-ellipsis border-t border-border">
-                    {item.name}
-                  </td>
-                  <td className="max-w-[384px] p-4 text-sm text-text-muted whitespace-nowrap overflow-hidden text-ellipsis border-t border-border">
-                    {Number(item.quantity)}
-                  </td>
-                  <td className="max-w-[384px] p-4 text-sm text-text-muted whitespace-nowrap overflow-hidden text-ellipsis border-t border-border">
-                    {formatCentsToBRL(item.priceInCents)}
-                  </td>
-                  <td className="max-w-[384px] p-4 text-sm text-text-muted whitespace-nowrap overflow-hidden text-ellipsis border-t border-border">
-                    <span className="bg-bg px-2 py-1 rounded text-xs">
-                      {item.category}
-                    </span>
-                  </td>
-                  <td className="max-w-[384px] p-4 border-t border-border">
-                    <div className="max-w-[150px] flex items-center justify-between gap-4">
-                      <Link to={`/dashboard/items/${item.id}`}>
-                        <Actions icon={<Eye size={18} />} text="Visualizar" />
-                      </Link>
+                <Link
+                  className="flex items-center gap-2 font-bold underline decoration-border truncate"
+                  to={`/app/items/${item.id}`}
+                >
+                  <span className="truncate">{item.name}</span>
+                  <SquareArrowOutUpLeft size={14} color="gray" className="shrink-0" />
+                </Link>
+              </div>
 
-                      <Link to={`/dashboard/items/${item.id}/update`}>
-                        <Actions icon={<Pencil size={18} />} text="Editar" />
-                      </Link>
+              {/* Categoria */}
+              {item.category ? (
+                <span className="border border-border rounded-2xl px-2 py-0.5 text-xs w-fit">
+                  {item.category?.name ?? item.category}
+                </span>
+              ) : (
+                <span className="border border-border text-text-muted rounded-2xl px-2 py-0.5 text-xs w-fit">
+                  Sem categoria
+                </span>
+              )}
 
-                      <Actions
-                        icon={<Trash2 size={18} />}
-                        text="Deletar"
-                        isTrash
-                        onClick={() => setItemToDelete(item)}
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              {/* Estoque + Preço */}
+              <div className="flex justify-between sm:justify-center gap-6 sm:gap-10 sm:ml-auto">
+                <div className="min-w-[120px] text-start sm:text-end">
+                  <p className="text-[12px] uppercase text-text-muted">Estoque</p>
+                  <span className="font-medium text-base">{item.quantity} unidades</span>
+                </div>
+
+                <div className="text-start sm:text-end">
+                  <p className="text-[12px] uppercase text-text-muted">Preço unitário</p>
+                  <span className="font-medium text-base text-primary">{formatCentsToBRL(item.priceInCents)}</span>
+                </div>
+              </div>
+            </section>
+          ))}
         </div>
 
-        {/* 3. Paginação empurrada para o rodapé */}
-        <div className="mt-auto pt-10 pb-8 flex justify-center border-t border-border bg-white">
+
+        <div className="mt-auto py-5 px-4 flex justify-center border border-border rounded-2xl">
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={totalPages}
@@ -112,7 +112,6 @@ export default function StockTable({ items, allItems, setItems }) {
               onChange={handlePageChange}
               shape="rounded"
               size="small"
-              // Customizando o estilo para bater com seu roxo (primary)
               sx={{
                 '& .Mui-selected': {
                   backgroundColor: 'var(--color-primary) !important',
@@ -122,7 +121,10 @@ export default function StockTable({ items, allItems, setItems }) {
             />
           </Stack>
         </div>
+
+
+
       </div>
     </>
-  );
+  )
 }

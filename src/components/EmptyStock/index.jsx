@@ -11,8 +11,8 @@ export default function EmptyStock() {
           src={emptyBoxIcon}
           alt=""
         />
-        <h2 className="text-[2.5rem] text-[var(--color-text)]">Seu estoque está vazio</h2>
-        <p className="text-base mt-4 mb-8 w-full max-w-[400px]">
+        <h2 className="text-4xl font-bold text-text-main">Seu estoque está vazio</h2>
+        <p className="text-base text-muted mt-4 mb-8 w-full max-w-[400px]">
           Parece que você ainda não adicionou nenhum item. Comece agora para
           organizar seu inventário.
         </p>
