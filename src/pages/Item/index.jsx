@@ -1,11 +1,24 @@
 import { useParams, Link } from "react-router-dom";
 import ConfirmDeletion from "../../components/ConfirmDeletion";
 import { formatToCurrency } from "../../utils/currencyUtils";
-import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode } from "lucide-react";
+import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode, CalendarClock } from "lucide-react";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import { getItemService } from "@/services/appService";
 import useDeleteItem from "@/hooks/useDeleteItem";
+
+function translateField(field) {
+  const fieldMap = {
+    name: "Nome",
+    quantity: "Quantidade",
+    sku: "SKU",
+    priceInCents: "Preço unitário",
+    category: "Categoria",
+    description: "Descrição"
+  }
+
+  return fieldMap[field] || field
+}
 
 function formatDateISO(dateStr) {
   if (!dateStr) return ""
@@ -254,13 +267,50 @@ export default function Item() {
                 )}
 
                 {activeTab === "Movimentações" && (
-                  <p className="text-sm text-text-muted">Nenhuma movimentação registrada.</p>
+                  item.movements.length > 0 ? (
+                    item.movements.map((m) => (
+                      <section className="border border-border py-6 rounded-2xl px-3 relative mb-5" key={m.id}>
+                        <div className="flex items-center gap-3 mb-5">
+                          <CalendarClock size={22} className="text-primary" />
+                          <span className="font-semibold text-text-main truncate" >{formatDateISO(m.createdAt)}</span>
+                        </div>
+
+
+
+                        {m.changes.map((c) => (
+                          <div key={c.field} className="mt-3 flex flex-col">
+                            <span className="uppercase text-xs font-semibold text-text-main">{translateField(c.field)}</span>
+                            <div className="flex gap-3 flex-wrap">
+                              <span className="line-through font-medium text-muted">{c.oldValue}</span>
+                              <span className="font-semibold text-primary">{c.newValue}</span>
+                            </div>
+                          </div>
+
+                        ))}
+
+                        <details className="group inline-block cursor-pointer select-none absolute top-4 right-4">
+                          {/* A bolinha com o ponto de exclamação */}
+                          <summary className="list-none flex items-center justify-center w-5 h-5 rounded-full bg-border text-muted text-xs font-bold transition-colors">
+                            !
+                          </summary>
+
+                          {/* O texto que aparece logo abaixo ao clicar */}
+                          <div className="absolute right-0 top-5 mt-2 p-2.5 bg-text-main text-white text-xs rounded-lg shadow-lg z-10 border border-zinc-800 scroll-auto w-[205px]">
+                            {m.reason}
+                          </div>
+                        </details>
+                      </section>
+                    ))
+                  ) : (
+                    <p className="text-sm text-text-muted">Nenhuma movimentação registrada.</p>
+                  )
                 )}
 
                 {activeTab === "Fornecedores" && (
                   <p className="text-sm text-text-muted">Nenhum fornecedor vinculado.</p>
                 )}
               </div>
+
             </div>
           </div>
         </div>
