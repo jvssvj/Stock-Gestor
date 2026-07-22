@@ -1,4 +1,4 @@
-import { Navbar } from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import { Logos } from "./components/Logos";
 import { Features } from "./components/Features";
 import { Workflow } from "./components/Workflow";

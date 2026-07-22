@@ -31,7 +31,6 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(true)
   const [prevPathname, setPrevPathname] = useState('')
 
-  // Fecha ao trocar de rota — mesma lógica do SimulaDev
   if (prevPathname !== location.pathname) {
     setPrevPathname(location.pathname)
     setCollapsed(true)
@@ -170,7 +169,6 @@ export default function Sidebar() {
             </span>
             {collapsed && <Tooltip label="Sair" />}
           </button>
-
         </div>
 
       </aside>
