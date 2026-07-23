@@ -1,7 +1,7 @@
 import { Box } from "lucide-react";
 
 interface LogoProps {
-    showLabel: boolean
+    showLabel?: boolean
 }
 
 export default function Logo({ showLabel }: LogoProps) {
