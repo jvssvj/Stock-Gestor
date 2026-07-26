@@ -16,6 +16,12 @@ export interface Category {
   iconName: string
 }
 
+export interface CreateCategory {
+  name: string
+  color: string
+  iconName: string
+}
+
 export interface ItemMovementChange {
   field: string
   oldValue: string | number | null

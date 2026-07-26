@@ -6,16 +6,8 @@ import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import { getItemService } from "@/services/appService";
 import useDeleteItem from "@/hooks/useDeleteItem";
-import type { ApiEnvelope, Item as StockItem } from "@/types";
-
-function unwrapItem(response: ApiEnvelope<StockItem> | StockItem): StockItem {
-  return "data" in response ? response.data : response
-}
-
-function getCategoryName(category: StockItem["category"]) {
-  if (!category) return ""
-  return typeof category === "string" ? category : category.name
-}
+import type { ApiEnvelope, Item, Item as StockItem } from "@/types";
+import CategoryIcon from "@/components/CategoryIcon";
 
 function translateField(field: string) {
   const fieldMap: Record<string, string> = {
@@ -48,7 +40,7 @@ export default function Item() {
 
   const [activeTab, setActiveTab] = useState("Visão Geral")
   const { itemId } = useParams()
-  const [item, setItem] = useState<StockItem | null>(null)
+  const [item, setItem] = useState<Item | null>(null)
   const [loadingItem, setLoadingItem] = useState(true)
   const [errorItem, setErrorItem] = useState<string | null>(null)
 
@@ -58,7 +50,7 @@ export default function Item() {
       try {
         setLoadingItem(true)
         const response = await getItemService(itemId)
-        setItem(unwrapItem(response))
+        setItem(response.data)
       } catch (err) {
         setErrorItem("Erro ao carregar os detalhes do item.")
         console.error(err)
@@ -77,14 +69,13 @@ export default function Item() {
       </div>
     )
   }
+
   if (errorItem) return <p>{errorItem}</p>
   if (!item) return <p className="p-8 text-text-muted">Item não encontrado.</p>
 
   const price = (item.priceInCents / 100).toFixed(2)
   const totalPrice = (parseFloat(price) * item.quantity).toFixed(2)
   const [totalInt, totalDec] = formatToCurrency(totalPrice).toString().split(",")
-  const categoryName = getCategoryName(item.category)
-  const movements = item.movements ?? []
 
   return (
     <>
@@ -104,7 +95,12 @@ export default function Item() {
           <nav className="flex items-center gap-1.5 text-sm text-text-muted mb-3">
             <Link to="/app/items" className="hover:text-text-main transition-colors no-underline text-text-muted">Itens</Link>
             <span>›</span>
-            {item.category && <><span className="hover:text-text-main transition-colors cursor-default">{categoryName}</span><span>›</span></>}
+            {item.category &&
+              <>
+                <span className="hover:text-text-main transition-colors cursor-default">{item.name ?? ""}</span>
+                <span>›</span>
+              </>
+            }
             <span className="text-text-main font-medium">Detalhes</span>
           </nav>
 
@@ -248,12 +244,11 @@ export default function Item() {
                     <div className="flex items-center justify-between gap-5">
                       <div className="flex-1">
                         <p className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-4">Categoria</p>
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-primary-subtle flex items-center justify-center">
-                            <Tag size={16} className="text-primary" />
-                          </div>
-                          <span className="text-base font-semibold text-text-main">{categoryName}</span>
-                        </div>
+                        <CategoryIcon
+                          iconName={item.category?.iconName}
+                          color={item.category?.color}
+                          name={item.category?.name}
+                        />
                       </div>
 
                       <div className="flex-1">

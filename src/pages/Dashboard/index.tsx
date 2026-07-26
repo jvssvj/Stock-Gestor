@@ -58,7 +58,7 @@ export default function Dashboard() {
       )}
       {items.data.length > 0 ? (
         <div className="w-full max-w-container">
-          <section className="flex items-end flex-col gap-4 sm:flex-row sm:justify-between">
+          <section className="flex flex-col gap-4 sm:items-end sm:flex-row sm:justify-between">
             <h2 className="text-text-dark font-bold text-3xl">Dashboard</h2>
 
             <Link

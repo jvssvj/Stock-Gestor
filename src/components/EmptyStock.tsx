@@ -1,4 +1,4 @@
-import emptyBoxIcon from "@/assets/images/empty-box.png";
+import emptyBoxIcon from "@/assets/images/empty-box.webp";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -8,21 +8,21 @@ interface EmptyStockProps {
 
 export default function EmptyStock(_props: EmptyStockProps) {
   return (
-    <div className="grid place-items-center h-full w-full">
+    <div className="grid place-items-center h-full w-full max-w-[400px]">
       <section className="grid place-items-center text-center">
         <img
           className="w-[150px] mb-4"
           src={emptyBoxIcon}
           alt=""
         />
-        <h2 className="text-4xl font-bold text-text-main">Seu estoque está vazio</h2>
-        <p className="text-base text-muted mt-4 mb-8 w-full max-w-[400px]">
+        <h2 className="text-4xl font-bold text-text-main">Estoque vazio</h2>
+        <p className="text-base text-muted mt-4 mb-8 w-full">
           Parece que você ainda não adicionou nenhum item. Comece agora para
           organizar seu inventário.
         </p>
         <Link
           to={"/app/create"}
-          className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
+          className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg no-underline"
         >
           <Plus />  Adicionar item
         </Link>

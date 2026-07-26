@@ -1,5 +1,5 @@
 import { apiFetch } from "./api";
-import type { ApiEnvelope, Category, Id, Item, PaginatedResponse } from "@/types";
+import type { ApiEnvelope, Category, CreateCategory, Id, Item, PaginatedResponse } from "@/types";
 
 export async function createItemService(data: FormData): Promise<ApiEnvelope<Item>> {
     return await apiFetch<ApiEnvelope<Item>>("/items", {
@@ -27,8 +27,8 @@ export async function getItemsService(page = 1): Promise<PaginatedResponse<Item>
     })
 }
 
-export async function getItemService(id: Id): Promise<ApiEnvelope<Item> | Item> {
-    return await apiFetch<ApiEnvelope<Item> | Item>(`/items/${id}`, {
+export async function getItemService(id: Id): Promise<ApiEnvelope<Item>> {
+    return await apiFetch<ApiEnvelope<Item>>(`/items/${id}`, {
         method: "GET"
     })
 }
@@ -36,5 +36,12 @@ export async function getItemService(id: Id): Promise<ApiEnvelope<Item> | Item> 
 export async function getCategoriesService(): Promise<ApiEnvelope<Category[]> | Category[]> {
     return await apiFetch<ApiEnvelope<Category[]> | Category[]>('/categories', {
         method: "GET"
+    })
+}
+
+export async function createCategoryService(data: CreateCategory) {
+    return await apiFetch<ApiEnvelope<Category>>("/categories", {
+        method: "POST",
+        body: JSON.stringify(data)
     })
 }

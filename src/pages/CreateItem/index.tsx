@@ -27,21 +27,19 @@ export default function CreateItem() {
 
     try {
       const response = await createItemService(formData)
-      const createdId = response?.data?.id
 
-      if (createdId) {
-        navigate("/app/success", {
-          state: {
-            mode: "create",
-            itemId: createdId,
-            itemName: formData.get("name"),
-            itemQuantity: formData.get("quantity"),
-            itemSku: formData.get("sku"),
+      navigate("/app/success", {
+        state: {
+          status: "create",
+          resource: "item",
+          data: {
+            id: response.data.id,
+            name: String(formData.get("name")),
+            quantity: Number(formData.get("quantity")),
+            sku: String(formData.get("sku")),
           },
-        })
-      } else {
-        console.error("ID não retornado pela API")
-      }
+        },
+      })
 
     } catch (error) {
       if (hasValidationErrors(error)) {
@@ -53,7 +51,6 @@ export default function CreateItem() {
       setLoading(false)
     }
   }
-
 
   return (
     <section className="w-full max-w-container">
