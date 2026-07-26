@@ -1,4 +1,4 @@
-import { Eye, Image, Pencil, SquareArrowOutUpLeft, Trash2 } from "lucide-react"
+import { Image, SquareArrowOutUpLeft } from "lucide-react"
 import Pagination from "@mui/material/Pagination"
 import Stack from "@mui/material/Stack"
 import { Link } from "react-router-dom"
@@ -91,27 +91,16 @@ export default function StockTable({ items, allItems, setItems, onPageChange }: 
                 </Link>
               </div>
 
-              {/* Categoria */}
-              {item.category ? (
-                <span className="border border-border rounded-2xl px-2 py-0.5 text-xs w-fit">
-                  {getCategoryName(item.category)}
-                </span>
-              ) : (
-                <span className="border border-border text-text-muted rounded-2xl px-2 py-0.5 text-xs w-fit">
-                  Sem categoria
-                </span>
-              )}
-
               {/* Estoque + Preço */}
               <div className="flex justify-between sm:justify-center gap-6 sm:gap-10 sm:ml-auto">
-                <div className="min-w-[120px] text-start sm:text-end">
-                  <p className="text-[12px] uppercase text-text-muted">Estoque</p>
-                  <span className="font-medium text-base">{item.quantity} unidades</span>
+                <div className="text-start sm:text-end">
+                  <p className="text-[12px] text-text-muted">Estoque</p>
+                  <span className="font-bold text-base">{item.quantity} un</span>
                 </div>
 
                 <div className="text-start sm:text-end">
-                  <p className="text-[12px] uppercase text-text-muted">Preço unitário</p>
-                  <span className="font-medium text-base text-primary">{formatCentsToBRL(item.priceInCents)}</span>
+                  <p className="text-[12px] text-text-muted">Preço unit.</p>
+                  <span className="font-bold text-base text-primary">{formatCentsToBRL(item.priceInCents)}</span>
                 </div>
               </div>
             </section>

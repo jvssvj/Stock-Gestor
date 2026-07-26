@@ -4,7 +4,7 @@ interface LowStockProps {
   data: Item[]
 }
 
-export default function LowStock({ data }: LowStockProps) {
+export default function LowStockItems({ data }: LowStockProps) {
   return (
     /* 1. Div pai controla o arredondamento e o scroll */
     <div className="w-full overflow-x-auto rounded-xl border border-border">

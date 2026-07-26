@@ -7,7 +7,7 @@ interface InfosProps {
   color: string
 }
 
-export default function Infos({ iconElement, title, quantity, color }: InfosProps) {
+export default function StatCard({ iconElement, title, quantity, color }: InfosProps) {
   const styledIcon = cloneElement(iconElement, {
     className: `text-${color}`
   })

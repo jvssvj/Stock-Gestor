@@ -1,12 +1,12 @@
 import { useParams, Link } from "react-router-dom";
-import ConfirmDeletion from "../../components/ConfirmDeletion";
-import { formatToCurrency } from "../../utils/currencyUtils";
+import ConfirmDeletion from "../components/ConfirmDeletion";
+import { formatToCurrency } from "../utils/currencyUtils";
 import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode, CalendarClock } from "lucide-react";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import { getItemService } from "@/services/appService";
 import useDeleteItem from "@/hooks/useDeleteItem";
-import type { ApiEnvelope, Item, Item as StockItem } from "@/types";
+import type { Item, Item as StockItem } from "@/types";
 import CategoryIcon from "@/components/CategoryIcon";
 
 function translateField(field: string) {

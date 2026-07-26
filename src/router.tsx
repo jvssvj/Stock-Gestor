@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import RootLayout from "./layouts/RootLayout/RootLayout";
+import RootLayout from "./layouts/RootLayout";
 import Dashboard from "./pages/Dashboard";
 import Stock from "./pages/Stock";
-import Item from "./pages/Item";
+import Item from "./pages/ItemDetails";
 import CreateItem from "./pages/CreateItem";
 import UpdateItem from "./pages/UpdateItem";
 import SuccessStatus from "./pages/SuccessStatus";
 import Home from "./pages/Home";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
-import SettingsPage from "./pages/SettingsPage";
+import SettingsPage from "./pages/Settings";
 import Categories from "./pages/Categories";
 import CreateCategory from "./pages/CreateCategory";
 

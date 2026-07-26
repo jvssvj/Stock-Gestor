@@ -1,13 +1,12 @@
 import useGetItems from "@/hooks/useGetItems";
-
-import Infos from "./components/Infos";
-import RecentItems from "./components/RecentItems";
-import LowStock from "./components/LowStock";
 import { ClipboardCheck, Plus, Shapes, TriangleAlert } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Welcome from "@/components/Welcome";
 import Spinner from "@/components/Spinner";
 import EmptyStock from "@/components/EmptyStock";
+import RecentItems from "@/components/RecentItems";
+import LowStockItems from "@/components/LowStockItems";
+import StatCard from "@/components/StatCard";
 
 export default function Dashboard() {
   const { items, loading, error } = useGetItems()
@@ -72,19 +71,19 @@ export default function Dashboard() {
           <hr className="my-10 border-t border-border" />
 
           <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
-            <Infos
+            <StatCard
               iconElement={<Shapes />}
               title={"Total de itens diferentes"}
               quantity={uniqueCategories.length}
               color={"success"}
             />
-            <Infos
+            <StatCard
               iconElement={<ClipboardCheck />}
               title={"Total de itens"}
               quantity={items.data.length}
               color={"primary"}
             />
-            <Infos
+            <StatCard
               iconElement={<TriangleAlert />}
               title={"Itens com baixo estoque"}
               quantity={runningOut.length}
@@ -110,7 +109,7 @@ export default function Dashboard() {
                   <Link to={'#'} className="text-primary hover:text-primary-light font-semibold">Gerar relatório</Link>
                 </section>
 
-                <LowStock data={runningOut} />
+                <LowStockItems data={runningOut} />
               </div>
             )}
           </div>

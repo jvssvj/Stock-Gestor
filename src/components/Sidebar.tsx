@@ -1,20 +1,21 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Box, LogOut, Settings, ChevronRight, ChevronLeft, Tags } from 'lucide-react'
+import { LayoutDashboard, Box, LogOut, Settings, ChevronRight, ChevronLeft, Tags, type LucideIcon } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 
-const navItems = [
+interface NavItem {
+  to: string
+  label: string
+  icon: LucideIcon
+}
+
+const navItems: NavItem[] = [
   { to: '/app', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/app/items', label: 'Estoque', icon: Box },
   { to: '/app/categories', label: 'Categorias', icon: Tags },
 ]
 
-interface TooltipProps {
-  label: string
-}
-
-function Tooltip({ label }: TooltipProps) {
+function Tooltip({ label }: { label: string }) {
   return (
     <span className="
       pointer-events-none absolute left-full ml-3 top-1/2 -translate-y-1/2
@@ -25,6 +26,34 @@ function Tooltip({ label }: TooltipProps) {
     ">
       {label}
     </span>
+  )
+}
+
+function NavLink({ item, collapsed, pathname }: { item: NavItem; collapsed: boolean; pathname: string }) {
+  const { to, label, icon: Icon } = item
+  const isActive = to === '/app'
+    ? pathname === '/app'
+    : pathname.startsWith(to)
+
+  return (
+    <Link
+      to={to}
+      className={`
+        group relative flex items-center gap-2.5 p-2.5 rounded-lg
+        text-[13px] whitespace-nowrap no-underline
+        transition-[background,color] duration-150
+        ${isActive
+          ? 'bg-primary text-white font-medium'
+          : 'text-text-muted hover:bg-primary hover:text-white'
+        }
+      `}
+    >
+      <span className="shrink-0"><Icon size={19} /></span>
+      <span className={`overflow-hidden transition-[opacity,width] duration-200 ${collapsed ? 'opacity-0 w-0' : ''}`}>
+        {label}
+      </span>
+      {collapsed && <Tooltip label={label} />}
+    </Link>
   )
 }
 
@@ -57,7 +86,7 @@ export default function Sidebar() {
         ${collapsed ? 'w-14' : 'w-[240px]'}
       `}>
 
-        {/* ── Logo ── */}
+        {/* Logo */}
         <div className="flex items-center justify-center p-3 border-b border-border min-h-14">
           <div className="flex items-center gap-2 overflow-hidden flex-1">
             <div className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center shrink-0">
@@ -79,38 +108,14 @@ export default function Sidebar() {
           </button>
         </div>
 
-        {/* ── Nav ── */}
+        {/* Nav */}
         <nav className="flex-1 px-2 py-2.5 flex flex-col gap-1 overflow-hidden">
-          {navItems.map(({ to, label, icon: Icon }) => {
-            const isActive = to === '/app'
-              ? location.pathname === '/app'
-              : location.pathname.startsWith(to)
-
-            return (
-              <Link
-                key={to}
-                to={to}
-                className={`
-                  group relative flex items-center gap-2.5 p-2.5 rounded-lg
-                  text-[13px] whitespace-nowrap no-underline
-                  transition-[background,color] duration-150
-                  ${isActive
-                    ? 'bg-primary text-white font-medium'
-                    : 'text-text-muted hover:bg-primary hover:text-white'
-                  }
-                `}
-              >
-                <span className="shrink-0"><Icon size={19} /></span>
-                <span className={`overflow-hidden transition-[opacity,width] duration-200 ${collapsed ? 'opacity-0 w-0' : ''}`}>
-                  {label}
-                </span>
-                {collapsed && <Tooltip label={label} />}
-              </Link>
-            )
-          })}
+          {navItems.map((item) => (
+            <NavLink key={item.to} item={item} collapsed={collapsed} pathname={location.pathname} />
+          ))}
         </nav>
 
-        {/* ── Footer ── */}
+        {/* Footer */}
         <div className="flex flex-col gap-1 border-t border-border px-2 py-2.5">
 
           {/* User */}
