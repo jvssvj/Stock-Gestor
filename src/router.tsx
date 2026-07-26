@@ -13,19 +13,30 @@ import PrivateRoute from "./components/PrivateRoute";
 import SettingsPage from "./pages/Settings";
 import Categories from "./pages/Categories";
 import CreateCategory from "./pages/CreateCategory";
+import PublicRoute from "./components/PublicRoute";
+import HomeRedirect from "./components/HomeRedirect";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <HomeRedirect />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: '/register',
-    element: <Register />
+    element: <PublicRoute />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
   },
   {
     element: <PrivateRoute />,
