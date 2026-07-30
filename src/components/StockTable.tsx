@@ -2,8 +2,6 @@ import { Image, SquareArrowOutUpLeft } from "lucide-react"
 import Pagination from "@mui/material/Pagination"
 import Stack from "@mui/material/Stack"
 import { Link } from "react-router-dom"
-import useDeleteItem from "@/hooks/useDeleteItem"
-import ConfirmDeletion from "@/components/ConfirmDeletion"
 import type { ChangeEvent, Dispatch, SetStateAction } from "react"
 import type { Item, PaginatedResponse } from "@/types"
 
@@ -31,7 +29,6 @@ function SkeletonRows() {
     </tr>
   ))
 }
-
 interface StockTableProps {
   items: PaginatedResponse<Item>
   allItems: Item[]
@@ -40,11 +37,7 @@ interface StockTableProps {
   loadingPage?: boolean
 }
 
-export default function StockTable({ items, allItems, setItems, onPageChange }: StockTableProps) {
-  const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({
-    items: allItems,
-    setItems,
-  })
+export default function StockTable({ items, onPageChange }: StockTableProps) {
 
   const currentItems = items?.data || []
   const { totalPages, currentPage } = items?.meta || { totalPages: 1, currentPage: 1 }
@@ -56,15 +49,6 @@ export default function StockTable({ items, allItems, setItems, onPageChange }: 
   return (
     <>
       <div className="bg-white min-h-[565px] flex flex-col w-full max-w-container mt-8 overflow-hidden">
-
-        {itemToDelete && (
-          <ConfirmDeletion
-            productName={itemToDelete.name}
-            productSku={itemToDelete.sku}
-            cancelAction={() => setItemToDelete(null)}
-            confirmAction={() => confirmDelete()}
-          />
-        )}
 
         <div className="flex flex-col gap-4 mb-10">
           {currentItems.map((item) => (

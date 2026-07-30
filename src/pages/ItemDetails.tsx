@@ -1,11 +1,10 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import ConfirmDeletion from "../components/ConfirmDeletion";
 import { formatToCurrency } from "../utils/currencyUtils";
 import { Package, Pencil, Trash2, CalendarDays, RefreshCw, Tag, QrCode, CalendarClock } from "lucide-react";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
-import { getItemService } from "@/services/appService";
-import useDeleteItem from "@/hooks/useDeleteItem";
+import { deleteItemService, getItemService } from "@/services/appService";
 import type { Item, Item as StockItem } from "@/types";
 import CategoryIcon from "@/components/CategoryIcon";
 
@@ -36,31 +35,63 @@ function formatDateISO(dateStr?: string) {
 const TABS = ["Visão Geral", "Movimentações", "Fornecedores"]
 
 export default function Item() {
-  const { confirmDelete, itemToDelete, setItemToDelete } = useDeleteItem({})
-
   const [activeTab, setActiveTab] = useState("Visão Geral")
-  const { itemId } = useParams()
   const [item, setItem] = useState<Item | null>(null)
+  const [itemToDelete, setItemToDelete] = useState<Item | null>(null)
   const [loadingItem, setLoadingItem] = useState(true)
   const [errorItem, setErrorItem] = useState<string | null>(null)
 
+  const navigate = useNavigate()
+
+  const { itemId } = useParams()
+
   useEffect(() => {
-    async function fetchItem() {
-      if (!itemId) return
+    if (!itemId) {
+      setLoadingItem(false)
+      setErrorItem("ID do item não encontrado.")
+      return
+    }
+
+    async function fetchItem(id: string) {
       try {
         setLoadingItem(true)
-        const response = await getItemService(itemId)
+
+        const response = await getItemService(id)
         setItem(response.data)
-      } catch (err) {
+      } catch (error) {
         setErrorItem("Erro ao carregar os detalhes do item.")
-        console.error(err)
+        console.error(error)
       } finally {
         setLoadingItem(false)
       }
     }
 
-    fetchItem()
+    fetchItem(itemId)
   }, [itemId])
+
+  async function handleDelete() {
+    if (!itemToDelete) return
+
+    try {
+
+      await deleteItemService(itemToDelete.id)
+
+      navigate("/app/success", {
+        state: {
+          status: "delete",
+          resource: "item",
+          data: {
+            id: itemToDelete.id,
+            name: itemToDelete.name,
+          },
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setItemToDelete(null)
+    }
+  }
 
   if (loadingItem) {
     return (
@@ -81,10 +112,11 @@ export default function Item() {
     <>
       {itemToDelete && (
         <ConfirmDeletion
-          productName={itemToDelete.name}
-          productSku={itemToDelete.sku}
+          name={itemToDelete.name}
+          resource="item"
+          sku={itemToDelete.sku}
           cancelAction={() => setItemToDelete(null)}
-          confirmAction={confirmDelete}
+          confirmAction={handleDelete}
         />
       )}
 

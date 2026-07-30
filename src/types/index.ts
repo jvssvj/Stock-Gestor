@@ -22,6 +22,8 @@ export interface CreateCategory {
   iconName: string
 }
 
+export type UpdateCategory = Partial<CreateCategory>
+
 export interface ItemMovementChange {
   field: string
   oldValue: string | number | null
@@ -63,6 +65,10 @@ export interface PaginatedResponse<T> {
 export interface ApiEnvelope<T> {
   data: T
   message?: string
+}
+
+export interface MessageResponse {
+  message: string
 }
 
 export interface ValidationError {

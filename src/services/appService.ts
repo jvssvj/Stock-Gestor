@@ -1,5 +1,5 @@
 import { apiFetch } from "./api";
-import type { ApiEnvelope, Category, CreateCategory, Id, Item, PaginatedResponse } from "@/types";
+import type { ApiEnvelope, Category, CreateCategory, Id, Item, MessageResponse, PaginatedResponse, UpdateCategory } from "@/types";
 
 export async function createItemService(data: FormData): Promise<ApiEnvelope<Item>> {
     return await apiFetch<ApiEnvelope<Item>>("/items", {
@@ -15,9 +15,9 @@ export async function updateItemService(id: Id, data: FormData): Promise<ApiEnve
     })
 }
 
-export async function deleteItemService(id: Id): Promise<ApiEnvelope<Item>> {
-    return await apiFetch<ApiEnvelope<Item>>(`/items/${id}`, {
-        method: "DELETE",
+export async function deleteItemService(id: Id): Promise<MessageResponse> {
+    return await apiFetch<MessageResponse>(`/items/${id}`, {
+        method: "DELETE"
     })
 }
 
@@ -39,9 +39,28 @@ export async function getCategoriesService(): Promise<ApiEnvelope<Category[]> | 
     })
 }
 
-export async function createCategoryService(data: CreateCategory) {
+export async function getCategoryService(id: Id): Promise<ApiEnvelope<Category | null>> {
+    return await apiFetch<ApiEnvelope<Category | null>>(`/categories/${id}`, {
+        method: "GET"
+    })
+}
+
+export async function createCategoryService(data: CreateCategory): Promise<ApiEnvelope<Category>> {
     return await apiFetch<ApiEnvelope<Category>>("/categories", {
         method: "POST",
         body: JSON.stringify(data)
+    })
+}
+
+export async function updateCategoryService(id: Id, data: UpdateCategory): Promise<ApiEnvelope<Category>> {
+    return await apiFetch<ApiEnvelope<Category>>(`/categories/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data)
+    })
+}
+
+export async function deleteCategoryService(id: Id): Promise<MessageResponse> {
+    return await apiFetch<MessageResponse>(`/categories/${id}`, {
+        method: "DELETE"
     })
 }

@@ -15,6 +15,7 @@ import Categories from "./pages/Categories";
 import CreateCategory from "./pages/CreateCategory";
 import PublicRoute from "./components/PublicRoute";
 import HomeRedirect from "./components/HomeRedirect";
+import UpdateCategory from "./pages/UpdateCategory";
 
 const router = createBrowserRouter([
   {
@@ -61,8 +62,8 @@ const router = createBrowserRouter([
             path: "categories",
             children: [
               { index: true, element: <Categories /> },
-              { path: "create", element: <CreateCategory /> }
-
+              { path: "create", element: <CreateCategory /> },
+              { path: ":id/update", element: <UpdateCategory /> }
             ]
           },
         ],
