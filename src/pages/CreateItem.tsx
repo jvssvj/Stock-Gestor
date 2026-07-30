@@ -24,6 +24,7 @@ export default function CreateItem() {
 
   const handleCreateItem = async (formData: FormData) => {
     setLoading(true)
+    setServerErrors({})
 
     try {
       const response = await createItemService(formData)
@@ -40,13 +41,12 @@ export default function CreateItem() {
           },
         },
       })
-
     } catch (error) {
       if (hasValidationErrors(error)) {
         setServerErrors(parseApiValidationErrors(error.errors))
+      } else {
+        console.error(error)
       }
-
-      console.error("Erro ao criar item:", error)
     } finally {
       setLoading(false)
     }

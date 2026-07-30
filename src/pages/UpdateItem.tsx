@@ -52,25 +52,27 @@ export default function UpdateItem() {
   if (errorItem) return <p>{errorItem}</p>
   if (!item) return <p>Item não encontrado.</p>
 
-  const handleUpdate = async (formDataInstance: FormData) => {
+  const handleUpdate = async (formData: FormData) => {
     setSubmitting(true)
     setServerErrors({})
 
-
     try {
-      await updateItemService(item.id, formDataInstance)
+      const response = await updateItemService(item.id, formData)
 
       navigate("/app/success", {
         state: {
-          mode: "update",
-          itemId: itemId,
-          itemName: formDataInstance.get("name") || item.name,
-          itemQuantity: formDataInstance.get("quantity") || item.quantity,
-          itemSku: formDataInstance.get("sku") || item.sku,
+          status: "update",
+          resource: "item",
+          data: {
+            id: response.data.id,
+            name: response.data.name,
+            quantity: response.data.quantity,
+            sku: response.data.sku,
+          },
         },
       })
+
     } catch (error) {
-      console.log(error)
       if (hasValidationErrors(error)) {
         setServerErrors(parseApiValidationErrors(error.errors))
       } else {
@@ -80,6 +82,7 @@ export default function UpdateItem() {
       setSubmitting(false)
     }
   }
+
   return (
     <section className="w-full max-w-container">
       <h2 className="text-text-dark font-bold text-3xl">Atualização do item</h2>
