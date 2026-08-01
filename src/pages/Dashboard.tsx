@@ -57,8 +57,11 @@ export default function Dashboard() {
       )}
       {items.data.length > 0 ? (
         <div className="w-full max-w-container">
-          <section className="flex flex-col gap-4 sm:items-end sm:flex-row sm:justify-between">
-            <h2 className="text-text-dark font-bold text-3xl">Dashboard</h2>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+            <section>
+              <h2 className="text-text-dark font-bold text-2xl">Dashboard</h2>
+              <p className="text-muted">Acompanhe o desempenho do seu estoque em tempo real.</p>
+            </section>
 
             <Link
               to={"/app/create"}
@@ -66,22 +69,22 @@ export default function Dashboard() {
             >
               <Plus />  Adicionar item
             </Link>
-          </section>
+          </div>
 
           <hr className="my-10 border-t border-border" />
 
           <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
             <StatCard
+              iconElement={<ClipboardCheck />}
+              title={"Total de produtos"}
+              quantity={items.data.length}
+              color={"primary"}
+            />
+            <StatCard
               iconElement={<Shapes />}
               title={"Total de itens diferentes"}
               quantity={uniqueCategories.length}
               color={"success"}
-            />
-            <StatCard
-              iconElement={<ClipboardCheck />}
-              title={"Total de itens"}
-              quantity={items.data.length}
-              color={"primary"}
             />
             <StatCard
               iconElement={<TriangleAlert />}
@@ -93,12 +96,15 @@ export default function Dashboard() {
 
           <div className="">
             <div>
-              <section className="flex items-center justify-between mt-8 mb-5">
-                <h3 className="font-semibold">Itens recentes</h3>
-                <Link to="/app/items" className="text-primary hover:text-primary-light font-semibold">
+              <div className="flex items-center justify-between mt-8 mb-5">
+                <section>
+                  <h2 className="text-sm font-semibold">Movimentações recentes</h2>
+                  <p className="text-xs text-muted">Últimas entradas e saídas</p>
+                </section>
+                <Link to="/app/items" className="text-primary text-sm hover:text-primary-light font-semibold">
                   Ver todos
                 </Link>
-              </section>
+              </div>
               <RecentItems data={recentItems} />
             </div>
 

@@ -20,7 +20,7 @@ export default function StatCard({ iconElement, title, quantity, color }: InfosP
           {title}
         </span>
       </div>
-      <span className="text-2xl font-bold text-text-main">
+      <span className="text-3xl font-bold text-text-main">
         {quantity}
       </span>
     </div>

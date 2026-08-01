@@ -93,8 +93,8 @@ export default function Stock() {
 
       <section className="w-full max-w-container">
         <header >
-          <h2 className="text-text-main font-bold text-3xl">Estoque</h2>
-          <p>Gerencie a disponibilidade e informações dos produtos.</p>
+          <h2 className="text-text-main font-bold text-2xl">Estoque</h2>
+          <p className="text-muted">Gerencie a disponibilidade e informações dos produtos.</p>
         </header>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-between">

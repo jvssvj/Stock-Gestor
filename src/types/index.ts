@@ -14,6 +14,9 @@ export interface Category {
   name: string
   color: string
   iconName: string
+  _count: {
+    items: number
+  }
 }
 
 export interface CreateCategory {
