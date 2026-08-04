@@ -6,9 +6,11 @@
   font-family: var(--font-primary);
 }
 
-@theme {
+:root {
   color-scheme: light;
+}
 
+@theme {
   /* ─── Layout ─── */
   --max-width-container: 1440px;
 
