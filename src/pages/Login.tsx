@@ -131,12 +131,12 @@ export default function Login() {
             {apiError && <span className="text-danger text-sm">{apiError}</span>}
           </label>
 
-          <a
+          <Link
             className="text-primary text-sm no-underline text-end"
-            href="#forgot-password"
+            to="/forgot-password"
           >
             Esqueci a senha?
-          </a>
+          </Link>
 
           <button
             disabled={loading}

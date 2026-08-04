@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LayoutDashboard, Box, LogOut, Settings, ChevronRight, ChevronLeft, Tags, type LucideIcon } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
+import Logo from './Logo'
 
 interface NavItem {
   to: string
@@ -89,9 +90,10 @@ export default function Sidebar() {
         {/* Logo */}
         <div className="flex items-center justify-center p-3 border-b border-border min-h-14">
           <div className="flex items-center gap-2 overflow-hidden flex-1">
-            <div className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center shrink-0">
+            <Logo />
+            {/* <div className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center shrink-0">
               <Box size={14} color="white" />
-            </div>
+            </div> */}
             <span className={`
               text-[15px] font-semibold text-text-main whitespace-nowrap
               transition-[opacity,width] duration-200

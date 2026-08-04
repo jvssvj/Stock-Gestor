@@ -127,18 +127,22 @@ export default function SuccessStatusCard({
         {status !== "delete" && (
           <Link
             to={detailsUrl}
-            className="no-underline w-full py-3.5 px-6 bg-primary hover:bg-primary-light text-white text-sm font-semibold rounded-lg text-center transition-colors duration-200"
+            className={`no-underline w-full py-3.5 px-6 bg-primary hover:bg-primary-light text-white text-sm font-semibold rounded-lg text-center transition-colors duration-200 ${isItem ? "block" : "hidden"}`}
           >
-            Ver Detalhes {isItem ? "do Item" : "da Categoria"}
+            {isItem ? "Ver Detalhes do Item" : ""}
           </Link>
         )}
 
         <Link
           to={backUrl}
-          className={`no-underline w-full py-3.5 px-6 text-sm font-semibold rounded-lg text-center transition-colors duration-200 ${status === "delete"
-            ? "bg-primary hover:bg-primary-light text-white"
-            : "border border-border hover:bg-bg text-text-main"
-            }`}
+          className={`no-underline w-full py-3.5 px-6 text-sm font-semibold rounded-lg text-center transition-colors duration-200 
+            ${status === "delete"
+              ? "bg-primary hover:bg-primary-light text-white"
+              : "border border-border hover:bg-bg text-text-main"
+            }
+            ${!isItem && "bg-primary text-white hover:bg-primary-light"}
+
+          `}
         >
           {isItem ? "Voltar ao Estoque" : "Voltar às Categorias"}
         </Link>

@@ -319,13 +319,13 @@ export default function Item() {
 
                         {m.changes.map((c) => (
                           <div key={c.field} className="mt-3 flex flex-col">
-                            <span className="uppercase text-xs font-semibold text-text-main">{translateField(c.field)}</span>
+                            <span className="uppercase text-xs font-semibold text-text-main">{translateField(c.field)}
+                            </span>
                             <div className="flex gap-3 flex-wrap">
                               <span className="line-through font-medium text-muted">{c.oldValue}</span>
                               <span className="font-semibold text-primary">{c.newValue}</span>
                             </div>
                           </div>
-
                         ))}
 
                         <details className="group inline-block cursor-pointer select-none absolute top-4 right-4">

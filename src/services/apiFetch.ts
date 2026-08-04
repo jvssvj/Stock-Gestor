@@ -25,11 +25,15 @@ export async function apiFetch<T = unknown>(endpoint: string, options: RequestIn
     })
 
     if (response.status === 401) {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
+        const token = localStorage.getItem("token")
 
-        window.location.href = "/"
-        throw new Error("Sessão expirada")
+        if (token) {
+            localStorage.removeItem("token")
+            localStorage.removeItem("user")
+
+            window.location.href = "/"
+            throw new Error("Sessão expirada")
+        }
     }
 
     if (!response.ok) {

@@ -1,4 +1,4 @@
-import { apiFetch } from "./api";
+import { apiFetch } from "./apiFetch";
 import type { ApiEnvelope, Category, CreateCategory, Id, Item, MessageResponse, PaginatedResponse, UpdateCategory } from "@/types";
 
 export async function createItemService(data: FormData): Promise<ApiEnvelope<Item>> {

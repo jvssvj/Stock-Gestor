@@ -5,6 +5,7 @@ import type { User } from "@/types";
 export interface AuthContextValue {
     user: User | null
     login: (userData: User, token: string) => void
+    updateUser: (userData: User) => void
     logout: () => void
     getToken: () => string | null
 }
@@ -31,6 +32,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         localStorage.setItem("token", token)
     }, [])
 
+    const updateUser = useCallback((userData: User) => {
+        setUser(userData)
+        localStorage.setItem("user", JSON.stringify(userData))
+    }, [])
+
     const logout = useCallback(() => {
         setUser(null)
         localStorage.removeItem("user")
@@ -52,8 +58,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const getToken = useCallback(() => localStorage.getItem("token"), [])
 
     const value = useMemo<AuthContextValue>(() => {
-        return { user, login, logout, getToken }
-    }, [user, login, logout, getToken])
+        return { user, login, updateUser, logout, getToken }
+    }, [user, login, updateUser, logout, getToken])
 
     return (
         <AuthContext.Provider value={value}>

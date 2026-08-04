@@ -16,6 +16,7 @@ import CreateCategory from "./pages/CreateCategory";
 import PublicRoute from "./components/PublicRoute";
 import HomeRedirect from "./components/HomeRedirect";
 import UpdateCategory from "./pages/UpdateCategory";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />
   },
   {
     element: <PublicRoute />,
