@@ -54,6 +54,30 @@ export interface Item {
   movements?: ItemMovement[]
 }
 
+export interface ItemFormData {
+  name: string
+  quantity: number | string
+  priceInCents: number | string
+  category: string
+  description: string
+  sku: string
+  reason: string
+  image?: File | null
+}
+
+export interface ItemFormSubmit {
+  id: Id
+  name: string
+  quantity: number
+  priceInCents: number
+  category: string
+  description: string
+  sku: string
+  reason: string
+  updatedAt: string
+  image?: File | null
+  imageRemoved?: boolean
+}
 export interface PaginationMeta {
   totalItems?: number
   totalPages: number

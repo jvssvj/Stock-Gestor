@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import UpdateItemForm from "@/components/UpdateItemForm";
 import { useCategories } from "@/hooks/useGetCategories";
 import { getItemService, updateItemService } from "@/services/appService";
 import Spinner from "@/components/Spinner";
 import { hasValidationErrors } from "@/utils/apiErrors";
 import { parseApiValidationErrors } from "@/utils/parseApiValidationErrors";
-import type { ApiEnvelope, FieldErrors, Item } from "@/types";
+import type { ApiEnvelope, FieldErrors, Item, ItemFormSubmit } from "@/types";
+import ItemForm from "@/components/ItemForm";
 
 function unwrapItem(response: ApiEnvelope<Item> | Item): Item {
   return "data" in response ? response.data : response
@@ -52,13 +52,24 @@ export default function UpdateItem() {
   if (errorItem) return <p>{errorItem}</p>
   if (!item) return <p>Item não encontrado.</p>
 
-  const handleUpdate = async (formData: FormData) => {
+  const handleUpdate = async (payload: ItemFormSubmit) => {
     setSubmitting(true)
     setServerErrors({})
 
+    const formData = new FormData()
+    formData.append("name", payload.name)
+    formData.append("quantity", String(payload.quantity))
+    formData.append("priceInCents", String(payload.priceInCents))
+    formData.append("sku", payload.sku)
+    formData.append("description", payload.description ?? "")
+    formData.append("categoryId", payload.category ?? "")
+    formData.append("reason", payload.reason)
+
+    if (payload.image) formData.append("image", payload.image)
+    if (payload.imageRemoved) formData.append("removeImage", "true")
+
     try {
       const response = await updateItemService(item.id, formData)
-
       navigate("/app/success", {
         state: {
           status: "update",
@@ -71,7 +82,6 @@ export default function UpdateItem() {
           },
         },
       })
-
     } catch (error) {
       if (hasValidationErrors(error)) {
         setServerErrors(parseApiValidationErrors(error.errors))
@@ -89,19 +99,20 @@ export default function UpdateItem() {
       <p className="text-text-muted mt-2 mb-8">
         Atualize os detalhes abaixo para atualizar o item no seu inventário.
       </p>
-      <UpdateItemForm
-        itemImage={item.imageUrl}
+      <ItemForm
+        mode="update"
         itemId={item.id}
         itemName={item.name}
         itemQuantity={item.quantity}
         itemPriceInCents={item.priceInCents}
-        itemCategory={item.category?.id ? String(item.category.id) : undefined}
-        itemDescription={item.description}
+        itemCategory={item.category?.id ? String(item.category.id) : ""}
+        itemDescription={item.description ?? ""}
         itemSku={item.sku}
+        itemImageUrl={item.imageUrl ?? ""}
         categories={categories}
         onSubmit={handleUpdate}
         serverErrors={serverErrors}
-        submitting={submitting}
+        loading={submitting}
       />
     </section>
   )

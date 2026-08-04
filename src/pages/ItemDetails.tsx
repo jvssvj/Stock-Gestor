@@ -10,6 +10,7 @@ import CategoryIcon from "@/components/CategoryIcon";
 
 function translateField(field: string) {
   const fieldMap: Record<string, string> = {
+    image: "Imagem",
     name: "Nome",
     quantity: "Quantidade",
     sku: "SKU",

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef, type ChangeEvent, type DragEvent, type FormEvent } from "react";
 import { UploadCloud, X } from "lucide-react";
 import { cleanCurrencyString, formatToCurrency } from "@/utils/currencyUtils";
-import type { Category, FieldErrors, Id } from "@/types";
+import type { Category, FieldErrors, Id, ItemFormData, ItemFormSubmit } from "@/types";
 
 const inputBase =
   "border border-border p-2.5 rounded-lg mt-1.5 w-full focus:outline-none focus:border-primary transition-colors bg-white text-sm";
@@ -11,24 +11,6 @@ const labelClass = "text-sm font-medium text-text-main";
 const errorText = "text-danger text-xs mt-1";
 
 type FormMode = "create" | "update"
-
-interface FormState {
-  name: string
-  quantity: number | string
-  priceInCents: number | string
-  category: string
-  description: string
-  sku: string
-  reason: string
-}
-
-interface FormSubmitPayload extends FormState {
-  id: Id
-  quantity: number
-  priceInCents: number
-  updatedAt: string
-  image: File | null
-}
 
 interface FormProps {
   mode?: FormMode
@@ -41,10 +23,12 @@ interface FormProps {
   itemSku?: string
   itemImageUrl?: string
   categories?: Category[]
-  onSubmit: (payload: FormSubmitPayload) => void
+  loading?: boolean
+  serverErrors?: FieldErrors
+  onSubmit: (payload: ItemFormSubmit) => void
 }
 
-export default function Form({
+export default function ItemForm({
   mode = "create",
   itemId = "",
   itemName = "",
@@ -55,21 +39,24 @@ export default function Form({
   itemSku = "",
   itemImageUrl = "",
   categories = [],
+  loading,
   onSubmit,
 }: FormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [formData, setFormData] = useState<FormState>({
+  const [formData, setFormData] = useState<ItemFormData>({
     name: itemName,
     quantity: itemQuantity,
-    priceInCents: mode === "update" ? Number(itemPriceInCents) / 100 : 0,
+    priceInCents: mode === "update" ? itemPriceInCents / 100 : 0,
     category: itemCategory,
     description: itemDescription,
     sku: itemSku,
     reason: "",
-  });
+    image: null,
+  })
 
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageRemoved, setImageRemoved] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(itemImageUrl || null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [isDragging, setIsDragging] = useState(false);
@@ -110,7 +97,8 @@ export default function Form({
     formData.category !== itemCategory ||
     formData.description !== itemDescription ||
     formData.sku !== itemSku ||
-    imageFile !== null;
+    imageFile !== null ||
+    imageRemoved
 
   // ── Handlers de campo ──
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -186,6 +174,7 @@ export default function Form({
       priceInCents: Math.round(parseFloat(String(formData.priceInCents)) * 100),
       updatedAt: new Date().toISOString().split("T")[0],
       image: imageFile,
+      imageRemoved
     };
 
     onSubmit(payload);
@@ -212,7 +201,11 @@ export default function Form({
             />
             <button
               type="button"
-              onClick={() => { setImageFile(null); setImagePreview(null); }}
+              onClick={() => {
+                setImageFile(null)
+                setImagePreview(null)
+                setImageRemoved(true)
+              }}
               className="absolute top-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 transition-colors cursor-pointer"
             >
               <X size={16} />
@@ -385,11 +378,11 @@ export default function Form({
             Cancelar
           </button>
           <button
-            disabled={mode === "update" && !isModified}
+            disabled={loading || (mode === "update" && !isModified)}
             type="submit"
             className="px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-light transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {mode === "update" ? "Salvar Alterações" : "Salvar Item"}
+            {loading ? "Salvando..." : mode === "update" ? "Salvar Alterações" : "Salvar Item"}
           </button>
         </div>
 
