@@ -78,15 +78,15 @@ export default function Categories() {
 
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                    <div>
+                    <div className="w-full">
                         <h1 className="text-2xl font-bold text-text-main">Categorias</h1>
                         <p className="text-sm text-muted mt-1">
                             {categories.length} {categories.length === 1 ? "categoria cadastrada" : "categorias cadastradas"}
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <label htmlFor="search" className="relative">
+                    <div className="w-full flex flex-col sm:flex-row items-center justify-end gap-3">
+                        <label htmlFor="search" className="w-full sm:w-auto relative">
                             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
                             <input
                                 id="search"
@@ -94,13 +94,13 @@ export default function Categories() {
                                 placeholder="Buscar categoria..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                                className="pl-9 pr-4 py-2.5 text-sm border border-border rounded-lg bg-white focus:outline-none focus:border-primary transition-colors"
+                                className="w-full pl-9 pr-4 py-2.5 text-sm border border-border rounded-lg bg-white focus:outline-none focus:border-primary transition-colors"
                             />
                         </label>
 
                         <Link
                             to="/app/categories/create"
-                            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors no-underline whitespace-nowrap"
+                            className="w-full sm:w-auto inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors no-underline whitespace-nowrap"
                         >
                             <Plus size={16} />
                             Nova categoria

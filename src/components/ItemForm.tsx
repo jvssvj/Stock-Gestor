@@ -369,18 +369,18 @@ export default function ItemForm({
 
       {/* ── FOOTER ── */}
       <div className="flex flex-col items-end gap-2">
-        <div className="flex items-center justify-end gap-3">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-end gap-3">
           <button
             type="button"
             onClick={() => window.history.back()}
-            className="px-6 py-2.5 rounded-lg border border-border text-sm font-medium text-text-muted hover:bg-surface-offset transition-colors cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-border text-sm font-medium text-text-muted hover:bg-surface-offset transition-colors cursor-pointer"
           >
             Cancelar
           </button>
           <button
             disabled={loading || (mode === "update" && !isModified)}
             type="submit"
-            className="px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-light transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full sm:w-auto px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-light transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Salvando..." : mode === "update" ? "Salvar Alterações" : "Salvar Item"}
           </button>

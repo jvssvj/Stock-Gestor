@@ -29,7 +29,7 @@ export default function CategoryIcon({
             >
                 <Icon size={size} color={color} />
             </div>
-            <p>{name}</p>
+            <p className="truncate">{name}</p>
         </div>
     )
 }

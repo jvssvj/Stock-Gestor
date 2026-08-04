@@ -125,7 +125,7 @@ export default function Item() {
 
         {/* ── Breadcrumb + Header ── */}
         <div className="mb-6">
-          <nav className="flex items-center gap-1.5 text-sm text-text-muted mb-3">
+          <nav className="hidden sm:flex items-center gap-1.5 text-sm text-text-muted mb-3">
             <Link to="/app/items" className="hover:text-text-main transition-colors no-underline text-text-muted">Itens</Link>
             <span>›</span>
             {item.category &&
@@ -147,22 +147,23 @@ export default function Item() {
               )}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="w-full flex flex-col sm:flex-row items-center gap-3">
               <Link
                 to={`/app/items/${item.id}/update`}
-                className="no-underline flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-white text-text-main text-sm font-medium hover:bg-bg transition-colors"
+                className="w-full sm:w-auto text-center no-underline flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-white text-text-main text-sm font-medium hover:bg-bg transition-colors"
               >
                 <Pencil size={15} />
                 Atualizar Item
               </Link>
               <button
                 onClick={() => setItemToDelete(item)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-danger text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-danger text-white text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer"
               >
                 <Trash2 size={15} />
                 Excluir Item
               </button>
             </div>
+
           </div>
         </div>
 
@@ -274,7 +275,7 @@ export default function Item() {
                   <div className="flex flex-col gap-8">
 
                     {/* Categoria + SKU */}
-                    <div className="flex items-center justify-between gap-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
                       <div className="flex-1">
                         <p className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-4">Categoria</p>
                         <CategoryIcon

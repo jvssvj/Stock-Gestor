@@ -48,7 +48,7 @@ export default function StockTable({ items, onPageChange }: StockTableProps) {
 
   return (
     <>
-      <div className="bg-white min-h-[565px] flex flex-col w-full max-w-container mt-8 overflow-hidden">
+      <div className="min-h-[565px] flex flex-col w-full max-w-container mt-8 overflow-hidden">
 
         <div className="flex flex-col gap-4 mb-10">
           {currentItems.map((item) => (
@@ -109,8 +109,6 @@ export default function StockTable({ items, onPageChange }: StockTableProps) {
             />
           </Stack>
         </div>
-
-
 
       </div>
     </>
