@@ -265,7 +265,7 @@ export default function SettingsPage() {
             </header>
 
             {/* ── Seção: Perfil ── */}
-            <section aria-labelledby="profile-heading" className="rounded-xl border border-border p-6 mb-6">
+            <section aria-labelledby="profile-heading" className="bg-white rounded-xl border border-border p-6 mb-6">
                 <h2 id="profile-heading" className="text-lg font-semibold text-text mb-6">Perfil</h2>
 
                 <form onSubmit={handleProfileSubmit} noValidate>
@@ -370,7 +370,7 @@ export default function SettingsPage() {
             </section>
 
             {/* ── Seção: Email ── */}
-            <section aria-labelledby="email-heading" className="rounded-xl border border-border p-6 mb-6">
+            <section aria-labelledby="email-heading" className="bg-white rounded-xl border border-border p-6 mb-6">
                 <h2 id="email-heading" className="text-lg font-semibold text-text mb-1">E-mail</h2>
                 <p className="text-xs text-text-muted mb-6">
                     E-mail atual: <span className="font-semibold text-text">{currentEmail}</span>
@@ -481,7 +481,7 @@ export default function SettingsPage() {
             </section>
 
             {/* ── Seção: Senha ── */}
-            <section aria-labelledby="password-heading" className="rounded-xl border border-border p-6">
+            <section aria-labelledby="password-heading" className="bg-white rounded-xl border border-border p-6">
                 <h2 id="password-heading" className="text-lg font-semibold text-text mb-1">Alterar senha</h2>
                 <p className="text-xs text-text-muted mb-6">Enviaremos um código para o seu e-mail para confirmar a alteração.</p>
 

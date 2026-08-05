@@ -6,10 +6,6 @@
   font-family: var(--font-primary);
 }
 
-:root {
-  color-scheme: light;
-}
-
 @theme {
   /* ─── Layout ─── */
   --max-width-container: 1440px;
@@ -18,41 +14,41 @@
   --font-primary: "Inter", sans-serif;
 
   /* ─── Colors (Mapeia para bg-*, text-*, border-*) ─── */
-  --color-text-main: #000333;
+  --color-text-main: #00011a;
   --color-white: #ffffff;
-  --color-off-white: #f7f7f7;
-  --color-bg: #eeeeee;
-  --color-border: #b0b0b0;
-  --color-muted: #5f5f5f;
-  --color-light-gray: #6a7282;
+  --color-off-white: #f0f2f8;
+  --color-bg: #efefef;
+  --color-border: #8b95a5;
+  --color-muted: #374151;
+  --color-light-gray: #374151;
   --color-black: #000000;
 
   /* ─── Brand ─── */
-  --color-primary: #3852B4;
-  --color-primary-light: #9bace9;
-  --color-primary-subtle: #e4e5ff;
+  --color-primary: #1a38db;
+  --color-primary-light: #5977ff;
+  --color-primary-subtle: #c7d2ff;
 
   /* ─── Status ─── */
-  --color-success-subtle: #e4ffe4;
-  --color-success-light: #dcffd8;
-  --color-success: #19d800;
+  --color-success-subtle: #b8ffb5;
+  --color-success-light: #70ff6b;
+  --color-success: #00b300;
 
-  --color-warning-subtle: #ffefe4;
-  --color-warning-light: #ffccb9;
-  --color-warning: #ff3c00;
+  --color-warning-subtle: #ffd1b8;
+  --color-warning-light: #ff7f47;
+  --color-warning: #e62200;
 
-  --color-danger-subtle: #ffe4e4;
-  --color-danger-light: #ffb9b9;
-  --color-danger: #ff1010;
+  --color-danger-subtle: #ffb8b8;
+  --color-danger-light: #ff5252;
+  --color-danger: #cc0000;
 
   /* ─── Accents ─── */
-  --color-purple-subtle: #f7e4ff;
-  --color-purple-light: #dfb9ff;
-  --color-purple: #9310ff;
+  --color-purple-subtle: #e8b8ff;
+  --color-purple-light: #a847ff;
+  --color-purple: #7300cc;
 
-  --color-teal-subtle: #e6f7f5;
-  --color-teal-light: #9fe0d8;
-  --color-teal: #14b8a6;
+  --color-teal-subtle: #a8f5eb;
+  --color-teal-light: #3db8ab;
+  --color-teal: #0d9488;
 }
 
 html {
