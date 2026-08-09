@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, useMemo, useCallback, useEffect, type ReactNode } from "react";
 import type { User } from "@/types";
+import { getMeService } from "@/services/authService";
 
 export interface AuthContextValue {
     user: User | null
@@ -41,6 +42,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setUser(null)
         localStorage.removeItem("user")
         localStorage.removeItem("token")
+    }, [])
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if (!token) return
+
+        getMeService()
+            .then((res) => {
+                updateUser(res.data)
+            })
+            .catch((err) => {
+                console.error("getMeService error:", err)
+            })
     }, [])
 
     useEffect(() => {
