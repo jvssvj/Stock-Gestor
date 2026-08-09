@@ -52,9 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             .then((res) => {
                 updateUser(res.data)
             })
-            .catch((err) => {
-                console.error("getMeService error:", err)
-            })
+            .catch((err) => { })
     }, [])
 
     useEffect(() => {
