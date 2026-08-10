@@ -18,7 +18,7 @@ export default function Home() {
                 <Logos />
                 <Features />
                 <Workflow />
-                <Stats />
+                {/* <Stats /> */}
                 <Pricing />
                 <CTA />
             </main>

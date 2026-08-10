@@ -49,8 +49,8 @@ export default function Navbar() {
 
     return (
         <>
-            <header className="fixed top-0 w-full z-50 border-b bg-bg border-border/50">
-                <div className=" max-w-container px-6 h-16 flex items-center justify-between">
+            <header className="fixed top-0 w-full z-50 border-b bg-bg border-border/50 px-6">
+                <div className="max-w-container mx-auto h-16 flex items-center justify-between">
                     {/* Logo */}
                     <a href="#" className="relative flex items-center gap-2.5 z-10">
                         <Logo showLabel />

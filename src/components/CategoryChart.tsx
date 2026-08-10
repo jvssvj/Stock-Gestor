@@ -33,12 +33,16 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload }: CustomTooltipProps) {
     if (!active || !payload?.length) return null;
     const item = payload[0];
+
+    const total = payload.reduce((sum, p) => sum + p.value, 0);
+    const percent = total > 0 ? (item.value / total) * 100 : 0;
+
     return (
         <div className="bg-white border border-border rounded-lg px-3 py-2 shadow-sm">
             <p className="text-xs text-muted font-medium">{item.name}</p>
             <p className="text-sm font-bold text-text-main">
                 {item.value} {item.value === 1 ? "item" : "itens"} ·{" "}
-                {(item.payload.percent * 100).toFixed(0)}%
+                {percent.toFixed(0)}%
             </p>
         </div>
     );
@@ -100,7 +104,7 @@ export default function CategoryChart({ data }: CategoryChartProps) {
             </ResponsiveContainer>
 
             {/* Total no centro */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none" style={{ top: -16 }}>
+            <div className="absolute z-0 inset-0 flex flex-col items-center justify-center pointer-events-none" style={{ top: -16 }}>
                 <span className="text-xs text-muted">Total</span>
                 <span className="text-xl font-bold text-text-main">{total}</span>
             </div>
