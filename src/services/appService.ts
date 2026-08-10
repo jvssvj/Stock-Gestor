@@ -1,5 +1,11 @@
 import { apiFetch } from "./apiFetch";
-import type { ApiEnvelope, Category, CreateCategory, Id, Item, MessageResponse, PaginatedResponse, UpdateCategory } from "@/types";
+import type { ApiEnvelope, Category, CreateCategory, Dashboard, Id, Item, MessageResponse, PaginatedResponse, UpdateCategory } from "@/types";
+
+export async function dashboardService() {
+    return await apiFetch<ApiEnvelope<Dashboard>>("/dashboard", {
+        method: "GET"
+    })
+}
 
 export async function createItemService(data: FormData): Promise<ApiEnvelope<Item>> {
     return await apiFetch<ApiEnvelope<Item>>("/items", {

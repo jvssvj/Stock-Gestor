@@ -40,6 +40,7 @@ export default function ItemForm({
   itemImageUrl = "",
   categories = [],
   loading,
+  serverErrors = {},
   onSubmit,
 }: FormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -59,7 +60,14 @@ export default function ItemForm({
   const [imageRemoved, setImageRemoved] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(itemImageUrl || null);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [localServerErrors, setLocalServerErrors] = useState<FieldErrors>({})
   const [isDragging, setIsDragging] = useState(false);
+
+  const allErrors = { ...errors, ...localServerErrors }
+
+  useEffect(() => {
+    setLocalServerErrors(serverErrors)
+  }, [serverErrors])
 
   useEffect(() => {
     if (mode === "update") {
@@ -106,6 +114,7 @@ export default function ItemForm({
     const finalValue = name === "priceInCents" ? cleanCurrencyString(value) : value;
     setFormData((prev) => ({ ...prev, [name]: finalValue }));
     setErrors((prev) => { const n = { ...prev }; delete n[name]; return n; });
+    setLocalServerErrors((prev) => { const n = { ...prev }; delete n[name]; return n; });
   }, []);
 
   // ── Handlers de imagem ──
@@ -123,8 +132,10 @@ export default function ItemForm({
     }
 
     setImageFile(file);
+    setImageRemoved(false);
     setImagePreview(URL.createObjectURL(file));
     setErrors((p) => { const n = { ...p }; delete n.image; return n; });
+    setLocalServerErrors((p) => { const n = { ...p }; delete n.image; return n; });
   }
 
   function handleDrop(e: DragEvent<HTMLDivElement>) {
@@ -151,7 +162,7 @@ export default function ItemForm({
     if (isNaN(price) || price < 0)
       newErrors.priceInCents = "O preço deve ser um valor positivo.";
 
-    if (mode === "update" && isModified && !formData.reason.trim())
+    if (mode === "update" && isModified && !formData.reason?.trim())
       newErrors.reason = "Descreva o motivo da alteração.";
 
     return newErrors;
@@ -174,7 +185,7 @@ export default function ItemForm({
       priceInCents: Math.round(parseFloat(String(formData.priceInCents)) * 100),
       updatedAt: new Date().toISOString().split("T")[0],
       image: imageFile,
-      imageRemoved
+      imageRemoved,
     };
 
     onSubmit(payload);
@@ -186,19 +197,20 @@ export default function ItemForm({
       onSubmit={handleSubmit}
       noValidate
     >
+      {/* ── ERRO GERAL ── */}
+      {allErrors.form && (
+        <div className="rounded-lg border border-danger-light bg-danger-subtle px-4 py-3 text-sm text-danger">
+          {allErrors.form}
+        </div>
+      )}
+
       {/* ── IMAGEM ── */}
       <div className="flex flex-col">
-        <label className={labelClass}>
-          Imagem do Item
-        </label>
+        <label className={labelClass}>Imagem do Item</label>
 
         {imagePreview ? (
           <div className="relative mt-1.5 w-full h-48 rounded-lg overflow-hidden border border-border">
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="w-full h-full object-cover"
-            />
+            <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
             <button
               type="button"
               onClick={() => {
@@ -218,7 +230,7 @@ export default function ItemForm({
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
             className={`mt-1.5 flex flex-col items-center justify-center gap-2 border-2 border-dashed rounded-lg p-10 cursor-pointer transition-colors ${isDragging ? "border-primary bg-primary-subtle" : "border-border hover:border-primary hover:bg-primary-subtle/40"
-              } ${errors.image ? "border-danger bg-danger-subtle" : ""}`}
+              } ${allErrors.image ? "border-danger bg-danger-subtle" : ""}`}
           >
             <UploadCloud size={32} className="text-text-muted" />
             <p className="text-sm text-center">
@@ -236,8 +248,7 @@ export default function ItemForm({
           className="hidden"
           onChange={(e) => handleImageFile(e.target.files?.[0])}
         />
-
-        {errors.image && <span className={errorText}>{errors.image}</span>}
+        {allErrors.image && <span className={errorText}>{allErrors.image}</span>}
       </div>
 
       {/* ── NOME ── */}
@@ -252,16 +263,16 @@ export default function ItemForm({
           placeholder="Ex: Monitor Dell 24 polegadas"
           value={formData.name}
           onChange={handleChange}
-          className={`${inputBase} ${errors.name ? inputErrorClass : ""}`}
+          className={`${inputBase} ${allErrors.name ? inputErrorClass : ""}`}
         />
-        {errors.name && <span className={errorText}>{errors.name}</span>}
+        {allErrors.name && <span className={errorText}>{allErrors.name}</span>}
       </div>
 
       {/* ── QUANTIDADE + PREÇO ── */}
       <div className="flex gap-4 max-[640px]:flex-col">
         <div className="flex flex-col w-full">
           <label htmlFor="quantity" className={labelClass}>
-            Quantidade <span className="text-danger">*</span>
+            Quantidade
           </label>
           <input
             type="number"
@@ -271,14 +282,14 @@ export default function ItemForm({
             placeholder="0"
             value={formData.quantity}
             onChange={handleChange}
-            className={`${inputBase} ${errors.quantity ? inputErrorClass : ""}`}
+            className={`${inputBase} ${allErrors.quantity ? inputErrorClass : ""}`}
           />
-          {errors.quantity && <span className={errorText}>{errors.quantity}</span>}
+          {allErrors.quantity && <span className={errorText}>{allErrors.quantity}</span>}
         </div>
 
         <div className="flex flex-col w-full">
           <label htmlFor="priceInCents" className={labelClass}>
-            Preço Unitário (R$) <span className="text-danger">*</span>
+            Preço Unitário (R$)
           </label>
           <input
             type="text"
@@ -286,9 +297,9 @@ export default function ItemForm({
             id="priceInCents"
             value={formatToCurrency(formData.priceInCents)}
             onChange={handleChange}
-            className={`${inputBase} ${errors.priceInCents ? inputErrorClass : ""}`}
+            className={`${inputBase} ${allErrors.priceInCents ? inputErrorClass : ""}`}
           />
-          {errors.priceInCents && <span className={errorText}>{errors.priceInCents}</span>}
+          {allErrors.priceInCents && <span className={errorText}>{allErrors.priceInCents}</span>}
         </div>
       </div>
 
@@ -304,31 +315,27 @@ export default function ItemForm({
           placeholder="Ex: MON-DELL-24"
           value={formData.sku}
           onChange={handleChange}
-          className={`${inputBase} ${errors.sku ? inputErrorClass : ""}`}
+          className={`${inputBase} ${allErrors.sku ? inputErrorClass : ""}`}
         />
-        {errors.sku && <span className={errorText}>{errors.sku}</span>}
+        {allErrors.sku && <span className={errorText}>{allErrors.sku}</span>}
       </div>
 
       {/* ── CATEGORIA ── */}
       <div className="flex flex-col">
-        <label htmlFor="category" className={labelClass}>
-          Categoria
-        </label>
+        <label htmlFor="category" className={labelClass}>Categoria</label>
         <select
           name="category"
           id="category"
           value={formData.category}
           onChange={handleChange}
-          className={`${inputBase} ${errors.category ? inputErrorClass : ""}`}
+          className={`${inputBase} ${allErrors.category ? inputErrorClass : ""}`}
         >
-          <option value="" disabled hidden>Selecione uma categoria</option>
+          <option value="" disabled hidden>Selecione uma categoria (opcional)</option>
           {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
+            <option key={cat.id} value={cat.id}>{cat.name}</option>
           ))}
         </select>
-        {errors.category && <span className={errorText}>{errors.category}</span>}
+        {allErrors.category && <span className={errorText}>{allErrors.category}</span>}
       </div>
 
       {/* ── DESCRIÇÃO ── */}
@@ -342,9 +349,9 @@ export default function ItemForm({
           placeholder="Adicione detalhes sobre o item, como especificações, cor, modelo, etc."
           value={formData.description}
           onChange={handleChange}
-          className={`${inputBase} resize-none min-h-[120px] ${errors.description ? inputErrorClass : ""}`}
+          className={`${inputBase} resize-none min-h-[120px] ${allErrors.description ? inputErrorClass : ""}`}
         />
-        {errors.description && <span className={errorText}>{errors.description}</span>}
+        {allErrors.description && <span className={errorText}>{allErrors.description}</span>}
       </div>
 
       {/* ── REASON (só no update) ── */}
@@ -359,9 +366,9 @@ export default function ItemForm({
             placeholder="Descreva o motivo desta alteração no estoque..."
             value={formData.reason}
             onChange={handleChange}
-            className={`${inputBase} resize-none min-h-[100px] ${errors.reason ? inputErrorClass : ""}`}
+            className={`${inputBase} resize-none min-h-[100px] ${allErrors.reason ? inputErrorClass : ""}`}
           />
-          {errors.reason && <span className={errorText}>{errors.reason}</span>}
+          {allErrors.reason && <span className={errorText}>{allErrors.reason}</span>}
         </div>
       )}
 

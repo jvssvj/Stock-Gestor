@@ -9,6 +9,39 @@ export interface User {
   avatarUrl?: string
 }
 
+
+export interface DashboardItem {
+  id: string
+  name: string
+  quantity: number
+}
+
+export interface RecentItem extends DashboardItem {
+  createdAt: string
+}
+
+export interface DashboardMovement {
+  label: string
+  value: number
+}
+
+export interface DashboardAttentionItem {
+  id: Id
+  name: string
+  missingFields: string[]
+}
+
+export interface Dashboard {
+  totalDifferentItems: number
+  totalQuantity: number
+  lowStockCount: number
+  lowStockItems: DashboardItem[]
+  recentItems: RecentItem[]
+  topMovements: DashboardMovement[]
+  itemsByCategory: DashboardMovement[]
+  needsAttention: DashboardAttentionItem[]
+}
+
 export interface Category {
   id: Id
   name: string

@@ -110,7 +110,7 @@ export default function Stock() {
             <Search className="absolute ml-4 text-text-muted w-[20px] pointer-events-none text-border" />
             <input
               value={searchedItem}
-              className="w-full py-2 pl-12 rounded-lg border border-border text-base focus:border-primary-light focus:outline-none"
+              className="w-full py-2 pl-12 rounded-lg border border-border text-base focus:border-primary-light focus:outline-none bg-white"
               type="text"
               name="search-product"
               id="search-product"

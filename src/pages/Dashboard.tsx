@@ -1,5 +1,5 @@
 import useGetItems from "@/hooks/useGetItems";
-import { ClipboardCheck, Plus, Shapes, TriangleAlert } from "lucide-react";
+import { CircleAlert, ClipboardCheck, Clock, Plus, Shapes, TriangleAlert, TriangleAlertIcon } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Welcome from "@/components/Welcome";
 import Spinner from "@/components/Spinner";
@@ -7,11 +7,23 @@ import EmptyStock from "@/components/EmptyStock";
 import RecentItems from "@/components/RecentItems";
 import LowStockItems from "@/components/LowStockItems";
 import StatCard from "@/components/StatCard";
+import { useDashboard } from "@/hooks/useDashboard";
+import NeedAttention from "@/components/NeedAttention";
+import TopMovementsChart from "@/components/TopMovementsChart";
+import CategoryChart from "@/components/CategoryChart";
 
 export default function Dashboard() {
-  const { items, loading, error } = useGetItems()
+  const { dashboard, loading, error } = useDashboard()
   const location = useLocation()
   const navigate = useNavigate()
+
+  if (!dashboard) {
+    return (
+      <div className="min-h-[100dvh] grid items-center">
+        < Spinner />
+      </div>
+    )
+  }
 
   if (loading) {
     return (
@@ -23,107 +35,107 @@ export default function Dashboard() {
 
   if (error) return <p>Erro ao carregar itens: {error}</p>
 
-  function formatDate(dateString: string) {
-    if (!dateString) return "";
-
-    const [datePart, timePart] = dateString.split("T");
-    const [year, month, day] = datePart.split("-")
-    const [hour, minute] = timePart.split(":")
-
-    return `${day}/${month}/${year} às ${hour}:${minute}`
-  }
-
-  const recentItems = [...(items?.data || [])]
-    .sort((a, b) => new Date(b.updatedAt || b.createdAt || "").getTime() - new Date(a.updatedAt || a.createdAt || "").getTime())
-    .slice(0, 10)
-    .map(item => ({
-      ...item,
-      formattedDate: formatDate(item.updatedAt || item.createdAt || "")
-    }))
-
-  const runningOut = (items?.data || [])
-    .filter((item) => item.quantity <= 10)
-    .sort((a, b) => a.quantity - b.quantity)
-
-  const uniqueCategories = [...new Set((items?.data || [])
-    .map((item) => item.category?.name || item.category)
-    .filter(Boolean)
-  )]
-
   return (
     <>
       {location.state && (
         <Welcome firstName={location.state.firstName} onClick={() => navigate(location.pathname, { replace: true })} />
       )}
-      {items.data.length > 0 ? (
-        <div className="w-full max-w-container">
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
-            <section>
-              <h2 className="text-text-dark font-bold text-2xl">Dashboard</h2>
-              <p className="text-muted">Acompanhe o desempenho do seu estoque em tempo real.</p>
+
+      {dashboard.totalDifferentItems <= 0 && (
+        <EmptyStock url={"/app/create"} />
+      )}
+
+      <div className="w-full max-w-container">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+          <section>
+            <h2 className="text-text-dark font-bold text-2xl">Dashboard</h2>
+            <p className="text-muted">Acompanhe o desempenho do seu estoque em tempo real.</p>
+          </section>
+
+          <Link
+            to={"/app/create"}
+            className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px] h-[45px]"
+          >
+            <Plus />  Adicionar item
+          </Link>
+        </div>
+
+        <hr className="my-10 border-t border-border" />
+
+        <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
+          <StatCard
+            iconElement={<ClipboardCheck />}
+            title={"Total de produtos"}
+            quantity={dashboard.totalQuantity}
+            color={"blue"}
+          />
+          <StatCard
+            iconElement={<Shapes />}
+            title={"Total de itens diferentes"}
+            quantity={dashboard.totalDifferentItems}
+            color={"green"}
+          />
+          <StatCard
+            iconElement={<TriangleAlert />}
+            title={"Itens com baixo estoque"}
+            quantity={dashboard.lowStockCount}
+            color={"red"}
+          />
+        </div>
+
+        <div className="flex flex-col xl:flex-row items-stretch gap-5 mt-8 mb-5">
+          <section className="bg-white w-full xl:max-w-[1000px] rounded-xl border border-border p-6">
+            <h2 className="text-base font-semibold text-text-main mb-4">
+              Top 5 Itens Mais Movimentados
+            </h2>
+            <TopMovementsChart data={dashboard.topMovements} />
+          </section>
+
+          <section className="bg-white w-full xl:max-w-[440px] rounded-xl border border-border p-6">
+            <h2 className="text-base font-semibold text-text-main mb-4">
+              Categorias
+            </h2>
+            <CategoryChart data={dashboard.itemsByCategory} />
+          </section>
+        </div>
+
+        <div>
+          <section className="mb-2">
+            <h2 className="flex items-center gap-2 text-base font-semibold">
+              <TriangleAlertIcon className="text-danger-light" /> Itens que precisam de atenção
+            </h2>
+          </section>
+          <NeedAttention data={dashboard.needsAttention} />
+        </div>
+
+        {/* <div className="w-full flex flex-col xl:flex-row items-start gap-5 mt-8">
+          <div className="w-full">
+            <div className="flex items-center justify-between mb-2">
+              <section>
+                <h2 className="flex items-center gap-2 text-base font-semibold">
+                  <Clock className="text-primary" /> Movimentações recentes
+                </h2>
+              </section>
+              <Link to="/app/items" className="text-primary text-sm hover:text-primary-light font-semibold">
+                Ver todos
+              </Link>
+            </div>
+            <RecentItems data={dashboard.recentItems} />
+          </div>
+
+          <div className="w-full">
+            <section className="flex items-center justify-between mb-2">
+              <h2 className="flex items-center gap-2 text-base font-semibold">
+                <CircleAlert className="text-danger" /> Itens com baixo estoque
+              </h2>
+              <Link to={'#'} className="text-primary text-sm hover:text-primary-light font-semibold">Gerar relatório</Link>
             </section>
 
-            <Link
-              to={"/app/create"}
-              className="flex items-center justify-center bg-primary text-white rounded-lg gap-2 py-[0.81rem] px-8 cursor-pointer transition-all duration-200 ease-in-out no-underline text-xs w-full whitespace-nowrap hover:bg-primary-light active:scale-[0.92] sm:max-w-[200px]"
-            >
-              <Plus />  Adicionar item
-            </Link>
+            <LowStockItems data={dashboard.lowStockItems} />
           </div>
+        </div> */}
 
-          <hr className="my-10 border-t border-border" />
-
-          <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
-            <StatCard
-              iconElement={<ClipboardCheck />}
-              title={"Total de produtos"}
-              quantity={items.data.length}
-              color={"primary"}
-            />
-            <StatCard
-              iconElement={<Shapes />}
-              title={"Total de itens diferentes"}
-              quantity={uniqueCategories.length}
-              color={"success"}
-            />
-            <StatCard
-              iconElement={<TriangleAlert />}
-              title={"Itens com baixo estoque"}
-              quantity={runningOut.length}
-              color={"danger"}
-            />
-          </div>
-
-          <div className="">
-            <div>
-              <div className="flex items-center justify-between mt-8 mb-5">
-                <section>
-                  <h2 className="text-sm font-semibold">Movimentações recentes</h2>
-                  <p className="text-xs text-muted">Últimas entradas e saídas</p>
-                </section>
-                <Link to="/app/items" className="text-primary text-sm hover:text-primary-light font-semibold">
-                  Ver todos
-                </Link>
-              </div>
-              <RecentItems data={recentItems} />
-            </div>
-
-            {runningOut.length >= 1 && (
-              <div>
-                <section className="flex items-center justify-between mt-8 mb-5">
-                  <h3 className="font-semibold" >Itens com baixo estoque</h3>
-                  <Link to={'#'} className="text-primary hover:text-primary-light font-semibold">Gerar relatório</Link>
-                </section>
-
-                <LowStockItems data={runningOut} />
-              </div>
-            )}
-          </div>
-        </div >
-      ) : (
-        <EmptyStock url={"/app/create"} />
-      )
-      }
+      </div >
     </>
   )
 }
