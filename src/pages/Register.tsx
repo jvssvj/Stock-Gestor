@@ -85,7 +85,7 @@ export default function Register() {
 
     return (
         <div className="min-h-[100dvh] p-4 flex flex-col items-center justify-center">
-            <section className="bg-white rounded-[0.7rem] w-full max-w-[450px] flex flex-col items-center justify-center">
+            <section className="bg-white py-12 px-4 rounded-2xl w-full max-w-[450px] flex flex-col items-center justify-center">
                 <Logo />
                 <h1 className="text-3xl text-text-main font-semibold my-4">Crie sua conta</h1>
                 <p className="text-base text-text-muted text-center">Comece a gerenciar seu estoque hoje mesmo</p>

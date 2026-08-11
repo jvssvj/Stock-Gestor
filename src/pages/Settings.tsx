@@ -245,7 +245,7 @@ export default function SettingsPage() {
 
     const inputBase = "w-full px-3 py-2.5 rounded-lg bg-surface-2 border text-text placeholder:text-text-faint focus:outline-none focus:border-primary transition-colors";
     const inputError = "border-danger bg-danger-subtle text-danger";
-    const inputNormal = "border-border";
+    const inputNormal = "border-light-gray";
 
     return (
         <div className="w-full max-w-container mx-auto">
@@ -265,7 +265,7 @@ export default function SettingsPage() {
             </header>
 
             {/* ── Seção: Perfil ── */}
-            <section aria-labelledby="profile-heading" className="bg-white rounded-xl border border-border p-6 mb-6">
+            <section aria-labelledby="profile-heading" className="bg-white rounded-xl border border-light-gray p-6 mb-6">
                 <h2 id="profile-heading" className="text-lg font-semibold text-text mb-6">Perfil</h2>
 
                 <form onSubmit={handleProfileSubmit} noValidate>
@@ -276,7 +276,7 @@ export default function SettingsPage() {
                                 type="button"
                                 aria-label="Alterar foto de perfil"
                                 onClick={() => fileInputRef.current?.click()}
-                                className="relative w-20 h-20 rounded-full bg-surface-offset flex items-center justify-center overflow-hidden group border-2 border-border hover:border-primary transition-colors cursor-pointer"
+                                className="relative w-20 h-20 rounded-full bg-surface-offset flex items-center justify-center overflow-hidden group border-2 border-light-gray hover:border-primary transition-colors cursor-pointer"
                             >
                                 {avatarPreview ? (
                                     <img src={avatarPreview} alt="Avatar atual" className="w-full h-full object-cover" />
@@ -370,7 +370,7 @@ export default function SettingsPage() {
             </section>
 
             {/* ── Seção: Email ── */}
-            <section aria-labelledby="email-heading" className="bg-white rounded-xl border border-border p-6 mb-6">
+            <section aria-labelledby="email-heading" className="bg-white rounded-xl border border-light-gray p-6 mb-6">
                 <h2 id="email-heading" className="text-lg font-semibold text-text mb-1">E-mail</h2>
                 <p className="text-xs text-text-muted mb-6">
                     E-mail atual: <span className="font-semibold text-text">{currentEmail}</span>
@@ -481,7 +481,7 @@ export default function SettingsPage() {
             </section>
 
             {/* ── Seção: Senha ── */}
-            <section aria-labelledby="password-heading" className="bg-white rounded-xl border border-border p-6">
+            <section aria-labelledby="password-heading" className="bg-white rounded-xl border border-light-gray p-6">
                 <h2 id="password-heading" className="text-lg font-semibold text-text mb-1">Alterar senha</h2>
                 <p className="text-xs text-text-muted mb-6">Enviaremos um código para o seu e-mail para confirmar a alteração.</p>
 

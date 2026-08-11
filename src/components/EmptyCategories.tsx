@@ -8,7 +8,7 @@ export default function EmptyCategories() {
             <div className="flex flex-col items-center">
                 <img className="max-w-[150px]" src={emptyFolder} alt="" />
                 <h2 className="mt-10 text-4xl font-semibold text-text-main">
-                    Organize seus produtos
+                    Organize seu estoque
                 </h2>
 
                 <p className="text-base text-muted mt-4 mb-8 w-full">

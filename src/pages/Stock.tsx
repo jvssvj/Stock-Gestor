@@ -43,7 +43,7 @@ export default function Stock() {
     if (searching && findItem().length === 0) {
       return (
         <>
-          <div className="bg-white py-10 px-4 rounded-2xl w-full max-w-[1920px] mt-8 grid place-items-center text-center border-2 border-dotted border-border">
+          <div className="bg-white py-10 px-4 rounded-2xl w-full max-w-[1920px] mt-8 grid place-items-center text-center border-2 border-dotted border-light-gray">
             <section>
               <h2 className="text-text-main font-bold text-2xl mb-5">Nenhum item encontrado</h2>
               <p className="text-text-muted max-w-[500px]">
@@ -110,7 +110,7 @@ export default function Stock() {
             <Search className="absolute ml-4 text-text-muted w-[20px] pointer-events-none text-border" />
             <input
               value={searchedItem}
-              className="w-full py-2 pl-12 rounded-lg border border-border text-base focus:border-primary-light focus:outline-none bg-white"
+              className="w-full py-2 pl-12 rounded-lg border border-light-gray text-base focus:border-primary-light focus:outline-none bg-white"
               type="text"
               name="search-product"
               id="search-product"

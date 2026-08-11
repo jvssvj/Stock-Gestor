@@ -1,5 +1,4 @@
 import Logo from "@/components/Logo";
-import { Box } from "lucide-react";
 
 export function Footer() {
     return (

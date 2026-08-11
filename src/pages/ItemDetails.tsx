@@ -140,7 +140,7 @@ export default function Item() {
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-4xl font-bold text-text-main">{item.name}</h1>
               {item.sku && (
-                <span className="text-sm font-medium text-text-muted border border-border px-3 py-1 rounded-full bg-white">
+                <span className="text-sm font-medium text-text-muted border border-light-gray px-3 py-1 rounded-full bg-white">
                   {item.sku}
                 </span>
               )}
@@ -149,7 +149,7 @@ export default function Item() {
             <div className="w-full flex flex-col sm:flex-row items-center gap-3">
               <Link
                 to={`/app/items/${item.id}/update`}
-                className="w-full sm:w-auto text-center no-underline flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-white text-text-main text-sm font-medium hover:bg-bg transition-colors"
+                className="w-full sm:w-auto text-center no-underline flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-light-gray bg-white text-text-main text-sm font-medium hover:bg-bg transition-colors"
               >
                 <Pencil size={15} />
                 Atualizar Item
@@ -173,7 +173,7 @@ export default function Item() {
           <div className="flex flex-col gap-4 w-full md:max-w-[340px]">
 
             {/* Imagem */}
-            <div className="w-full relative bg-white rounded-2xl border border-border overflow-hidden">
+            <div className="w-full relative bg-white rounded-2xl border border-light-gray overflow-hidden">
               {item.imageUrl ? (
                 <img
                   className="w-full aspect-square object-cover object-center"
@@ -193,7 +193,7 @@ export default function Item() {
             </div>
 
             {/* Histórico */}
-            <div className="bg-white rounded-2xl border border-border p-5 w-full">
+            <div className="bg-white rounded-2xl border border-light-gray p-5 w-full">
               <div className="flex items-center gap-2 mb-5">
                 <RefreshCw size={16} className="text-text-muted" />
                 <h3 className="text-sm font-bold text-text-main uppercase tracking-wide">Histórico</h3>
@@ -229,19 +229,19 @@ export default function Item() {
 
             {/* Métricas */}
             <div className="flex flex-col items-center justify-between gap-4 xl:flex-row">
-              <div className="bg-white rounded-2xl border border-border p-5 flex-1 w-full">
+              <div className="bg-white rounded-2xl border border-light-gray p-5 flex-1 w-full">
                 <p className="text-xs text-text-muted mb-3">Preço Unitário</p>
                 <p className="text-2xl font-bold text-text-main">{formatToCurrency(price)}</p>
               </div>
 
-              <div className="bg-white rounded-2xl border border-border p-5 flex-1 w-full">
+              <div className="bg-white rounded-2xl border border-light-gray p-5 flex-1 w-full">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-xs text-text-muted">Quantidade</p>
                 </div>
                 <p className="text-2xl font-bold text-text-main">{item.quantity}</p>
               </div>
 
-              <div className="bg-white rounded-2xl border border-border p-5 flex-1 w-full">
+              <div className="bg-white rounded-2xl border border-light-gray p-5 flex-1 w-full">
                 <p className="text-xs text-text-muted mb-3">Valor Total em Estoque</p>
                 <p className="text-2xl font-bold text-success leading-tight">
                   {totalInt}<span className="text-base font-normal">,{totalDec ?? "00"}</span>
@@ -250,10 +250,10 @@ export default function Item() {
             </div>
 
             {/* Tabs + Conteúdo */}
-            <div className="bg-white rounded-2xl border border-border overflow-hidden">
+            <div className="bg-white rounded-2xl border border-light-gray overflow-hidden">
 
               {/* Tab bar */}
-              <div className="flex border-b border-border px-6 overflow-scroll gap-5">
+              <div className="flex border-b border-light-gray px-6 overflow-scroll gap-5">
                 {TABS.map((tab) => (
                   <button
                     key={tab}
@@ -299,7 +299,7 @@ export default function Item() {
                     {item.description && (
                       <div>
                         <p className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-4">Descrição do Item</p>
-                        <div className="bg-off-white rounded-xl p-5 border border-border">
+                        <div className="bg-off-white rounded-xl p-5 border border-light-gray">
                           <p className="text-sm text-text-main leading-relaxed whitespace-pre-line">{item.description}</p>
                         </div>
                       </div>
@@ -310,7 +310,7 @@ export default function Item() {
                 {activeTab === "Movimentações" && (
                   (item.movements?.length ?? 0) > 0 ? (
                     item.movements!.map((m) => (
-                      <section className="border border-border py-6 rounded-2xl px-3 relative mb-5" key={m.id}>
+                      <section className="border border-light-gray py-6 rounded-2xl px-3 relative mb-5" key={m.id}>
                         <div className="flex items-center gap-3 mb-5">
                           <CalendarClock size={22} className="text-primary" />
                           <span className="font-semibold text-text-main truncate" >{formatDateISO(m.createdAt)}</span>

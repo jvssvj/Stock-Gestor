@@ -1,5 +1,5 @@
 import useGetItems from "@/hooks/useGetItems";
-import { CircleAlert, ClipboardCheck, Clock, Plus, Shapes, TriangleAlert, TriangleAlertIcon } from "lucide-react";
+import { CircleAlert, ClipboardCheck, Clock, LayoutDashboard, Plus, Shapes, TriangleAlert, TriangleAlertIcon } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Welcome from "@/components/Welcome";
 import Spinner from "@/components/Spinner";
@@ -35,14 +35,14 @@ export default function Dashboard() {
 
   if (error) return <p>Erro ao carregar itens: {error}</p>
 
+  if (dashboard.totalDifferentItems <= 0) {
+    return <EmptyStock url={"/app/create"} />
+  }
+
   return (
     <>
       {location.state && (
         <Welcome firstName={location.state.firstName} onClick={() => navigate(location.pathname, { replace: true })} />
-      )}
-
-      {dashboard.totalDifferentItems <= 0 && (
-        <EmptyStock url={"/app/create"} />
       )}
 
       <div className="w-full max-w-container">
@@ -60,7 +60,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <hr className="my-10 border-t border-border" />
+        <hr className="my-5 border-t border-light-gray" />
 
         <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
           <StatCard
@@ -84,14 +84,14 @@ export default function Dashboard() {
         </div>
 
         <div className="flex flex-col xl:flex-row items-stretch gap-5 mt-8 mb-5">
-          <section className="bg-white w-full xl:max-w-[1000px] rounded-xl border border-border p-6">
+          <section className="bg-white w-full xl:max-w-[1000px] rounded-xl border border-gray-200 p-6">
             <h2 className="text-base font-semibold text-text-main mb-4">
               Top 5 Itens Mais Movimentados
             </h2>
             <TopMovementsChart data={dashboard.topMovements} />
           </section>
 
-          <section className="bg-white w-full xl:max-w-[440px] rounded-xl border border-border p-6">
+          <section className="bg-white w-full flex flex-col xl:max-w-[440px] rounded-xl border border-gray-200 p-6">
             <h2 className="text-base font-semibold text-text-main mb-4">
               Categorias
             </h2>

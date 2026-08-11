@@ -160,7 +160,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Menu mobile */}
-                <div className={`md:hidden fixed w-full top-16 z-40 bg-bg transition-all duration-300 ease-in-out ${menuOpen
+                <div className={`md:hidden right-0 fixed w-full top-16 z-40 bg-bg transition-all duration-300 ease-in-out ${menuOpen
                     ? 'opacity-100 translate-y-0 pointer-events-auto'
                     : 'opacity-0 -translate-y-2 pointer-events-none'
                     } rounded-b-2xl`}>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function Hero() {
     return (
-        <div className="relative pt-32 pb-24 overflow-hidden mx-6 flex items-center justify-center">
+        <div className="pt-32 pb-24 mx-6 flex items-center justify-center">
             <div className="grid lg:grid-cols-12 gap-12 items-center w-full max-w-container">
                 <section className="lg:col-span-7">
                     {/* <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur-sm">
@@ -97,7 +97,6 @@ export function Hero() {
                     </div>
 
                 </div>
-
             </div>
         </div>
     );

@@ -37,7 +37,7 @@ function DropdownMenu({ item, onDelete, onClose }: DropdownMenuProps) {
   return (
     <div
       ref={ref}
-      className="absolute right-0 top-8 z-20 w-44 bg-white border border-border rounded-xl shadow-lg p-1"
+      className="absolute right-0 top-8 z-20 w-44 bg-white border border-light-gray rounded-xl shadow-lg p-1"
     >
       <Link
         to={`/app/items/${item.id}`}
@@ -55,7 +55,7 @@ function DropdownMenu({ item, onDelete, onClose }: DropdownMenuProps) {
         <Pencil size={15} className="text-muted" />
         Editar
       </Link>
-      <div className="border-t border-border my-1" />
+      <div className="border-t border-light-gray my-1" />
       <button
         type="button"
         onClick={() => { onDelete(item); onClose() }}
@@ -140,18 +140,18 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
             return (
               <section
                 key={item.id}
-                className="flex items-center gap-4 border border-gray-200 rounded-2xl px-4 py-4 bg-white"
+                className="flex items-center gap-4 border border-light-gray rounded-2xl px-4 py-4 bg-white"
               >
                 {/* Imagem */}
                 <div className="shrink-0">
                   {item.imageUrl ? (
                     <img
-                      className="w-12 h-12 rounded-xl object-cover border border-border"
+                      className="w-12 h-12 rounded-xl object-cover border border-light-gray"
                       src={item.imageUrl}
                       alt=""
                     />
                   ) : (
-                    <div className="w-12 h-12 rounded-xl bg-off-white border border-border flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-xl bg-off-white border border-light-gray flex items-center justify-center">
                       <Image size={20} className="text-muted" />
                     </div>
                   )}
@@ -167,7 +167,7 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
                       {item.name}
                     </Link>
                     {item.category && (
-                      <span className="text-[11px] font-medium text-muted border border-border rounded-full px-2 py-0.5 shrink-0">
+                      <span className="text-[11px] font-medium text-muted border border-light-gray rounded-full px-2 py-0.5 shrink-0">
                         {typeof item.category === "string" ? item.category : item.category.name}
                       </span>
                     )}
@@ -229,7 +229,7 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
           })}
         </div>
 
-        <div className="mt-auto py-5 px-4 flex justify-center border border-border rounded-2xl">
+        <div className="mt-auto py-5 px-4 flex justify-center bg-white border border-gray-200 rounded-2xl">
           <Stack spacing={2} alignItems="center">
             <Pagination
               count={totalPages}

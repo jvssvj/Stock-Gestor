@@ -131,7 +131,7 @@ export default function Categories() {
                             return (
                                 <div
                                     key={category.id}
-                                    className={`bg-white border border-border rounded-2xl p-5 relative group transition-all duration-300 hover:shadow-md ${isDeleting
+                                    className={`bg-white border border-gray-200 rounded-2xl p-5 relative group transition-all duration-300 hover:shadow-md ${isDeleting
                                         ? "opacity-0 scale-95 pointer-events-none"
                                         : "opacity-100 scale-100"
                                         }`}

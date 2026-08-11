@@ -54,21 +54,21 @@ export default function NeedAttention({ data }: NeedsAttentionProps) {
             [&::-webkit-scrollbar-thumb]:rounded-full
         ">
             <table className="bg-white w-full min-w-[700px] border-separate border-spacing-0">
-                <thead className="bg-gray-300">
+                <thead className="bg-primary">
                     <tr>
-                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-muted">
+                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-white">
                             Nome
                         </th>
-                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-muted">
+                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-white">
                             Informação faltando
                         </th>
-                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-muted">
+                        <th className="text-start p-4 whitespace-nowrap text-xs uppercase font-medium text-white">
                             Ação
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item) => (
+                    {data.slice(0, 10).map((item) => (
                         <tr
                             key={item.id}
                             className="group hover:bg-off-white transition-colors"

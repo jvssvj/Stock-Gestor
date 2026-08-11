@@ -44,7 +44,7 @@ function NavLink({ item, collapsed, pathname }: { item: NavItem; collapsed: bool
         text-[13px] whitespace-nowrap no-underline
         transition-[background,color] duration-150
         ${isActive
-          ? 'bg-primary text-white font-medium'
+          ? 'bg-primary text-white font-medium text-main'
           : 'text-text-muted hover:bg-primary hover:text-white'
         }
       `}
@@ -82,28 +82,25 @@ export default function Sidebar() {
       )}
 
       <aside className={`
-        flex flex-col fixed z-[5] bg-white border-r border-border shrink-0
+        flex flex-col fixed z-[5] bg-white border-r border-light-gray shrink-0
         overflow-hidden h-dvh transition-[width] duration-[250ms] ease-in-out
         ${collapsed ? 'w-14' : 'w-[240px]'}
       `}>
 
         {/* Logo */}
-        <div className="flex items-center justify-center p-3 border-b border-border min-h-14">
+        <div className="flex items-center justify-center p-3 border-b border-light-gray min-h-14">
           <div className="flex items-center gap-2 overflow-hidden flex-1">
             <Logo />
-            {/* <div className="w-7 h-7 rounded-[8px] bg-primary flex items-center justify-center shrink-0">
-              <Box size={14} color="white" />
-            </div> */}
             <span className={`
               text-[15px] font-semibold text-text-main whitespace-nowrap
               transition-[opacity,width] duration-200
               ${collapsed ? 'opacity-0 w-0' : 'opacity-100'}
             `}>
-              StockFlow
+              Stock Gestor
             </span>
           </div>
           <button
-            className="w-[35px] h-[35px] rounded-sm bg-transparent border border-border cursor-pointer flex items-center justify-center shrink-0 text-text-muted hover:bg-bg transition-colors duration-150"
+            className="w-[35px] h-[35px] rounded-sm bg-transparent border border-light-gray cursor-pointer flex items-center justify-center shrink-0 text-text-muted hover:bg-bg transition-colors duration-150"
             onClick={() => setCollapsed(!collapsed)}
           >
             {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
@@ -111,14 +108,14 @@ export default function Sidebar() {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-2 py-2.5 flex flex-col gap-1 overflow-hidden">
+        <nav className="font-medium text-main text-text-main flex-1 px-2 py-2.5 flex flex-col gap-1 overflow-hidden">
           {navItems.map((item) => (
             <NavLink key={item.to} item={item} collapsed={collapsed} pathname={location.pathname} />
           ))}
         </nav>
 
         {/* Footer */}
-        <div className="flex flex-col gap-1 border-t border-border px-2 py-2.5">
+        <div className="flex flex-col gap-1 border-t border-light-gray px-2 py-2.5">
 
           {/* User */}
           <div className="group relative flex items-center gap-2.5 h-14 pl-[3px] rounded-md overflow-visible">
@@ -129,13 +126,13 @@ export default function Sidebar() {
                 alt="Avatar"
               />
             ) : (
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[11px] font-medium text-white shrink-0">
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-[11px] font-medium text-main text-white shrink-0">
                 {initials}
               </div>
             )}
             {!collapsed ? (
               <div className="flex-1 overflow-hidden">
-                <div className="text-[13px] font-medium text-text-main truncate">
+                <div className="text-[13px] font-medium text-main text-text-main truncate">
                   {user?.firstName} {user?.lastName}
                 </div>
                 {user?.email && (
@@ -150,7 +147,7 @@ export default function Sidebar() {
           {/* Configurações */}
           <Link
             to="/app/settings"
-            className={`
+            className={`font-medium text-main
               group relative flex gap-2.5 items-center p-2.5 rounded-lg
               no-underline transition-colors duration-150
               ${location.pathname === '/app/settings'
@@ -168,7 +165,7 @@ export default function Sidebar() {
 
           {/* Logout */}
           <button
-            className="group relative w-full bg-transparent border-none cursor-pointer text-text-muted flex gap-2.5 items-center p-2.5 rounded-lg hover:bg-danger hover:text-white transition-colors duration-150"
+            className="font-medium text-main group relative w-full bg-transparent border-none cursor-pointer text-text-muted flex gap-2.5 items-center p-2.5 rounded-lg hover:bg-danger hover:text-white transition-colors duration-150"
             onClick={() => {
               navigate('/', { replace: true })
               setTimeout(() => logout(), 1)
