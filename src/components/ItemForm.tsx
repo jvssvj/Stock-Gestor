@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef, type ChangeEvent, type DragEv
 import { UploadCloud, X } from "lucide-react";
 import { cleanCurrencyString, formatToCurrency } from "@/utils/currencyUtils";
 import type { Category, FieldErrors, Id, ItemFormData, ItemFormSubmit } from "@/types";
+import { Link } from "react-router-dom";
 
 const inputBase =
   "border border-border p-2.5 rounded-lg mt-1.5 w-full focus:outline-none focus:border-primary transition-colors bg-white text-sm";
@@ -323,19 +324,30 @@ export default function ItemForm({
       {/* ── CATEGORIA ── */}
       <div className="flex flex-col">
         <label htmlFor="category" className={labelClass}>Categoria</label>
-        <select
-          name="category"
-          id="category"
-          value={formData.category}
-          onChange={handleChange}
-          className={`${inputBase} ${allErrors.category ? inputErrorClass : ""}`}
-        >
-          <option value="" disabled hidden>Selecione uma categoria (opcional)</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>{cat.name}</option>
-          ))}
-        </select>
-        {allErrors.category && <span className={errorText}>{allErrors.category}</span>}
+        {categories.length === 0 ? (
+          <p className="mt-1.5 text-sm text-muted">
+            Sem categorias.{" "}
+            <Link to="/app/categories/create" className="text-primary font-semibold hover:underline">
+              Cadastrar categoria
+            </Link>
+          </p>
+        ) : (
+          <>
+            <select
+              name="category"
+              id="category"
+              value={formData.category}
+              onChange={handleChange}
+              className={`${inputBase} ${allErrors.category ? inputErrorClass : ""}`}
+            >
+              <option value="">Sem categoria</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
+              ))}
+            </select>
+            {allErrors.category && <span className={errorText}>{allErrors.category}</span>}
+          </>
+        )}
       </div>
 
       {/* ── DESCRIÇÃO ── */}

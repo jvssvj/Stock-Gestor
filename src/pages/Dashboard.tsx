@@ -65,19 +65,19 @@ export default function Dashboard() {
         <div className="w-full flex flex-col gap-5 md:flex-row justify-between">
           <StatCard
             iconElement={<ClipboardCheck />}
-            title={"Total de produtos"}
+            title={"Quantidade em estoque"}
             quantity={dashboard.totalQuantity}
             color={"blue"}
           />
           <StatCard
             iconElement={<Shapes />}
-            title={"Total de itens diferentes"}
+            title={"Produtos cadastrados"}
             quantity={dashboard.totalDifferentItems}
             color={"green"}
           />
           <StatCard
             iconElement={<TriangleAlert />}
-            title={"Itens com baixo estoque"}
+            title={"Baixo estoque"}
             quantity={dashboard.lowStockCount}
             color={"red"}
           />
@@ -102,7 +102,7 @@ export default function Dashboard() {
         <div>
           <section className="mb-2">
             <h2 className="flex items-center gap-2 text-base font-semibold">
-              <TriangleAlertIcon className="text-danger-light" /> Itens que precisam de atenção
+              <TriangleAlertIcon className="text-danger-light" /> Itens que precisam de atenção ({dashboard.needsAttention.length})
             </h2>
           </section>
           <NeedAttention data={dashboard.needsAttention} />

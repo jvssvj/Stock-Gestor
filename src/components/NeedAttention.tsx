@@ -43,6 +43,16 @@ function translateField(field: string) {
 }
 
 export default function NeedAttention({ data }: NeedsAttentionProps) {
+    if (!data?.length) {
+        return (
+            <div className="bg-white flex flex-col items-center justify-center py-10 text-center rounded-xl border border-light-gray">
+                <p className="mt-1 text-sm text-muted">
+                    Nenhum item precisa de atenção no momento.
+                </p>
+            </div>
+        )
+    }
+
     return (
         <div className="
             w-full overflow-x-auto rounded-xl
@@ -68,7 +78,7 @@ export default function NeedAttention({ data }: NeedsAttentionProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.slice(0, 10).map((item) => (
+                    {data.slice(0, 5).map((item) => (
                         <tr
                             key={item.id}
                             className="group hover:bg-off-white transition-colors"

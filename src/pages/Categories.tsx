@@ -15,6 +15,7 @@ import { deleteCategoryService } from "@/services/appService"
 import ConfirmDeletion from "@/components/ConfirmDeletion"
 import EmptyCategories from "@/components/EmptyCategories"
 import type { Category, Id } from "@/types"
+import { EmptySearch } from "@/components/EmptySearch"
 
 const ICON_MAP: Record<string, LucideIcon> = {
     Package, Tag, Box, Truck, ShoppingCart, Layers, Archive, Boxes,
@@ -29,6 +30,7 @@ export default function Categories() {
     const [search, setSearch] = useState("")
     const [deletingId, setDeletingId] = useState<Id | null>(null)
     const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(null)
+    const [loadingDeletion, setLoadingDeletion] = useState<boolean>(false)
 
     const filtered = categories.filter((c) =>
         c.name.toLowerCase().includes(search.toLowerCase())
@@ -36,6 +38,7 @@ export default function Categories() {
 
     async function handleDelete() {
         if (!categoryToDelete) return
+        setLoadingDeletion(true)
 
         try {
             await deleteCategoryService(categoryToDelete.id)
@@ -48,6 +51,7 @@ export default function Categories() {
             console.error(error)
         } finally {
             setDeletingId(null)
+            setLoadingDeletion(false)
         }
     }
 
@@ -71,6 +75,7 @@ export default function Categories() {
                     name={categoryToDelete.name}
                     cancelAction={() => setCategoryToDelete(null)}
                     confirmAction={handleDelete}
+                    loadingDeletion={loadingDeletion}
                 />
             )}
 
@@ -109,18 +114,12 @@ export default function Categories() {
                 </div>
 
                 {/* Empty search */}
-                {filtered.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-14 h-14 rounded-xl bg-primary-subtle flex items-center justify-center mb-4">
-                            <Tag size={24} className="text-primary" />
-                        </div>
-                        <p className="text-base font-semibold text-text-main mb-1">
-                            Nenhuma categoria encontrada
-                        </p>
-                        <p className="text-sm text-muted">
-                            Nenhum resultado para "{search}"
-                        </p>
-                    </div>
+                {search.trim() && filtered.length === 0 ? (
+                    <EmptySearch
+                        type="category"
+                        search={search}
+                        onClear={() => setSearch("")}
+                    />
                 ) : (
                     /* Grid */
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -183,19 +182,6 @@ export default function Categories() {
                                 </div>
                             )
                         })}
-
-                        {/* Card de adicionar */}
-                        <Link
-                            to="/app/categories/create"
-                            className="border-2 border-dashed border-border rounded-2xl p-5 flex flex-col items-center justify-center gap-2 min-h-[140px] hover:border-primary hover:bg-primary-subtle/30 transition-colors no-underline group"
-                        >
-                            <div className="w-10 h-10 rounded-xl bg-bg flex items-center justify-center group-hover:bg-primary-subtle transition-colors">
-                                <Plus size={20} className="text-muted group-hover:text-primary transition-colors" />
-                            </div>
-                            <span className="text-sm font-medium text-muted group-hover:text-primary transition-colors">
-                                Nova categoria
-                            </span>
-                        </Link>
                     </div>
                 )}
             </div>

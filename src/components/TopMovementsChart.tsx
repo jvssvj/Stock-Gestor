@@ -38,19 +38,20 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
         <div className="bg-white border border-border rounded-lg px-3 py-2 shadow-sm">
             <p className="text-xs text-muted font-medium">{label}</p>
             <p className="text-sm font-bold text-text-main">
-                {payload[0].value} movimentações
+                {payload[0].value} {payload[0].value === 1 ? "movimentação" : "movimentações"}
             </p>
         </div>
     );
 }
-
 export default function TopMovementsChart({ data }: TopMovementsChartProps) {
-    if (!data?.length) {
+    const hasMovements = data.some((item) => item.value > 0)
+
+    if (!hasMovements) {
         return (
             <div className="flex items-center justify-center h-48 text-sm text-muted">
                 Nenhuma movimentação registrada.
             </div>
-        );
+        )
     }
 
     return (

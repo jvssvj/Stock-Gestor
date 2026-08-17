@@ -83,6 +83,7 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
 
   const [openMenuId, setOpenMenuId] = useState<string | number | null>(null)
   const [itemToDelete, setItemToDelete] = useState<Item | null>(null)
+  const [loadingItemToDelete, setLoadingItemToDelete] = useState<boolean>(false)
 
   const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
     onPageChange?.(value)
@@ -90,6 +91,8 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
 
   async function handleDelete() {
     if (!itemToDelete) return
+    setLoadingItemToDelete(true)
+
     try {
       await deleteItemService(itemToDelete.id)
 
@@ -116,6 +119,7 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
       console.error(error)
     } finally {
       setItemToDelete(null)
+      setLoadingItemToDelete(false)
     }
   }
 
@@ -128,6 +132,7 @@ export default function StockTable({ items, onPageChange, setItems }: StockTable
           sku={itemToDelete.sku}
           cancelAction={() => setItemToDelete(null)}
           confirmAction={handleDelete}
+          loadingDeletion={loadingItemToDelete}
         />
       )}
 

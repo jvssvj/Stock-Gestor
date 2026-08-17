@@ -1,19 +1,12 @@
-import {
-    PieChart,
-    Pie,
-    Cell,
-    Tooltip,
-    ResponsiveContainer,
-    Legend,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 interface DataItem {
-    label: string;
-    value: number;
+    label: string
+    value: number
 }
 
 interface CategoryChartProps {
-    data: DataItem[];
+    data: DataItem[]
 }
 
 const COLORS = [
@@ -23,19 +16,19 @@ const COLORS = [
     "#e62200",
     "#5977ff",
     "#3db8ab",
-];
+]
 
 interface CustomTooltipProps {
-    active?: boolean;
-    payload?: { name: string; value: number; payload: { percent: number } }[];
+    active?: boolean
+    payload?: { name: string; value: number; payload: { percent: number } }[]
 }
 
 function CustomTooltip({ active, payload }: CustomTooltipProps) {
-    if (!active || !payload?.length) return null;
-    const item = payload[0];
+    if (!active || !payload?.length) return null
+    const item = payload[0]
 
-    const total = payload.reduce((sum, p) => sum + p.value, 0);
-    const percent = total > 0 ? (item.value / total) * 100 : 0;
+    const total = payload.reduce((sum, p) => sum + p.value, 0)
+    const percent = total > 0 ? (item.value / total) * 100 : 0
 
     return (
         <div className="bg-white border border-border rounded-lg px-3 py-2 shadow-sm">
@@ -45,11 +38,11 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
                 {percent.toFixed(0)}%
             </p>
         </div>
-    );
+    )
 }
 
 function CustomLegend({ payload }: { payload?: { color: string; value: string }[] }) {
-    if (!payload?.length) return null;
+    if (!payload?.length) return null
     return (
         <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 mt-2">
             {payload.map((entry, index) => (
@@ -64,7 +57,7 @@ function CustomLegend({ payload }: { payload?: { color: string; value: string }[
                 </li>
             ))}
         </ul>
-    );
+    )
 }
 
 export default function CategoryChart({ data }: CategoryChartProps) {
@@ -73,22 +66,27 @@ export default function CategoryChart({ data }: CategoryChartProps) {
             <div className="flex items-center justify-center h-48 text-sm text-muted">
                 Nenhuma categoria encontrada.
             </div>
-        );
+        )
     }
 
-    const total = data.reduce((sum, d) => sum + d.value, 0);
-    const chartData = data.map((d) => ({ name: d.label, value: d.value }));
+    const totalCategories = data.length
+    const chartData = data.map((d) => ({
+        name: d.label,
+        value: d.value === 0 ? 0.5 : d.value,
+        originalValue: d.value
+    }));
 
-    function TooltipWithTotal({ active, payload }: CustomTooltipProps) {
+    function TooltipWithTotal({ active, payload }: any) {
         if (!active || !payload?.length) return null;
         const item = payload[0];
-        const percent = total > 0 ? (item.value / total) * 100 : 0;
+
+        const value = item.payload.originalValue;
 
         return (
             <div className="bg-white border border-border rounded-lg px-3 py-2 shadow-sm">
                 <p className="text-xs text-muted font-medium">{item.name}</p>
                 <p className="text-sm font-bold text-text-main">
-                    {item.value} {item.value === 1 ? "item" : "itens"} · {percent.toFixed(0)}%
+                    {value} {value === 1 ? "item" : "itens"}
                 </p>
             </div>
         );
@@ -111,11 +109,14 @@ export default function CategoryChart({ data }: CategoryChartProps) {
                             strokeWidth={0}
                         >
                             {chartData.map((_, index) => (
-                                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                                <Cell
+                                    key={index}
+                                    fill={COLORS[index % COLORS.length]}
+                                />
                             ))}
                         </Pie>
+
                         <Tooltip content={<TooltipWithTotal />} />
-                        {/* <Legend content={<CustomLegend />} /> */}
                     </PieChart>
                 </ResponsiveContainer>
             </div>
@@ -123,8 +124,8 @@ export default function CategoryChart({ data }: CategoryChartProps) {
             {/* Total no centro */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                 <span className="text-xs text-muted">Total</span>
-                <span className="text-xl font-bold text-text-main">{total}</span>
+                <span className="text-xl font-bold text-text-main">{totalCategories}</span>
             </div>
         </div>
-    );
+    )
 }

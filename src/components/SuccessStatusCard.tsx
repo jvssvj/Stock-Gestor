@@ -43,11 +43,11 @@ export default function SuccessStatusCard({
     : `/app/categories/${data.id}`
 
   return (
-    <section className="border border-border w-full max-w-[480px] bg-white rounded-xl px-8 py-8 flex flex-col items-center text-center shadow-lg">
+    <section className="border border-light-gray w-full max-w-[480px] bg-white rounded-xl px-8 py-8 flex flex-col items-center text-center shadow-lg">
 
       {/* Ícone */}
-      <span className="w-16 h-16 rounded-full bg-success-subtle flex items-center justify-center mb-7">
-        <CircleCheck size={30} className="text-success" />
+      <span className="p-4 rounded-full bg-success-subtle flex items-center justify-center mb-7">
+        <CircleCheck size={24} className="text-success" />
       </span>
 
       {/* Título */}

@@ -1,4 +1,5 @@
 import { AlertTriangle } from "lucide-react"
+import Spinner from "./Spinner"
 
 type Resource = "item" | "category"
 
@@ -8,6 +9,7 @@ interface ConfirmDeletionProps {
   sku?: string
   cancelAction: () => void
   confirmAction: () => void
+  loadingDeletion: boolean
 }
 
 export default function ConfirmDeletion({
@@ -16,6 +18,7 @@ export default function ConfirmDeletion({
   sku,
   cancelAction,
   confirmAction,
+  loadingDeletion
 }: ConfirmDeletionProps) {
   const isItem = resource === "item"
 
@@ -33,7 +36,7 @@ export default function ConfirmDeletion({
           aria-labelledby="delete-title"
           className="bg-white py-8 px-4 rounded-lg w-full max-w-[600px] grid place-items-center text-center"
         >
-          <span className="bg-danger-light leading-[0] rounded-full p-4">
+          <span className="bg-danger-subtle leading-[0] rounded-full p-4">
             <AlertTriangle color="#ff1010" />
           </span>
 
@@ -64,7 +67,7 @@ export default function ConfirmDeletion({
           <div className="w-full flex items-center justify-center gap-4 mt-8 max-[395px]:flex-col">
             <button
               type="button"
-              className="bg-border py-[0.8rem] px-4 rounded-lg min-w-[135px] font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 max-[395px]:w-full"
+              className="bg-light-gray py-[0.8rem] px-4 rounded-lg min-w-[135px] font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 max-[395px]:w-full"
               onClick={cancelAction}
             >
               Cancelar
@@ -75,7 +78,9 @@ export default function ConfirmDeletion({
               className="bg-danger text-white py-[0.8rem] px-4 rounded-lg min-w-[135px] font-bold cursor-pointer transition-all duration-200 ease-in-out hover:scale-110 max-[395px]:w-full"
               onClick={confirmAction}
             >
-              Sim, excluir {isItem ? "item" : "categoria"}
+              {loadingDeletion
+                ? "Deletando..."
+                : `Sim, excluir ${isItem ? "item" : "categoria"}`}
             </button>
           </div>
         </section>
